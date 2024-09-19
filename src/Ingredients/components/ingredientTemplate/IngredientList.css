@@ -1,0 +1,125 @@
+.grid {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.grid-container {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); /* Tworzy 4 kolumny o równych szerokościach */
+    gap: 20px; /* Odstępy między elementami */
+    padding: 20px; /* Opcjonalne odstępy wewnątrz kontenera */
+    flex-wrap: wrap;
+}
+
+/* Na średnich ekranach, np. tablety */
+@media (max-width: 1524px) {
+    .grid-container {
+        grid-template-columns: repeat(3, 1fr); /* 2 kolumny na mniejszych ekranach */
+    }
+}
+
+/* Na średnich ekranach, np. tablety */
+@media (max-width: 1024px) {
+    .grid-container {
+        grid-template-columns: repeat(2, 1fr); /* 2 kolumny na mniejszych ekranach */
+    }
+}
+
+/* Na małych ekranach, np. smartfony */
+@media (max-width: 600px) {
+    .grid-container {
+        grid-template-columns: 1fr; /* 1 kolumna na bardzo małych ekranach */
+    }
+}
+
+.place-list-form-ingredient {
+    list-style: none;
+    margin:  auto;
+    padding: 0;
+    width: 800px;
+    max-width: 60rem;
+    color: white;
+    text-align: center;
+    gap: 10px;
+    /* margin-bottom: 110px; */
+    /* background-color: gold; */
+  }
+
+.place-list-form-placeholder-ingredient {
+    margin-top: 100px;
+    font-weight: 600;
+    width: 800px;
+    max-width: 60rem;
+    margin: auto ;
+}
+  
+
+.item-name-ingredient, .item-category, .item-weight, .item-action {
+    width: 20%;
+    padding: 0;
+}
+
+.item-name-ingredient {
+    text-align: start;
+}
+
+
+.cart-item-ingredient {
+    display: flex;
+    flex-direction: row;
+    color: white;
+    justify-content: space-between;
+    /* background-color: aq; */
+    height: 45px;
+    border-bottom: 1px solid rgb(91, 86, 86);
+    /* padding: 20px; */
+   /* padding: 0px 0px 20px 0px; */
+   text-align: center;
+   margin: 10px;
+   /* padding: 10px; */
+   /* box-shadow: 0 5px 16px rgb(239, 236, 236, 0.05); */
+}
+
+.cart-item-ingredient form {
+    padding: 0;
+    margin: 0;
+    display: flex;
+    justify-content: flex-end;
+}
+
+ul, ol {
+    list-style: none; /* Usuwa domyślny styl listy */
+}
+
+ul::marker, ol::marker {
+    content: ''; /* Usuwa marker poprzez ustawienie pustej treści */
+}
+
+.cart-item button {
+    background-color: red;
+    border: none;
+    border: none;
+    padding: 5px;
+    width: 80px;
+    font-size: 14px;
+    font-weight: 600;
+    border-radius: 5px;
+    color: white;
+    outline: none;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+    box-shadow: 0 5px 16px rgb(239, 236, 236, 0.05);
+}
+
+.cart-item button:hover {
+    /* border-radius: 5px solid white; */
+    background-color: white;
+    color: black;
+    cursor: pointer;
+}
+
+.item-name {
+    width: 50px;
+}

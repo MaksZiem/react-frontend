@@ -1,7 +1,7 @@
 .button {
   font: inherit;
   padding: 0.5rem 1.5rem;
-  border: 1px solid #028644;
+  border: 1px solid #676363;
   border-radius: 4px;
   background: #028644;
   color: white;
@@ -18,18 +18,18 @@
 .button:hover,
 .button:active {
   background: #016834;
-  border-color: #016834;
+  border: 1px solid #676363;
 }
 
 .button--inverse {
   background: transparent;
-  color: #ff0055;
+  color: white
 }
 
 .button--inverse:hover,
 .button--inverse:active {
   color: white;
-  background: #ff0055;
+  background-color: rgb(12, 16, 23);
 }
 
 .button--danger {

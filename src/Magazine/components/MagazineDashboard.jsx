@@ -1,13 +1,13 @@
 import React from 'react'
-
 import Button from '../../shared/components/FormElements/Button'
-import IngredientItem from './IngredientItem'
+import MagazineDashboardItem from './MagazineDashboardItem'
 import Card from '../../shared/components/UIElements/Card';
 
-import './IngredientList.css';
 
-const IngredientList = (props) => {
-  if (props.items.length === 0) {
+const MagazineDashboard = (props) => {
+  
+
+  if (props.ingredientTemplates.length === 0) {
     return (
         <div className='place-list center'>
             <Card>
@@ -19,9 +19,11 @@ const IngredientList = (props) => {
   }
 
   return (
-    <ul className='place-list'>
-        {props.items.map(ingredient => (
-            <IngredientItem 
+    <>
+    
+    <ul className='grid-container'>
+        {props.ingredientTemplates.map(ingredient => (
+            <MagazineDashboardItem 
                 key={ingredient.id}
                 id={ingredient.id}
                 name={ingredient.name}
@@ -29,7 +31,9 @@ const IngredientList = (props) => {
             />
         ))}
     </ul>
+    
+    </>
   )
 }
 
-export default IngredientList
+export default MagazineDashboard

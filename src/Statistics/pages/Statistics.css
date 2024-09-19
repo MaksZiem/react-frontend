@@ -1,0 +1,131 @@
+.container {
+  display: flex;
+  flex-direction: row;
+  background-color: black;
+  /* height: 100vh; */
+  justify-content: center;
+}
+
+.content {
+  width: 90%;
+  height: 100%;
+ /* Tworzy 4 kolumny o równych szerokościach */
+}
+
+.grid-container2 {
+    width: 90%;
+    color: white;
+    display: grid;
+    margin-top: 0;
+      grid-template-columns: repeat(2, 1fr); /* Tworzy 4 kolumny o równych szerokościach */
+      grid-template-rows: repeat(2, 1fr);
+  }
+
+.ranking {
+    /* background-color: red; */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.pie-chart {
+  /* border: 1px solid white; */
+  background-color: rgb(0, 5, 13);
+  width: 600px;
+    height: 300px;
+  border: 1px solid #676363;
+  border-radius: 15px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  box-shadow: 0 5px 16px rgb(239, 236, 236, 0.05);
+}
+
+.pie-chart ul {
+    /* background-color: red; */
+    margin: 0;
+    padding: 0;
+    text-align: center;
+    /* gap: 10px; */
+}
+
+.pie-chart li {
+    /* background-color: red; */
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 5px;
+    border-bottom: 1px solid white;
+}
+
+.pie-chart li:last-child {
+    /* background-color: red; */
+    border-bottom: none;
+}
+
+.pie-chart li:hover {
+    background-color: rgb(1, 13, 33);
+    cursor: pointer;
+}
+
+.pie-chart li > span {
+    /* background-color: green; */
+    width: 30%;
+}
+
+.pie-chart li > span:first-child {
+    text-align: left; /* Możesz również użyć text-align: start; */
+}
+
+.pie-chart li > span:last-child {
+    text-align: right;
+    /* Możesz również użyć text-align: end; */
+}
+
+.MuiChartsLegend-root .MuiChartsLegend-series text {
+  font-size: 0.7em !important; /* Zmiana rozmiaru czcionki */
+  fill: white !important; /* Zmiana koloru czcionki na biały */
+}
+
+.MuiChartsAxis-root.MuiChartsXAxis-root text {
+    fill: white !important;  /* Kolor tekstu na biały */
+    font-size: 16px !important;  /* Rozmiar tekstu */
+  }
+
+  .ranking2 {
+    /* background-color: red; */
+    /* background-color: red; */
+    width: 680px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    height: 300px;
+}
+
+
+.gauge-item {
+    /* background-color: red; */
+    width: 200px;
+    height: 150px;
+    text-align: center;
+    align-items: center;
+    background-color: rgb(0, 5, 13);
+  width: 300px;
+    height: 300px;
+  border: 1px solid #676363;
+  border-radius: 15px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 20px;
+  box-shadow: 0 5px 16px rgb(239, 236, 236, 0.05);
+}
+
+.gauge-item2 {
+    width: 240px;
+    height: 140px;
+}

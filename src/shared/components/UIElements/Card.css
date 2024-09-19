@@ -1,9 +1,12 @@
 .card {
+  color: white;
   margin: 0;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
   border-radius: 6px;
   padding: 1rem;
   overflow: hidden;
-  background: white;
+  background: rgb(12, 16, 23);
   margin: 1rem;
+  border: 1px solid #676363;
+  width: 400px;
+  box-shadow: 0 5px 16px rgb(239, 236, 236, 0.05);
 }

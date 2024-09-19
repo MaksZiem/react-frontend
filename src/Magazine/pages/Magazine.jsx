@@ -1,10 +1,9 @@
 import React from "react";
-import IngredientList from "../components/ingredientTemplate/IngredientList";
+import MagazineDashboard from "../components/MagazineDashboard";
 import LoadingSpinner from "../../shared/components/UIElements/LoadingSpinner";
 import ErrorModal from "../../shared/components/UIElements/ErrorModal";
 import { useEffect, useState } from "react";
 import { useHttpClient } from "../../shared/hooks/http-hook";
-import IngredientCartList from "../components/ingredientCartItems/IngredientCartList";
 import { useNavigate } from "react-router-dom";
 import { useForm } from "../../shared/hooks/form-hook";
 import Input from "../../shared/components/FormElements/Input";
@@ -13,8 +12,9 @@ import {
   VALIDATOR_REQUIRE,
 } from "../../shared/util/validators";
 import Button from "../../shared/components/FormElements/Button";
+import './IngredientDetails.css'
 
-const Ingredients = () => {
+const Magazine = () => {
   const { isLoading, error, sendRequest, clearError } = useHttpClient();
   const [LoadedIngredientsTamplates, setLoadedIngredientsTemplates] =
     useState();
@@ -74,6 +74,11 @@ const Ingredients = () => {
     } catch (err) {}
   };
 
+  const addIngredientTemplateHandler = () => {
+    navigate("/create-ingredient-template"); // Używamy navigate, aby przejść do odpowiedniej strony
+  };
+
+
   return (
     <>
       <ErrorModal error={error} onClear={clearError} />
@@ -81,13 +86,6 @@ const Ingredients = () => {
         <div className="center">
           <LoadingSpinner />
         </div>
-      )}
-      {!isLoading && loadedCartItems && (
-        <IngredientCartList
-          cartItems={loadedCartItems}
-          onDelete={cartItemsDeletedHandler}
-          onAddDish={addDishHandler}
-        />
       )}
       <h1 className="text3">Produkty</h1>
       <div className="search-container">
@@ -113,19 +111,24 @@ const Ingredients = () => {
             >
               <option value="all">All</option>
               <option value="fruit">Fruit</option>
-              <option value='meat'>Meat</option>
               <option value="vegetable">Vegetable</option>
             </select>
           </div>
           <button type="submit" className="submit-button" >Filter</button>
         </form>
       </div>
+
+      <div className="text2">
+        <button onClick={addIngredientTemplateHandler} className="submit-button2">
+          Dodaj Składnik
+        </button>
+      </div>
       
       {!isLoading && LoadedIngredientsTamplates && (
-        <IngredientList ingredientTemplates={LoadedIngredientsTamplates} />
+        <MagazineDashboard ingredientTemplates={LoadedIngredientsTamplates} />
       )}
     </>
   );
 };
 
-export default Ingredients;
+export default Magazine;

@@ -32,7 +32,7 @@
 .place-item__actions {
   padding: 1rem;
   text-align: center;
-  border-top: 1px solid #ccc;
+  border-top: 1px solid rgb(91, 86, 86);
 }
 
 .place-item__modal-content {
@@ -57,4 +57,10 @@
   .place-item__image {
     height: 20rem;
   } 
+}
+
+.add-to-cart-button.disabled {
+  /* Styl dla niedostępnego przycisku, np. */
+  background-color: grey;
+  cursor: not-allowed;
 }

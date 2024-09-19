@@ -1,0 +1,40 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    color: white;
+}
+
+.container2 {
+    margin-top: 120px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 30px 80px 80px 80px;
+    border: 1px solid #676363;
+    border-radius: 20px;
+    gap: 10px;
+    box-shadow: 0 5px 16px rgb(239, 236, 236, 0.05);
+}
+
+.weight-button {
+    background-color: rgb(12, 16, 23);
+    width: 150px;
+    height: 40px;;
+    border: none;
+    font-size: 14px;
+    font-weight: 600;
+    border-radius: 8px;
+    color: white;
+    outline: none;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+    border: 1px solid #676363;
+}
+
+.weight-button:hover {
+    background-color: white;
+    color: black;
+}
