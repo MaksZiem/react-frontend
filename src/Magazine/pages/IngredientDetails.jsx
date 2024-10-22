@@ -22,7 +22,7 @@ const IngredientDetails = () => {
     const fetchIngredients = async () => {
       try {
         const responseData = await sendRequest(
-          `http://localhost:5000/api/magazine/${name}` // Twój endpoint backendowy
+          `http://localhost:8000/api/magazine/${name}` // Twój endpoint backendowy
         );
         setIngredients(responseData.ingredients); // Przechowywanie danych w stanie
         if (responseData.ingredients.length > 0) {
@@ -50,7 +50,7 @@ const IngredientDetails = () => {
     event.preventDefault();
     try {
       await sendRequest(
-        'http://localhost:5000/api/magazine/add-ingredient', // Endpoint backendowy do dodania nowego składnika
+        'http://localhost:8000/api/magazine/add-ingredient', // Endpoint backendowy do dodania nowego składnika
         'POST',
         JSON.stringify({
           name: formData.name,
@@ -63,7 +63,7 @@ const IngredientDetails = () => {
       );
       // Opcjonalnie: ponowne załadowanie składników po dodaniu nowego
       const responseData = await sendRequest(
-        `http://localhost:5000/api/magazine/${name}`
+        `http://localhost:8000/api/magazine/${name}`
       );
       setIngredients(responseData.ingredients);
     } catch (err) {}

@@ -19,6 +19,7 @@ import CreateIngredientTemplate from './Magazine/pages/CreateIngredientTemplate'
 import Tables from './Dishes/pages/Tables'
 import Cook from './Dishes/pages/Cook';
 import Statistics from './Statistics/pages/Statistics';
+import ReadyDishes from './Dishes/pages/ReadyDishes';
 
 const App = () => {
     const [isLoggedIn, setIsLoggedIn] = useState(false)
@@ -47,6 +48,7 @@ const App = () => {
                 <Route path='/table-details/:tableId' element={<Dishes />} />
                 <Route path='/cook' element={<Cook />} />
                 <Route path='/statistics' element={<Statistics />} />
+                <Route path='/ready-dishes' element={<ReadyDishes />} />
             </Routes>
         )
     } else {

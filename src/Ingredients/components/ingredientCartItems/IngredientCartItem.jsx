@@ -23,7 +23,7 @@ const IngredientCartItem = (props) => {
     setShowConfirmModal(false);
     try {
       await sendRequest(
-        "http://localhost:5000/api/ingredients/delete-from-cart",
+        "http://localhost:8000/api/ingredients/delete-from-cart",
         "DELETE",
         JSON.stringify({
           ingredientTemplateId: props.id,

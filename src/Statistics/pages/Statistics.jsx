@@ -19,7 +19,7 @@ const Statistics = () => {
       try {
         // Fetch percentage stats for PieChart
         const responseDataStats = await sendRequest(
-          "http://localhost:5000/api/statistics/percentage-stats"
+          "http://localhost:8000/api/statistics/percentage-stats"
         );
         const transformedData = Object.entries(
           responseDataStats.dishPercentage
@@ -32,7 +32,7 @@ const Statistics = () => {
 
         // Fetch most popular dishes and ranking
         const responseDataPopularity = await sendRequest(
-          "http://localhost:5000/api/statistics/most-popular-dish"
+          "http://localhost:8000/api/statistics/most-popular-dish"
         );
         setMostPopularDish({
           name: responseDataPopularity.mostPopularDish,

@@ -11,7 +11,7 @@ const DishCartList = (props) => {
     event.preventDefault();
     try {
       await sendRequest(
-        "http://localhost:5000/api/dishes/add-order",
+        "http://localhost:8000/api/waiter/add-order",
         "POST",
         JSON.stringify({
           tableNumber: props.tableId,

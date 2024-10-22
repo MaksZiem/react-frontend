@@ -23,7 +23,12 @@ const NavLinks = () => {
             )}
             {auth.isLoggedIn && (
             <li>
-                <NavLink to="/tables" exact>kelner</NavLink>
+                <NavLink to="/tables" exact>przyjmowanie zamówien</NavLink>
+            </li>
+            )}
+             {auth.isLoggedIn && (
+            <li>
+                <NavLink to="/ready-dishes" exact>dania do odbioru</NavLink>
             </li>
             )}
             {auth.isLoggedIn && (

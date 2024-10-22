@@ -28,6 +28,7 @@ const DishList = (props) => {
                     price={dish.price}
                     isAvailable={dish.isAvailable}
                     tableId={props.tableId}
+                    onAddDish={props.onAddDish}
                 />
             ))
             }

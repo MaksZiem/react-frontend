@@ -17,7 +17,7 @@ const TablesList = () => {
   useEffect(() => {
     const fetchTables = async () => {
       try {
-        const responseData = await sendRequest('http://localhost:5000/api/dishes/tables');
+        const responseData = await sendRequest('http://localhost:8000/api/waiter/tables');
         setTables(responseData.tables);
       } catch (err) {
         console.log(err);
@@ -42,7 +42,7 @@ const TablesList = () => {
     const tipAmount = tips[orderId] || 0;
     try {
       await sendRequest(
-        'http://localhost:5000/api/dishes/add-tip',
+        'http://localhost:8000/api/waiter/add-tip',
         'POST',
         JSON.stringify({
           amount: tipAmount,

@@ -29,7 +29,7 @@ const IngredientCartList = (props) => {
     event.preventDefault();
     try {
       await sendRequest(
-        "http://localhost:5000/api/ingredients/add-dish",
+        "http://localhost:8000/api/ingredients/add-dish",
         "POST",
         JSON.stringify({
           name: formState.inputs.name.value,

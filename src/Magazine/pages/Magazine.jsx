@@ -28,7 +28,7 @@ const Magazine = () => {
     const fetchDishes = async () => {
       try {
         const responseData = await sendRequest(
-          "http://localhost:5000/api/ingredients",
+          "http://localhost:8000/api/ingredients",
           "GET"
         );
         setLoadedIngredientsTemplates(responseData.ingredientTemplates);
@@ -67,7 +67,7 @@ const Magazine = () => {
 
     try {
       const responseData = await sendRequest(
-        `http://localhost:5000/api/ingredients?name=${inputName}&category=${selectedCategory}`,
+        `http://localhost:8000/api/ingredients?name=${inputName}&category=${selectedCategory}`,
         "GET"
       );
       setLoadedIngredientsTemplates(responseData.ingredientTemplates); // Update with filtered data

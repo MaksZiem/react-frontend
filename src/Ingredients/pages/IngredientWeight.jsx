@@ -30,7 +30,7 @@ const IngredientWeight = () => {
         console.log(formState.inputs.weight.value)
         try {
             await sendRequest(
-                'http://localhost:5000/api/ingredients/add-to-cart',
+                'http://localhost:8000/api/ingredients/add-to-cart',
                 'POST',
                 JSON.stringify({
                     ingredientTemplateId: id,

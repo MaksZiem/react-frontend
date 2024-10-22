@@ -22,7 +22,7 @@ const CreateIngredientTemplate = () => {
     event.preventDefault();
     try {
       await sendRequest(
-        'http://localhost:5000/api/magazine/create-ingredient-template',
+        'http://localhost:8000/api/magazine/create-ingredient-template',
         'POST',
         JSON.stringify({
           name: formState.name,

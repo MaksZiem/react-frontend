@@ -14,10 +14,11 @@ const DishCartItem = (props) => {
     setShowConfirmModal(false);
     try {
       await sendRequest(
-        "http://localhost:5000/api/dishes/delete-from-cart",
+        "http://localhost:8000/api/waiter/delete-from-table",
         "DELETE",
         JSON.stringify({
           dishId: props.id,
+          tableNumber: props.tableId
         }),
         { "Content-Type": "application/json" }
       );
