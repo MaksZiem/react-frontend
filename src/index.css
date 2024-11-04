@@ -10,7 +10,9 @@ html {
 
 body {
   margin: 0;
-  background: rgb(5, 7, 10);
+  padding: 0;
+  background: rgb(222, 225, 236);
+  color: black;
 }
 
 .slide-in-left-enter {
@@ -39,4 +41,8 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.main {
+  background-color: red;
 }

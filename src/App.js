@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, useEffect } from 'react';
 import {
     BrowserRouter as Router,
     Route,
@@ -20,21 +20,68 @@ import Tables from './Dishes/pages/Tables'
 import Cook from './Dishes/pages/Cook';
 import Statistics from './Statistics/pages/Statistics';
 import ReadyDishes from './Dishes/pages/ReadyDishes';
+import WaiterStatistics from './Statistics/subPages/EmpWaiterStats';
+import CookStatistics from './Cook/pages/CookStatistics';
+import Employes from './Statistics/pages/Employes';
+import EmpCookStats from './Statistics/subPages/EmpCookStats';
+import DishStatistics from './Statistics/subPages/DishStatistics';
+import EmpWaiterStats from './Statistics/subPages/EmpWaiterStats';
+import DishesStatistics from './Statistics/pages/DishesStatistics';
+import Dish from './Statistics/dishSubPages/Dish';
+import UpdateUser from './User/pages/UpdateUser';
+import AllCooksStats from './Statistics/subPages/AllCooks';
+import AllWaiters from './Statistics/subPages/AllWaiters';
+import IngredientStatistics from './Statistics/pages/IngredientStatistics';
+import IngredientStats from './Statistics/subPages/IngredientStats';
+
+let logoutTimer
 
 const App = () => {
-    const [isLoggedIn, setIsLoggedIn] = useState(false)
+    const [token, setToken] = useState(false)
+    const [userId, setUserId] = useState(false)
+    const [userRole, setUserRole] = useState('')
+    const [tokenExpirationDate, setTokenExpirationDate] = useState()
 
-    const login = useCallback(() => {
-        setIsLoggedIn(true)
+    const login = useCallback((uid, token, userRole, expirationDate, ) => {
+        setToken(token)
+        setUserId(uid)
+        setUserRole(userRole)
+        const tokenExp = expirationDate || new Date(new Date().getTime() + 1000 * 60 * 60)
+        setTokenExpirationDate(tokenExp)
+        localStorage.setItem(
+            'userData',
+            JSON.stringify({userId: uid, token: token, tokenExp: tokenExp.toISOString()})
+        )
     }, [])
 
     const logout = useCallback(() => {
-        setIsLoggedIn(false)
+        setToken(null)
+        setUserId(null)
+        setUserRole(null)
+        setTokenExpirationDate(null)
+        localStorage.removeItem('userData')
     }, [])
+
+    useEffect(()=> {
+        if(token && tokenExpirationDate) {
+            const remainingTime = tokenExpirationDate.getTime() - new Date().getTime()
+            logoutTimer = setTimeout(logout, remainingTime )
+        } else {
+            clearTimeout(logoutTimer)
+        }
+    }, [token, logout, tokenExpirationDate])
+
+    useEffect(()=> {
+        const storedData = JSON.parse(localStorage.getItem('userData'))
+        //czy data jest z przyszlosci
+        if(storedData && storedData.token &&  new Date(storedData.tokenExp) > new Date() ) {
+            login(storedData.userId, storedData.token, userRole, new Date(storedData.tokenExp))
+        }
+    }, [login])
 
     let routes;
 
-    if (isLoggedIn) {
+    if (token) {
         routes = (
             <Routes>
                 <Route exact path='/' element={<Users />} />
@@ -49,6 +96,19 @@ const App = () => {
                 <Route path='/cook' element={<Cook />} />
                 <Route path='/statistics' element={<Statistics />} />
                 <Route path='/ready-dishes' element={<ReadyDishes />} />
+                <Route path='/waiter-statistics' element={<WaiterStatistics />} />
+                <Route path='/cook-statistics' element={<CookStatistics />} />
+                <Route path='/statistics/employes' element={<Employes />} />
+                <Route path='/statistics/dishes' element={<DishesStatistics />} />
+                <Route path='/statistics/ingredients' element={<IngredientStatistics />} />
+                <Route path='/statistics/dishes/dish' element={<Dish />} />
+                <Route path='/statistics/ingredients/ingredient' element={<IngredientStats /> } />
+                <Route path='/statistic/cook' element={<EmpCookStats />} />
+                <Route path='/statistic/waiter' element={<EmpWaiterStats />} />
+                <Route path="/dish/stats" element={<DishStatistics />} /> 
+                <Route path="/update-user" element={<UpdateUser />} /> 
+                <Route path='/statistics/all-cooks' element={<AllCooksStats />} />
+                <Route path='/statistics/all-waiters' element={<AllWaiters />} />
             </Routes>
         )
     } else {
@@ -63,7 +123,7 @@ const App = () => {
 
     return (
         <AuthContext.Provider
-            value={{ isLoggedIn: isLoggedIn, login: login, logout: logout }}
+            value={{ isLoggedIn: !!token, token: token, login: login, logout: logout, userId: userId, userRole: userRole }}
         >
             <Router>
                 <MainNavigation />

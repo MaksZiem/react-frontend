@@ -19,12 +19,13 @@ const DishList = (props) => {
       }
     
       return (
-        <ul className='grid-container'>
+        <ul className='grid-container3'>
             {props.items.map(dish => (
                 <DishItem
                     key={dish.id}
                     id={dish.id}
                     name={dish.name}
+                    image={dish.image || ''}
                     price={dish.price}
                     isAvailable={dish.isAvailable}
                     tableId={props.tableId}

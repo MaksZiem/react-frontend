@@ -36,7 +36,7 @@ const IngredientItem = (props) => {
 
             <button
               type="button"
-              className="add-to-cart-button"
+              className="ingredient-details-button2"
               onClick={handleButtonClick}
             >
               Dodaj do koszyka
@@ -44,6 +44,7 @@ const IngredientItem = (props) => {
           </form>
           </div>
         </div>
+        {/* </Card> */}
       </li>
     </>
   );

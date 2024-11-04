@@ -1,0 +1,48 @@
+.button-cooks, .button-waiters {
+    padding: 10px;
+    font-size: 18px;
+    outline: none;
+    border: 1px solid white;
+    border-radius: 10px;
+    cursor: pointer;
+    background-color: #666666;
+    
+}
+
+.button-cooks {
+    margin-right: 15px;
+}
+
+.button-cooks:hover {
+    background-color: rgb(152, 152, 152);
+    color: white;
+}
+
+.button-waiters {
+    margin-left: 15px;
+    /* background-color: #393838;
+    color: white; */
+}
+
+
+
+.button-waiters:hover {
+    background-color: rgb(152, 152, 152);
+    color: white;
+}
+
+/* Styl dla aktywnego przycisku TEN STYL JEST DLA PCZYCISKOW W NAVBARZE */ 
+.button-cooks.active-tab, .button-waiters.active-tab {
+    background-color: #ffffff; /* Lub kolor aktywnego przycisku */
+    color: #000000;
+    /* border-radius: 10px; */
+}
+
+/* Dopasowanie stylu przycisków do nawigacji */
+.button-center {
+    margin-top: 20px;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}

@@ -63,12 +63,12 @@ const DishCartItem = (props) => {
       </Modal>
       <li > 
         {isLoading && <LoadingSpinner asOverlay />}
-          <div className="cart-item">
-            <span className="item-name">{props.name}</span>
+          <div className="cart-item-ingredient">
+            <span className="item-name-ingredient">{props.name}</span>
             <span className="item-category">{props.price}</span>
-            <span className="item-name">{props.quantity}</span>
-            <div className="item-action" >
-            <button onClick={showDeleteWarningHandler}>
+            <span className="item-category">{props.quantity}</span>
+            <div className="item-action-cart" >
+            <button onClick={showDeleteWarningHandler} className='delete-ingredient-from-cart'>
               Usuń
             </button>
             </div>

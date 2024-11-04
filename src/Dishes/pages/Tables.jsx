@@ -1,18 +1,18 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import { useHttpClient } from '../../shared/hooks/http-hook';
 import { useNavigate } from 'react-router-dom';
 import ErrorModal from '../../shared/components/UIElements/ErrorModal';
 import LoadingSpinner from '../../shared/components/UIElements/LoadingSpinner';
 import './Tables.css';
-import Card from '../../shared/components/UIElements/Card';
+import { AuthContext } from '../../shared/context/auth-context';
 
 const TablesList = () => {
   const { isLoading, error, sendRequest, clearError } = useHttpClient();
   const [tables, setTables] = useState([]);
   const [tips, setTips] = useState({});
-  const [addTip, setAddTip] = useState(true)
-  const [addOrder, setAddOrder] = useState(true)
+  const [tipSubmittedTables, setTipSubmittedTables] = useState([]); 
   const navigate = useNavigate();
+  const auth = useContext(AuthContext);
 
   useEffect(() => {
     const fetchTables = async () => {
@@ -24,7 +24,6 @@ const TablesList = () => {
       }
     };
     fetchTables();
-    
   }, [sendRequest]);
 
   const viewTableDetailsHandler = (tableNumber) => {
@@ -47,12 +46,21 @@ const TablesList = () => {
         JSON.stringify({
           amount: tipAmount,
           orderId: orderId,
-          // addedDate: Date.now()
         }),
-        { 'Content-Type': 'application/json' }
+        { Authorization: 'Bearer ' + auth.token, 'Content-Type': 'application/json' }
       );
-      setAddTip(false)
-      setAddOrder(false)
+
+      
+      setTables((prevTables) =>
+        prevTables.map((table) =>
+          table.order && table.order._id === orderId
+            ? { ...table, status: 'free', order: null } 
+            : table
+        )
+      );
+
+      
+      setTipSubmittedTables((prevSubmitted) => [...prevSubmitted, orderId]);
     } catch (err) {
       console.log(err);
     }
@@ -81,60 +89,49 @@ const TablesList = () => {
       )}
       {!isLoading && tables && (
         <ul className="tables-list">
-          {/* <Card className='place-item__content'> */}
           {tables.map((table) => (
-            <li key={table._id} className={`table-item ${addOrder === false ? 'table-free' : getStatusClass(table.status)}`}>
-              <span>Numer stolika: {table.number}</span>
+            <li key={table._id} className={`table-item ${getStatusClass(table.status)}`}>
+              <div className='table-number'>Numer stolika: {table.number}</div>
               {table.order && (
                 <>
-                {/* <span>Order ID: {table.order._id}</span> */}
-              <span>Cena całkowita: {table.order.price} zł</span>    
-                {/* <div> */}
-
-                  {/* Wyświetlanie dań w zamówieniu */}
-                  {/* <h4>Dishes:</h4> */}
+                  <span>Cena całkowita: {table.order.price} zł</span>
                   <span>Dania:</span>
-                  {table.order.dishes && addOrder && table.order.dishes.length > 0 ? (
-                    <ul className='item-list'>
-                      
+                  {table.order.dishes && table.order.dishes.length > 0 ? (
+                    <ul className="item-list">
                       {table.order.dishes.map((dishItem) => (
                         <li key={dishItem._id}>
-                          <span className='table-dishes'>{dishItem.dish.name} (x{dishItem.quantity}) -{' '}</span>
-                          <span className='table-dishes'>{dishItem.dish.price * dishItem.quantity} zł</span>
+                          <span className="table-dishes">{dishItem.dish.name} (x{dishItem.quantity}) -{' '}</span>
+                          <span className="table-dishes">{dishItem.dish.price * dishItem.quantity} zł</span>
                         </li>
                       ))}
-                     
                     </ul>
                   ) : (
                     <p>No dishes found.</p>
                   )}
 
-                  {/* Obsługa napiwków dla zamówienia */}
-                  {table.status === 'delivered' && addTip && (
+                  {/* Formularz napiwku tylko dla zamówień, dla których nie dodano jeszcze napiwku */}
+                  {table.status === 'delivered' && !tipSubmittedTables.includes(table.order._id) && (
                     <>
                       <input
-                      className='select3'
+                        className="select3"
                         type="number"
                         placeholder="Napiwek"
                         value={tips[table.order._id] || ''}
                         onChange={(e) => handleTipChange(table.order._id, e.target.value)}
                       />
-                      <button className="submit-button3" onClick={() => submitTipHandler(table.order._id)}>
+                      <button className="add-order-table-button" onClick={() => submitTipHandler(table.order._id)}>
                         Dodaj napiwek
                       </button>
                     </>
                   )}
-                {/* </div> */}
                 </>
               )}
-              <button className="submit-button3" onClick={() => viewTableDetailsHandler(table.number)}>
+              <button className="add-order-table-button" onClick={() => viewTableDetailsHandler(table.number)}>
                 {table.status === 'free' ? "Dodaj zamówienie" : "Szczegóły"}
               </button>
-              <span className='status'>Status: {table.status}</span>
+              <span className="status">Status: {table.status}</span>
             </li>
           ))}
-          {/* </Card> */}
-          
         </ul>
       )}
     </>

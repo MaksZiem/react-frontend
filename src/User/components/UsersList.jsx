@@ -23,7 +23,6 @@ const UsersList = (props) => {
                     key={user.id}
                     id={user.id}
                     name={user.name}
-                    placeCount={user.places}
                 />
             ))}
         </ul>

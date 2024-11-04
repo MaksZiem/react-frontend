@@ -36,14 +36,16 @@ const Dishes = () => {
   };
 
   const updateCartHandler = () => {
-    // Odśwież koszyk po dodaniu dania
+    
     console.log('added')
     fetchTableCart();
   };
 
   return (
     <>
-      <h1>{tableId}</h1>
+    <div className='center'>
+      <h2>Numer stolika: {tableId}</h2>
+    </div>
       <ErrorModal error={error} onClear={clearError} />
       {isLoading && (
         <div className="center">
@@ -55,6 +57,7 @@ const Dishes = () => {
           cartItems={loadedCartItems}
           tableId={tableId}
           onDelete={cartItemsDeletedHandler}
+          onAddDish={updateCartHandler}
         />
       )}
       {!isLoading && LoadedDishesTemplates && (

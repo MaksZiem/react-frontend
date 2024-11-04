@@ -8,7 +8,7 @@ const ReadyDishes = () => {
   const { isLoading, error, sendRequest, clearError } = useHttpClient();
   const [readyDishes, setReadyDishes] = useState([]);
 
-  // Pobranie gotowych dań
+  
   useEffect(() => {
     const fetchReadyDishes = async () => {
       try {
@@ -21,11 +21,11 @@ const ReadyDishes = () => {
     fetchReadyDishes();
   }, [sendRequest]);
 
-  // Funkcja do oznaczania dania jako wydane
+  
   const markDishAsDelivered = async (orderId, dishName) => {
     try {
       await sendRequest(`http://localhost:8000/api/waiter/${orderId}/dish/${dishName}/delivered`, 'PATCH');
-      // Po oznaczeniu jako wydane, odśwież listę gotowych dań
+      
       setReadyDishes((prevDishes) => prevDishes.filter(dish => !(dish.orderId === orderId && dish.dishName === dishName)));
     } catch (err) {
       console.log(err);
@@ -34,7 +34,7 @@ const ReadyDishes = () => {
 
   return (
     <>
-      <ErrorModal error={error} onClear={clearError} />
+      
       {isLoading && (
         <div className="center">
           <LoadingSpinner />
@@ -42,16 +42,16 @@ const ReadyDishes = () => {
       )}
       {/* Wyświetlanie listy gotowych dań */}
       {!isLoading && readyDishes && (
-        <ul className="tables-list">
+        <ul className="orders-list">
           {readyDishes.length > 0 ? (
             readyDishes.map((dish, index) => (
-              <li key={index} className="table-item">
+              <li key={index} className="order-item">
                 <div className="order-info">
                   <p><strong>Numer zamówienia:</strong> {dish.orderId}</p>
                   <p><strong>Numer stolika:</strong> {dish.tableNumber}</p>
                   <p><strong>Danie:</strong> {dish.dishName}</p>
                   <button 
-                    className="submit-button"
+                    className="make-dish-ready"
                     onClick={() => markDishAsDelivered(dish.orderId, dish.dishName)}
                   >
                     Oznacz jako wydane

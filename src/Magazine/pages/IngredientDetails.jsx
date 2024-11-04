@@ -5,11 +5,14 @@ import LoadingSpinner from '../../shared/components/UIElements/LoadingSpinner';
 import ErrorModal from '../../shared/components/UIElements/ErrorModal';
 import Button from '../../shared/components/FormElements/Button';
 import './IngredientDetails.css'
+import { useLocation } from 'react-router-dom';
 
 const IngredientDetails = () => {
-  const { name } = useParams(); // Pobranie nazwy składnika z URL
+  
   const { isLoading, error, sendRequest, clearError } = useHttpClient();
   const [ingredients, setIngredients] = useState([]);
+  const location = useLocation();
+  const { name, category } = location.state || {};
   const [formData, setFormData] = useState({
     name: '',
     category: '',
@@ -22,11 +25,11 @@ const IngredientDetails = () => {
     const fetchIngredients = async () => {
       try {
         const responseData = await sendRequest(
-          `http://localhost:8000/api/magazine/${name}` // Twój endpoint backendowy
+          `http://localhost:8000/api/magazine/${name}` 
         );
-        setIngredients(responseData.ingredients); // Przechowywanie danych w stanie
+        setIngredients(responseData.ingredients); 
         if (responseData.ingredients.length > 0) {
-          // Inicjalizacja formularza z pierwszym składnikiem (opcjonalnie)
+          
           setFormData({
             name: responseData.ingredients[0].name,
             category: responseData.ingredients[0].category,
@@ -40,28 +43,28 @@ const IngredientDetails = () => {
     fetchIngredients();
   }, [sendRequest, name]);
 
-  // Obsługa zmiany wartości w formularzu
+  
   const inputChangeHandler = (event) => {
     setFormData({ ...formData, [event.target.name]: event.target.value });
   };
 
-  // Obsługa przesyłania formularza
+  
   const submitHandler = async (event) => {
     event.preventDefault();
     try {
       await sendRequest(
-        'http://localhost:8000/api/magazine/add-ingredient', // Endpoint backendowy do dodania nowego składnika
+        'http://localhost:8000/api/magazine/add-ingredient', 
         'POST',
         JSON.stringify({
           name: formData.name,
           category: formData.category,
-          expirationDate: formData.expirationDate, // Data w formacie YYYY-MM-DD
+          expirationDate: formData.expirationDate, 
           weight: formData.weight,
           price: formData.price
         }),
         { 'Content-Type': 'application/json' }
       );
-      // Opcjonalnie: ponowne załadowanie składników po dodaniu nowego
+      
       const responseData = await sendRequest(
         `http://localhost:8000/api/magazine/${name}`
       );
@@ -71,8 +74,11 @@ const IngredientDetails = () => {
 
   return (
     <>
-      <ErrorModal error={error} onClear={clearError} />
+      {/* <ErrorModal error={error} onClear={clearError} /> */}
       {isLoading && <LoadingSpinner asOverlay />}
+      {!isLoading && ingredients.length === 0 && (
+        <span>Brak składników do wyświetlenia.</span>
+      )}
       
       {/* Wyświetlanie listy składników */}
       {!isLoading && ingredients.length > 0 && (
@@ -113,9 +119,10 @@ const IngredientDetails = () => {
             type="text"
             name="name"
             id="name"
-            value={formData.name}
+            value={name}
             onChange={inputChangeHandler}
             required
+            disabled
           />
         </div>
         <div className='select2-container'>
@@ -125,9 +132,10 @@ const IngredientDetails = () => {
             type="text"
             name="category"
             id="category"
-            value={formData.category}
+            value={category}
             onChange={inputChangeHandler}
             required
+            disabled
           />
         </div>
         <div className='select2-container' >
@@ -171,9 +179,7 @@ const IngredientDetails = () => {
         </div>
       </div>
       </form>
-      {!isLoading && ingredients.length === 0 && (
-        <span>Brak składników do wyświetlenia.</span>
-      )}
+      
     </>
   );
 };

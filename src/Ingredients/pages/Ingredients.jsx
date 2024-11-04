@@ -13,6 +13,8 @@ import {
   VALIDATOR_REQUIRE,
 } from "../../shared/util/validators";
 import Button from "../../shared/components/FormElements/Button";
+import { useContext } from "react";
+import { AuthContext } from "../../../src/shared/context/auth-context";
 
 const Ingredients = () => {
   const { isLoading, error, sendRequest, clearError } = useHttpClient();
@@ -21,19 +23,24 @@ const Ingredients = () => {
   const [loadedCartItems, setLoadedCartItems] = useState();
   const [selectedCategory, setSelectedCategory] = useState("all");
   const [inputName, setInputName] = useState("");
-
+  const auth = useContext(AuthContext)
   const navigate = useNavigate();
 
   useEffect(() => {
+    console.log('userRole: '+auth.userRole)
     const fetchDishes = async () => {
       try {
         const responseData = await sendRequest(
           "http://localhost:8000/api/ingredients",
-          "GET"
+          "GET",
+          null,
+          { Authorization: 'Bearer ' + auth.token, 'Content-Type': 'application/json'  } 
+          
         );
         setLoadedIngredientsTemplates(responseData.ingredientTemplates);
         setLoadedCartItems(responseData.cartIngredients);
         console.log(responseData.cartIngredients);
+        console.log(auth.userId)
       } catch (error) {}
     };
     fetchDishes();

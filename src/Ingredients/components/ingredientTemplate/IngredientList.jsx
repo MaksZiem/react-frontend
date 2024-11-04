@@ -22,7 +22,7 @@ const IngredientList = (props) => {
     <>
      <h1 className="text">Wybrane składniki</h1>
       <div className="place-list-form-placeholder-ingredient">
-        <div className="cart-item-ingredient">
+        <div className="ingredients-list-desc">
           <span className="item-name-ingredient">nazwa</span>
           <span className="item-category">kategoria</span>
           
@@ -30,6 +30,7 @@ const IngredientList = (props) => {
         </div>
         </div>
     <ul className="place-list-form-ingredient">
+      {/* <h1>elo</h1> */}
         {props.ingredientTemplates.map(ingredient => (
             <IngredientItem 
                 key={ingredient.id}

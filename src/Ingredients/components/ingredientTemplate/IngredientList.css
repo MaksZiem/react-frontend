@@ -7,31 +7,11 @@
 .grid-container {
     width: 100%;
     display: grid;
-    grid-template-columns: repeat(4, 1fr); /* Tworzy 4 kolumny o równych szerokościach */
-    gap: 20px; /* Odstępy między elementami */
-    padding: 20px; /* Opcjonalne odstępy wewnątrz kontenera */
+    /* grid-template-columns: repeat(4, 1fr);  */
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); 
+    gap: 20px; 
+    padding: 20px; 
     flex-wrap: wrap;
-}
-
-/* Na średnich ekranach, np. tablety */
-@media (max-width: 1524px) {
-    .grid-container {
-        grid-template-columns: repeat(3, 1fr); /* 2 kolumny na mniejszych ekranach */
-    }
-}
-
-/* Na średnich ekranach, np. tablety */
-@media (max-width: 1024px) {
-    .grid-container {
-        grid-template-columns: repeat(2, 1fr); /* 2 kolumny na mniejszych ekranach */
-    }
-}
-
-/* Na małych ekranach, np. smartfony */
-@media (max-width: 600px) {
-    .grid-container {
-        grid-template-columns: 1fr; /* 1 kolumna na bardzo małych ekranach */
-    }
 }
 
 .place-list-form-ingredient {
@@ -43,8 +23,8 @@
     color: white;
     text-align: center;
     gap: 10px;
-    /* margin-bottom: 110px; */
-    /* background-color: gold; */
+    
+    
   }
 
 .place-list-form-placeholder-ingredient {
@@ -59,6 +39,9 @@
 .item-name-ingredient, .item-category, .item-weight, .item-action {
     width: 20%;
     padding: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
 .item-name-ingredient {
@@ -66,23 +49,25 @@
 }
 
 
-.cart-item-ingredient {
+.ingredients-list-desc {
     display: flex;
     flex-direction: row;
     color: white;
     justify-content: space-between;
-    /* background-color: aq; */
+    padding: 10px;
     height: 45px;
-    border-bottom: 1px solid rgb(91, 86, 86);
-    /* padding: 20px; */
-   /* padding: 0px 0px 20px 0px; */
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    /* border-bottom: 1px solid rgb(91, 86, 86); */
+    background-color: rgb(117, 148, 215);
    text-align: center;
-   margin: 10px;
-   /* padding: 10px; */
-   /* box-shadow: 0 5px 16px rgb(239, 236, 236, 0.05); */
+   /* margin: 10px; */
+   transition: background-color 0.3s, color 0.3s; 
+   
+   
 }
 
-.cart-item-ingredient form {
+.ingredients-list-desc form {
     padding: 0;
     margin: 0;
     display: flex;
@@ -90,11 +75,11 @@
 }
 
 ul, ol {
-    list-style: none; /* Usuwa domyślny styl listy */
+    list-style: none; 
 }
 
 ul::marker, ol::marker {
-    content: ''; /* Usuwa marker poprzez ustawienie pustej treści */
+    content: ''; 
 }
 
 .cart-item button {
@@ -114,7 +99,7 @@ ul::marker, ol::marker {
 }
 
 .cart-item button:hover {
-    /* border-radius: 5px solid white; */
+    
     background-color: white;
     color: black;
     cursor: pointer;

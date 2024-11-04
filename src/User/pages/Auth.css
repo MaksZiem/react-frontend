@@ -8,8 +8,72 @@
   max-width: 25rem;
   margin: 7rem auto;
   text-align: center;
+  background-color: rgb(255, 255, 255);
+  color: black;
+}
+
+.card {
+  margin-top: 150px;
+  border: none;
+  border-radius: 15px;
 }
 
 .authentication form {
   margin-bottom: 1rem;
 }
+
+.button {
+  margin-right: 0;
+}
+
+.authentication  input {
+  background: rgb(232, 232, 232);
+  border: 0.1px solid transparent;
+  color: black;
+}
+
+ .authentication  input:hover,
+ .authentication  input:focus  { 
+  border: 0.1px solid black;
+} 
+
+.logreg {
+  background-color: rgb(232, 232, 232);
+  border: none;
+  padding: 10px;
+  font-size: 16px;
+  border-radius: 5px;
+  cursor: pointer;
+  border: 0.1px solid transparent;
+  transition: all 0.2s;
+}
+
+.logreg:hover {
+  background-color: rgb(255, 255, 255);
+  border: 0.1px solid black;
+}
+
+.select-dropdown {
+  width: 100%;
+  padding: 10px;
+  background: rgb(232, 232, 232); /* Dopasowanie do tła input */
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  color: black;
+  cursor: pointer;
+  margin-top: 0.5rem;
+}
+
+/* Styl hover i focus */
+.select-dropdown:hover,
+.select-dropdown:focus {
+  /* background-color: rgb(255, 255, 255); */
+  outline: none;
+  /* border: 1px solid black; */
+}
+
+
+/* #name {
+  background: rgb(110, 95, 95);
+} */

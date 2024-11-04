@@ -8,9 +8,12 @@ import { useForm } from "../../shared/hooks/form-hook";
 import ErrorModal from "../../shared/components/UIElements/ErrorModal";
 import { VALIDATOR_REQUIRE } from "../../shared/util/validators";
 import './ingredientWeight.css'
+import { AuthContext } from "../../shared/context/auth-context";
+import { useContext } from "react";
 
 const IngredientWeight = () => {
     const location = useLocation();
+    const auth = useContext(AuthContext)
     const { name, category, id } = location.state || {}; // Fallback to empty object if no state is passed
     const { isLoading, error, sendRequest, clearError } = useHttpClient();
     const [formState, inputHandler] = useForm(
@@ -37,7 +40,7 @@ const IngredientWeight = () => {
                     weight: formState.inputs.weight.value,
 
                 }),
-                { 'Content-Type': 'application/json' }
+                { Authorization: 'Bearer ' + auth.token, 'Content-Type': 'application/json'  } 
             );
             navigate('/ingredients-dashboard')
         } catch (err) { }
@@ -51,8 +54,11 @@ const IngredientWeight = () => {
             <h1>Wprowadź ilość</h1>
             <h2>{name}</h2>
             {/* <h2>{category}</h2> */}
-        <form className="place-form" onSubmit={ingredientSubmitHandler}>
+        <form className="add-dish-forms-container" onSubmit={ingredientSubmitHandler}>
         {isLoading && <LoadingSpinner asOverlay />}
+        <div className="add-dish-forms">
+            
+
         <Input
           id="weight"
           element="input"
@@ -61,11 +67,16 @@ const IngredientWeight = () => {
           validators={[VALIDATOR_REQUIRE()]}
           errorText="Please enter a valid weight."
           onInput={inputHandler}
-        />
+          />
         
+        <div className="text">
+
         <button className="weight-button"  type="submit" disabled={!formState.isValid}>
           Dodaj składnik
         </button>
+        </div>
+          </div>
+        
       </form>
         </div>
         </div>

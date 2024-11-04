@@ -1,24 +1,39 @@
+/* .tables-list {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); 
+    grid-template-rows: repeat(2, 500px); 
+    gap: 20px; 
+    padding: 20px; 
+    flex-wrap: wrap;
+    
+    width: 100%;
+    
+    margin-right: 40px;
+    scrollbar-width: thin; 
+    scrollbar-color: #888 #f4f4f4; 
+} */
+
 .tables-list {
     display: grid;
-    grid-template-columns: repeat(4, 1fr); /* Tworzy 4 kolumny o równych szerokościach */
-    grid-template-rows: repeat(2, 500px); /* Tworzy 4 kolumny o równych szerokościach */
-    gap: 20px; /* Odstępy między elementami */
-    padding: 20px; /* Opcjonalne odstępy wewnątrz kontenera */
-    flex-wrap: wrap;
-    /* height: 100vh; */
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); 
+    /* background-color: red; */
+    gap: 20px;
+    padding: 20px;
     width: 100%;
-    /* width: 100vh; */
     margin-right: 40px;
     scrollbar-width: thin; /* For Firefox */
     scrollbar-color: #888 #f4f4f4; /* For Firefox */
 }
 
+
 .table-item {
-    background-color: rgb(12, 16, 23);
-    box-shadow: 0 5px 16px rgb(239, 236, 236, 0.05);
+    background-color: rgb(117, 148, 215);
+    /* box-shadow: 0 5px 16px rgb(239, 236, 236, 0.05); */
+    /* box-shadow: 7px 13px 26px -15px rgba(66, 68, 90, 1); */
     color: white;
     font-weight: 400;
-    width: 400px;
+    min-width: 400px;
+    min-height: 500px;
     padding: 30px 10px 30px 10px;
     display: flex;
     flex-direction: column;
@@ -33,46 +48,48 @@
     text-align: center;
     display: flex;
     align-items: center;
+    
 }
 
 .table-item2 {
     background-color: rgb(12, 16, 23);
-    box-shadow: 0 5px 16px rgb(239, 236, 236, 0.05);
+    /* box-shadow: 0 5px 16px rgba(176, 171, 171, 0.05); */
+    
     color: white;
     font-weight: 400;
-    /* height: 100px; */
+    
     width: 400px;
     padding: 30px 10px 30px 10px;
-    /* height: 500px; */
+    
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
-    /* gap: 10px; */
+    
     margin-top: 20px;
     border-radius: 10px;
 }
 
 .table-item2 span {
-    /* background-color: red; */
+    
     font-size: 18px;
     text-align: center;
     display: flex;
     align-items: center;
-    /* padding: 2px; */
-    /* justify-content: center; */
+    
+    
 }
 
 .table-item.table-free {
-    border: 1px solid rgb(38, 119, 50);
+    border: 3px solid rgb(38, 119, 50);
 }
 
 .table-item.table-waiting {
-    border: 1px solid rgb(142, 153, 47);
+    border: 3px solid rgb(142, 153, 47);
 }
 
 .table-item.table-delivered {
-    border: 1px solid rgb(236, 107, 9);
+    border: 3px solid rgb(236, 107, 9);
 }
 
 .border {
@@ -87,7 +104,7 @@
     list-style: none;
     padding: 0;
     width: 350px;
-    /* height: 20px; */
+    
     margin: 0;
     max-height: 200px;
     overflow-y: auto;
@@ -111,34 +128,34 @@
     padding: 10px;
     max-height: 200px;
     overflow-y: auto;
-    scrollbar-width: thin; /* Firefox */
-    scrollbar-color: #3f3f3f #000000; /* Kolor w Firefox */
+    scrollbar-width: thin; 
+    scrollbar-color: #3f3f3f #000000; 
 }
 
-/* Webkit (Chrome, Opera) stylizowanie paska przewijania */
+
 .item-list::-webkit-scrollbar {
-    width: 5em; /* Zwiększamy szerokość paska przewijania */
-    background-color: #000000; /* Tło dla paska przewijania */
+    width: 5em; 
+    background-color: #000000; 
 }
 
 .item-list::-webkit-scrollbar-thumb {
-    background-color: #3f3f3f; /* Kolor uchwytu przewijania */
-    border-radius: 20px; /* Zaokrąglenie uchwytu */
+    background-color: #3f3f3f; 
+    border-radius: 20px; 
 }
 
 .item-list::-webkit-scrollbar-thumb:hover {
-    background-color: #555; /* Zmiana koloru na hover */
+    background-color: #555; 
 }
 
 
 
 .item-list::-webkit-scrollbar-track {
-    background-color: #1a1a1a; /* Tło dla toru przewijania */
+    background-color: #1a1a1a; 
 }
 
-/* Usunięcie strzałek na górze i dole paska przewijania */
+
 .item-list::-webkit-scrollbar-button {
-    display: none; /* Ukrycie strzałek */
+    display: none; 
 }
 
 .submit-button3 {
@@ -156,7 +173,7 @@
     cursor: pointer;
     transition: background-color 0.3s, color 0.3s;
     border: 1px solid #676363;
-    /* margin-bottom: 10px; */
+    
 }
 
 .submit-button3:hover {
@@ -179,7 +196,7 @@
     cursor: pointer;
     transition: background-color 0.3s, color 0.3s;
     border: 1px solid #676363;
-    /* margin-bottom: 10px; */
+    
 }
 
 .submit-button4:hover {
@@ -215,3 +232,29 @@
 .order-info span {
     text-align: center;
 }
+
+
+
+.add-order-table-button {
+    background-color: rgb(255, 255, 255);
+    color: black;
+    border: none;
+    padding: 12px;
+    font-size: 16px;
+    font-weight: 600;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 160px;
+    border: 0.1px solid transparent;
+    transition: all 0.2s;
+    /* margin-right: 10px; */
+  }
+  
+  .add-order-table-button:hover {
+    background-color: rgb(232, 232, 232);
+    border: 0.1px solid black;
+  }
+
+  .table-number {
+    font-size: 22px;
+  }

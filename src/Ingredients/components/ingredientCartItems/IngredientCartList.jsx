@@ -8,8 +8,12 @@ import ErrorModal from "../../../shared/components/UIElements/ErrorModal";
 import { VALIDATOR_REQUIRE } from "../../../shared/util/validators";
 import Input from "../../../shared/components/FormElements/Input";
 import "./IngredientCartList.css";
+import { useContext } from "react";
+import { AuthContext } from "../../../shared/context/auth-context";
+import ImageUpload from "../../../shared/components/FormElements/ImageUpload";
 
 const IngredientCartList = (props) => {
+  const auth = useContext(AuthContext)
   const { isLoading, error, sendRequest, clearError } = useHttpClient();
   const [formState, inputHandler] = useForm(
     {
@@ -21,6 +25,10 @@ const IngredientCartList = (props) => {
         value: "",
         isValid: false,
       },
+      image: {
+        value: '',
+        isValid: false
+      }
     },
     false
   );
@@ -28,17 +36,20 @@ const IngredientCartList = (props) => {
   const placeSubmitHandler = async (event) => {
     event.preventDefault();
     try {
+      const formData = new FormData()
+      formData.append('name', formState.inputs.name.value)
+      formData.append('price', formState.inputs.price.value)
+      formData.append('image', formState.inputs.image.value)
       await sendRequest(
         "http://localhost:8000/api/ingredients/add-dish",
         "POST",
-        JSON.stringify({
-          name: formState.inputs.name.value,
-          price: formState.inputs.price.value,
-        }),
-        { "Content-Type": "application/json" }
+        formData,
+        { Authorization: 'Bearer ' + auth.token } 
       );
       props.onAddDish();
-    } catch (err) {}
+    } catch (err) {
+      
+    }
   };
 
   if (props.cartItems.length === 0) {
@@ -54,15 +65,15 @@ const IngredientCartList = (props) => {
     
       <ErrorModal error={error} onClear={clearError} />
       <h1 className="text">Wybrane składniki</h1>
-      <div className="place-list-form-placeholder">
-        <div className="cart-item">
-          <span className="item-name">nazwa</span>
+      <div className="place-list-form-placeholder-ingredient">
+        <div className="ingredients-list-desc">
+          <span className="item-name-ingredient">nazwa</span>
           <span className="item-category">kategoria</span>
           <span className="item-weight">ilość</span>
           <span className="item-action">akcje</span>
         </div>
       </div>
-      <ul className="place-list-form">
+      <ul className="place-list-form-ingredient">
         {props.cartItems.map((ingredient) => (
           <IngredientCartItem
             key={ingredient.ingredientTemplateId.id}
@@ -97,9 +108,13 @@ const IngredientCartList = (props) => {
           errorText="Please enter a valid price"
           onInput={inputHandler}
         />
-        <button type="submit" className="submit-button" disabled={!formState.isValid}>
+        <ImageUpload center id="image" onInput={inputHandler} onErrorText="Dodaj zdjecie" />
+        <div className="text">
+
+        <Button type="submit" disabled={!formState.isValid}>
           Dodaj
-        </button>
+        </Button>
+        </div>
         </div>
       </form>
       

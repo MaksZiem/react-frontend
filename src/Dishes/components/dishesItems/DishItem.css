@@ -59,8 +59,28 @@
   } 
 }
 
-.add-to-cart-button.disabled {
-  /* Styl dla niedostępnego przycisku, np. */
+/* .add-to-cart-button.disabled {
   background-color: grey;
   cursor: not-allowed;
+} */
+
+.ingredient-details-button.disabled {
+  background-color: rgb(174, 172, 172);
+  color: black;
+  border: none;
+  padding: 10px;
+  font-size: 16px;
+  font-weight: 600;
+  border-radius: 5px;
+  cursor: pointer;
+  width: 160px;
+  border: 0.1px solid transparent;
+  transition: all 0.2s;
+  cursor: not-allowed;
+  /* margin-right: 10px; */
 }
+
+/* .ingredient-details-button.disabled:hover {
+  background-color: rgb(232, 232, 232);
+  border: 0.1px solid black;
+} */

@@ -6,10 +6,13 @@ import { useHttpClient } from "../../../shared/hooks/http-hook";
 import { useState } from "react";
 import LoadingSpinner from "../../../shared/components/UIElements/LoadingSpinner";
 import './IngredientCartItem.css';
+import { useContext } from "react";
+import { AuthContext } from "../../../shared/context/auth-context";
 
 const IngredientCartItem = (props) => {
   const [showConfirmModal, setShowConfirmModal] = useState(false);
   const { isLoading, error, sendRequest, clearError } = useHttpClient();
+  const auth = useContext(AuthContext)
 
   const showDeleteWarningHandler = () => {
     setShowConfirmModal(true);
@@ -28,7 +31,7 @@ const IngredientCartItem = (props) => {
         JSON.stringify({
           ingredientTemplateId: props.id,
         }),
-        { "Content-Type": "application/json" }
+        { Authorization: 'Bearer ' + auth.token, 'Content-Type': 'application/json'  } 
       );
       props.onDelete(props.id);
     } catch (err) {}
@@ -61,12 +64,12 @@ const IngredientCartItem = (props) => {
       </Modal>
       <li > 
         {isLoading && <LoadingSpinner asOverlay />}
-          <div className="cart-item">
-            <span className="item-name">{props.name}</span>
-            <span className="item-name">{props.category}</span>
-            <span className="item-name">{props.weight}</span>
-            <div className="item-action" >
-            <button onClick={showDeleteWarningHandler} className="add-to-cart-button">
+          <div className="cart-item-ingredient">
+            <span className="item-name-ingredient">{props.name}</span>
+            <span className="item-category">{props.category}</span>
+            <span className="item-category">{props.weight}</span>
+            <div className="item-action-cart" >
+            <button onClick={showDeleteWarningHandler} className="delete-ingredient-from-cart">
               Usuń
             </button>
             </div>

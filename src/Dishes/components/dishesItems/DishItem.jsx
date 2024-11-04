@@ -29,18 +29,19 @@ const DishItem = (props) => {
     }
   };
 
-  const buttonClass = props.isAvailable ? 'add-to-cart-button' : 'add-to-cart-button disabled';
+  const buttonClass = props.isAvailable ? 'ingredient-details-button' : 'ingredient-details-button disabled';
 
   return (
-    <li>
+    <li lassName='one-item'>
       <ErrorModal error={error} onClear={clearError} />
-      <Card className="place-item__content">
-        <div className="place-item__info">
+      <Card className="ingredient-item__content">
+        <div className="ingredient-item__info">
           <h2>{props.name}</h2>
           <h3>{props.price} $</h3>
           <h3>{props.isAvailable}</h3>
+          <img src={`http://localhost:8000/${props.image}`} className='ingredient-image'  alt={props.name} />
         </div>
-        <div className="place-item__actions">
+        <div className="ingredient-item__actions">
           <form onSubmit={ingredientSubmitHandler}>
             <input type="hidden" name="ingredientTemplateId" value={props.id}></input>
             <button type="submit" className={buttonClass} disabled={!props.isAvailable}>

@@ -1,0 +1,11 @@
+.grid-container3 {
+    width: 100%;
+    display: grid;
+    /* grid-template-columns: repeat(4, 1fr);  */
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); 
+    /* background-color: yellow; */
+    gap: 20px; 
+    padding: 20px;  
+    margin-right: 40px;
+    /* flex-wrap: wrap; */
+}

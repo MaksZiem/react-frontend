@@ -12,7 +12,10 @@ import {
   VALIDATOR_REQUIRE,
 } from "../../shared/util/validators";
 import Button from "../../shared/components/FormElements/Button";
-import './IngredientDetails.css'
+import "./IngredientDetails.css";
+import { useContext } from "react";
+import { AuthContext } from "../../shared/context/auth-context";
+import './Magazine.css'
 
 const Magazine = () => {
   const { isLoading, error, sendRequest, clearError } = useHttpClient();
@@ -21,7 +24,7 @@ const Magazine = () => {
   const [loadedCartItems, setLoadedCartItems] = useState();
   const [selectedCategory, setSelectedCategory] = useState("all");
   const [inputName, setInputName] = useState("");
-
+  const auth = useContext(AuthContext);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -29,7 +32,12 @@ const Magazine = () => {
       try {
         const responseData = await sendRequest(
           "http://localhost:8000/api/ingredients",
-          "GET"
+          "GET",
+          null,
+          {
+            Authorization: "Bearer " + auth.token,
+            "Content-Type": "application/json",
+          }
         );
         setLoadedIngredientsTemplates(responseData.ingredientTemplates);
         setLoadedCartItems(responseData.cartIngredients);
@@ -46,7 +54,6 @@ const Magazine = () => {
   const nameChangeHandler = (event) => {
     setInputName(event.target.value);
   };
-
 
   const cartItemsDeletedHandler = (deletedIngredientId) => {
     setLoadedCartItems((prevItems) =>
@@ -75,9 +82,8 @@ const Magazine = () => {
   };
 
   const addIngredientTemplateHandler = () => {
-    navigate("/create-ingredient-template"); // Używamy navigate, aby przejść do odpowiedniej strony
+    navigate("/create-ingredient-template"); 
   };
-
 
   return (
     <>
@@ -89,12 +95,12 @@ const Magazine = () => {
       )}
       <h1 className="text3">Produkty</h1>
       <div className="search-container">
-        <form className="search-forms"  onSubmit={filterIngredientsHandler}>
+        <form className="search-forms" onSubmit={filterIngredientsHandler}>
           {/* Add your select input or other fields here */}
-          <div className="select-category" >
-          <label htmlFor="name">Enter Name:</label>
+          <div className="select-category">
+            <label htmlFor="name">Enter Name:</label>
             <input
-            className="select"
+              className="select"
               type="text"
               id="name"
               value={inputName}
@@ -114,16 +120,21 @@ const Magazine = () => {
               <option value="vegetable">Vegetable</option>
             </select>
           </div>
-          <button type="submit" className="submit-button" >Filter</button>
+          <button type="submit" className="filter">
+            Filter
+          </button>
         </form>
       </div>
 
       <div className="text2">
-        <button onClick={addIngredientTemplateHandler} className="submit-button2">
+        <button
+          onClick={addIngredientTemplateHandler}
+          className="ingredient-details"
+        >
           Dodaj Składnik
         </button>
       </div>
-      
+
       {!isLoading && LoadedIngredientsTamplates && (
         <MagazineDashboard ingredientTemplates={LoadedIngredientsTamplates} />
       )}
