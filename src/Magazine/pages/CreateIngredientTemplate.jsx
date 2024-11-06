@@ -23,8 +23,8 @@ const CreateIngredientTemplate = () => {
         isValid: false,
       },
       category: {
-        value: "",
-        isValid: false,
+        value: "warzywo",
+        isValid: true,
       },
       expirationDate: {
         value: "",
@@ -38,28 +38,24 @@ const CreateIngredientTemplate = () => {
     false
   );
 
-
   // useEffect(()=> {
   //   console.log(formState)
   // }, [formState])
 
   const ingredientSubmitHandler = async (event) => {
     event.preventDefault();
-    
+
     try {
       const formData = new FormData();
       formData.append("name", formState.inputs.name.value);
       formData.append("category", formState.inputs.category.value);
-      formData.append(
-        "expirationDate",
-        formState.inputs.expirationDate.value
-      );
+      formData.append("expirationDate", formState.inputs.expirationDate.value);
       formData.append("image", formState.inputs.image.value);
       // console.log(formData);
       await sendRequest(
         "http://localhost:8000/api/magazine/create-ingredient-template",
         "POST",
-        formData,
+        formData
         // { 'Content-Type': 'application/json' }
       );
       // Reset form po sukcesie
@@ -67,24 +63,22 @@ const CreateIngredientTemplate = () => {
       setShowConfirmModal(true);
       setFormData(
         {
-          name: { value: '', isValid: false },
-          category: { value: '', isValid: false },
-          expirationDate: { value: '', isValid: false },
-          image: { value: '', isValid: false }
+          name: { value: "", isValid: false },
+          category: { value: "", isValid: false },
+          expirationDate: { value: "", isValid: false },
+          image: { value: "", isValid: false },
         },
         false
       );
     } catch (err) {
-      console.log(err)
+      console.log(err);
     }
   };
 
   const cancelDeleteHandler = () => {
-    
     setShowConfirmModal(false);
-    navigate('/magazine')
+    navigate("/magazine");
   };
-
 
   return (
     <>
@@ -96,57 +90,75 @@ const CreateIngredientTemplate = () => {
         footerClass="place-item__modal-actions"
         footer={
           <React.Fragment>
-            
-            <Button danger onClick={cancelDeleteHandler}>
-              dodano
-            </Button>
+            <Button onClick={cancelDeleteHandler}>Ok</Button>
           </React.Fragment>
         }
       >
-        <p>
-          Zaktualizowano dane uzytkownika
-        </p>
+        <p>Pomyślnie dodano składnik</p>
       </Modal>
       {isLoading && <LoadingSpinner asOverlay />}
       <Card className="authentication">
-      <h2>Dodawanie składnika</h2>
-      <hr />
-      <form onSubmit={ingredientSubmitHandler}>
-        <Input
-          id="name"
-          element="input"
-          type="text"
-          label="name"
-          validators={[VALIDATOR_REQUIRE()]}
-          errorText="Please enter a valid name."
-          onInput={inputHandler}
+        <h2>Dodawanie składnika</h2>
+        <hr />
+        <form onSubmit={ingredientSubmitHandler}>
+          <Input
+            id="name"
+            element="input"
+            type="text"
+            label="Nazwa"
+            validators={[VALIDATOR_REQUIRE()]}
+            errorText="Please enter a valid name."
+            onInput={inputHandler}
           />
-        <Input
-          id="category"
-          element="input"
-          type="text"
-          label="category"
-          validators={[VALIDATOR_REQUIRE()]}
-          errorText="Please enter a valid name."
-          onInput={inputHandler}
+          {/* <Input
+            id="category"
+            element="input"
+            type="text"
+            label="category"
+            validators={[VALIDATOR_REQUIRE()]}
+            errorText="Please enter a valid name."
+            onInput={inputHandler}
+          /> */}
+          <div className="form-control">
+            <label htmlFor="category">Kategoria</label>
+            <select
+              id="category"
+              onChange={(e) => inputHandler("category", e.target.value, true)}
+              value={formState.inputs.category.value}
+              className="select-dropdown"
+            >
+              <option value="warzywo">warzywo</option>
+              <option value="owoc">owoc</option>
+              <option value="mieso">mieso</option>
+              <option value="owoce morza">owoce morza</option>
+              <option value="produkt zbozowy">produkt zbozowy</option>
+              <option value="nabial i jajka">nabial i jajka</option>
+              <option value="przyprawa">przyprawa</option>
+              <option value="oleje i tluscze">oleje i tluscze</option>
+              <option value="przetwor">przetwor</option>
+              <option value="mrozonka">mrozonka</option>
+              <option value="oki i wody">soki i wody</option>
+            </select>
+          </div>
+          <Input
+            id="expirationDate"
+            element="input"
+            type="date"
+            label="Data waności"
+            validators={[VALIDATOR_REQUIRE()]}
+            errorText="Please enter a valid name."
+            onInput={inputHandler}
           />
-        <Input
-          id="expirationDate"
-          element="input"
-          type="date"
-          label="expirationDate"
-          validators={[VALIDATOR_REQUIRE()]}
-          errorText="Please enter a valid name."
-          onInput={inputHandler}
+          <ImageUpload
+            center
+            id="image"
+            onInput={inputHandler}
+            onErrorText="Dodaj zdjecie"
           />
-        <ImageUpload
-          center
-          id="image"
-          onInput={inputHandler}
-          onErrorText="Dodaj zdjecie"
-          />
-        <Button  type="submit" disabled={!formState.isValid}>Dodaj składnik</Button>
-      </form>
+          <Button type="submit" disabled={!formState.isValid}>
+            Dodaj składnik
+          </Button>
+        </form>
       </Card>
     </>
   );

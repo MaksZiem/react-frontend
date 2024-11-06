@@ -29,6 +29,7 @@ const MagazineDashboard = (props) => {
                 name={ingredient.name}
                 category={ingredient.category}
                 image={ingredient.image}
+                onDelete={props.onDelete}
             />
         ))}
     </ul>

@@ -18,3 +18,15 @@
     background-color: white;
     color: black;
 }
+
+.item-name-ingredient {
+    /* background-color: red; */
+    text-align: center;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.magazine-ingredient-input {
+    background-color: red;
+}

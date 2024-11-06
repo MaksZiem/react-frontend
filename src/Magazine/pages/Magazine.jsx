@@ -28,7 +28,7 @@ const Magazine = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    const fetchDishes = async () => {
+    const fetchMagazineDashboard = async () => {
       try {
         const responseData = await sendRequest(
           "http://localhost:8000/api/ingredients",
@@ -44,7 +44,7 @@ const Magazine = () => {
         console.log(responseData.cartIngredients);
       } catch (error) {}
     };
-    fetchDishes();
+    fetchMagazineDashboard();
   }, [sendRequest]);
 
   const categoryChangeHandler = (event) => {
@@ -55,19 +55,24 @@ const Magazine = () => {
     setInputName(event.target.value);
   };
 
-  const cartItemsDeletedHandler = (deletedIngredientId) => {
-    setLoadedCartItems((prevItems) =>
-      prevItems.filter(
-        (item) => item.ingredientTemplateId._id !== deletedIngredientId
-      )
+  // const cartItemsDeletedHandler = (deletedIngredientId) => {
+  //   setLoadedCartItems((prevItems) =>
+  //     prevItems.filter(
+  //       (item) => item.ingredientTemplateId._id !== deletedIngredientId
+  //     )
+  //   );
+  //   navigate("/ingredients-dashboard");
+  // };
+
+  const deleteIngredientTemplateHandler = (deletedIngredientId) => {
+    console.log('usunieto')
+    setLoadedIngredientsTemplates((prevItems) =>
+      prevItems.filter((item) => item._id !== deletedIngredientId)
     );
-    navigate("/ingredients-dashboard");
+    navigate(`/magazine`);
   };
 
-  const addDishHandler = (deletedIngredientId) => {
-    setLoadedCartItems([]);
-    navigate("/ingredients-dashboard");
-  };
+  
 
   const filterIngredientsHandler = async (event) => {
     event.preventDefault(); // Prevents page refresh
@@ -136,7 +141,7 @@ const Magazine = () => {
       </div>
 
       {!isLoading && LoadedIngredientsTamplates && (
-        <MagazineDashboard ingredientTemplates={LoadedIngredientsTamplates} />
+        <MagazineDashboard ingredientTemplates={LoadedIngredientsTamplates} onDelete={deleteIngredientTemplateHandler}/>
       )}
     </>
   );

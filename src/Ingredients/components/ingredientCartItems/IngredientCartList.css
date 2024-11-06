@@ -142,6 +142,10 @@
     outline: none;
 }
 
+.select2:disabled {
+    background-color: rgb(199, 199, 199);
+}
+
 .select:focus {
     background-color: rgb(17, 23, 33);
 }
@@ -159,11 +163,13 @@
 
 .select2 {
     margin-top: 5px;
-    background-color: rgb(12, 16, 23);
+    /* background-color: rgb(12, 16, 23); */
+    border: none;
+    background-color: white;
     outline: none;
     height: 35px;
     border-radius: 8px;
-    color: white;
+    color: black;
     padding: 0.35rem 0.45rem;
     width: 400px;
     outline: none;
@@ -173,7 +179,7 @@
 }
 
 .select2:focus {
-    background-color: rgb(17, 23, 33);
+    background-color: rgb(237, 237, 237);
 }
 
 .select2-container {

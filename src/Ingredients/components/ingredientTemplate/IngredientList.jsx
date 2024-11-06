@@ -25,7 +25,6 @@ const IngredientList = (props) => {
         <div className="ingredients-list-desc">
           <span className="item-name-ingredient">nazwa</span>
           <span className="item-category">kategoria</span>
-          
           <span className="item-action">akcje</span>
         </div>
         </div>

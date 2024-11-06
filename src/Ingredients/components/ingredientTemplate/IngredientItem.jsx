@@ -33,7 +33,6 @@ const IngredientItem = (props) => {
               name="ingredientTemplateId"
               value={props.id}
             ></input>
-
             <button
               type="button"
               className="ingredient-details-button2"

@@ -50,7 +50,7 @@ const App = () => {
         setTokenExpirationDate(tokenExp)
         localStorage.setItem(
             'userData',
-            JSON.stringify({userId: uid, token: token, tokenExp: tokenExp.toISOString()})
+            JSON.stringify({userId: uid, token: token, userRole: userRole, tokenExp: tokenExp.toISOString()})
         )
     }, [])
 
@@ -75,7 +75,7 @@ const App = () => {
         const storedData = JSON.parse(localStorage.getItem('userData'))
         //czy data jest z przyszlosci
         if(storedData && storedData.token &&  new Date(storedData.tokenExp) > new Date() ) {
-            login(storedData.userId, storedData.token, userRole, new Date(storedData.tokenExp))
+            login(storedData.userId, storedData.token, storedData.userRole, new Date(storedData.tokenExp))
         }
     }, [login])
 
