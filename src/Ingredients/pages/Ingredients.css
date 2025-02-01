@@ -1,0 +1,12 @@
+.text4 {
+    /* background-color: red; */
+    text-align: center;
+    font-size: 30px;
+    margin-top: 60px;
+}
+
+
+.ingredient-search-container {
+    /* background-color: red; */
+    min-height: 70vh;
+}

@@ -6,11 +6,11 @@ const Employes = (props) => {
   const navigate = useNavigate();
 
   const navigateToCooks = () => {
-    navigate(`/statistics/all-cooks`);
+    navigate(`/statistics/employes`);
   };
 
   const navigateToWaiters = () => {
-    navigate(`/statistics/all-waiters`);
+    navigate(`/statistics/employes/waiters`);
   };
 
   return (

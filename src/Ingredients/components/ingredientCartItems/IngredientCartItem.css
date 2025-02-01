@@ -1,104 +1,127 @@
 .cart-item {
-    display: flex;
-    flex-direction: row;
-    color: white;
-    justify-content: space-around;
-    height: 35px;
-    border-bottom: 1px solid rgb(91, 86, 86);
-    /* padding: 20px; */
-   /* padding: 0px 0px 20px 0px; */
-   text-align: center;
-   margin: 10px;
-   /* padding: 10px; */
-   /* box-shadow: 0 5px 16px rgb(239, 236, 236, 0.05); */
+  display: flex;
+  flex-direction: row;
+  color: white;
+  justify-content: space-around;
+  height: 35px;
+  border-bottom: 1px solid rgb(91, 86, 86);
+  /* padding: 20px; */
+  /* padding: 0px 0px 20px 0px; */
+  text-align: center;
+  margin: 10px;
+  /* padding: 10px; */
+  /* box-shadow: 0 5px 16px rgb(239, 236, 236, 0.05); */
 }
 
-ul, ol {
-    list-style: none; /* Usuwa domyślny styl listy */
+ul,
+ol {
+  list-style: none; /* Usuwa domyślny styl listy */
 }
 
-ul::marker, ol::marker {
-    content: ''; /* Usuwa marker poprzez ustawienie pustej treści */
+ul::marker,
+ol::marker {
+  content: ""; /* Usuwa marker poprzez ustawienie pustej treści */
 }
 
 .cart-item2 {
-    display: flex;
-    flex-direction: row;
-    color: white;
-    justify-content: space-around;
-    height: 35px;
-    width: 100%;
-    border-bottom: 1px solid white;
-    /* padding: 20px; */
-   /* padding: 0px 0px 20px 0px; */
-   text-align: center;
-   /* margin: 10px; */
-   /* padding: 10px; */
-   /* box-shadow: 0 5px 16px rgb(239, 236, 236, 0.05); */
+  display: flex;
+  flex-direction: row;
+  color: white;
+  justify-content: space-around;
+  height: 35px;
+  width: 100%;
+  border-bottom: 1px solid white;
+  /* padding: 20px; */
+  /* padding: 0px 0px 20px 0px; */
+  text-align: center;
+  /* margin: 10px; */
+  /* padding: 10px; */
+  /* box-shadow: 0 5px 16px rgb(239, 236, 236, 0.05); */
 }
 
-ul, ol {
-    list-style: none; /* Usuwa domyślny styl listy */
+ul,
+ol {
+  list-style: none; /* Usuwa domyślny styl listy */
 }
 
-ul::marker, ol::marker {
-    content: ''; /* Usuwa marker poprzez ustawienie pustej treści */
+ul::marker,
+ol::marker {
+  content: ""; /* Usuwa marker poprzez ustawienie pustej treści */
 }
 
 .cart-item button {
-    background-color: red;
-    border: none;
-    border: none;
-    padding: 5px;
-    width: 80px;
-    font-size: 14px;
-    font-weight: 600;
-    border-radius: 5px;
-    color: white;
-    outline: none;
-    cursor: pointer;
-    transition: background-color 0.3s, color 0.3s;
-    box-shadow: 0 5px 16px rgb(239, 236, 236, 0.05);
+  background-color: red;
+  border: none;
+  border: none;
+  padding: 5px;
+  width: 80px;
+  font-size: 14px;
+  font-weight: 600;
+  border-radius: 5px;
+  color: white;
+  outline: none;
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s;
+  box-shadow: 0 5px 16px rgb(239, 236, 236, 0.05);
 }
 
 .cart-item button:hover {
-    /* border-radius: 5px solid white; */
-    background-color: white;
-    color: black;
-    cursor: pointer;
+  /* border-radius: 5px solid white; */
+  background-color: white;
+  color: black;
+  cursor: pointer;
 }
 
 .item-name {
-    width: 50px;
+  width: 50px;
 }
 
 .item-name2 {
-    width: 50px;
+  width: 50px;
 }
 
-.delete-ingredient-from-cart{
-    background-color: rgb(255, 255, 255);
-    /* background-color: red; */
+.delete-ingredient-from-cart {
+  background-color: rgb(235, 235, 235);
+  /* background-color: red; */
+  color: black;
+  border: none;
+  padding: 2px;
+  font-size: 16px;
+  font-weight: 600;
+  border-radius: 5px;
+  cursor: pointer;
+  width: 100px;
+  /* height: 40px; */
+  border: 0.1px solid transparent;
+  transition: all 0.2s;
+  /* margin-left: 10px; */
+}
+
+.delete-ingredient-from-cart:hover {
+  background-color: rgb(243, 47, 47);
+  border: 0.1px solid black;
+}
+
+.item-action-cart {
+  /* background-color: red; */
+  width: 20%;
+}
+
+.cart-item-ingredient-fix {
+    display: flex;
+    flex-direction: row;
     color: black;
-    border: none;
-    padding: 2px;
-    font-size: 16px;
+    justify-content: space-between;
     font-weight: 600;
-    border-radius: 5px;
-    cursor: pointer;
-    width: 100px;
-    /* height: 40px; */
-    border: 0.1px solid transparent;
-    transition: all 0.2s;
-    /* margin-left: 10px; */
+    /* background-color: ; */
+    height: 45px;
+    border-bottom: 3px solid rgb(222, 225, 236);
+    /* background: rgb(222, 225, 236); */
+    padding: 10px;
+    background-color: rgb(255, 255, 255);
+    text-align: center;
+    width: 100%;
+    /* margin: 10px; */
+    transition: background-color 0.3s, color 0.3s;
   }
-
-  .delete-ingredient-from-cart:hover {
-    background-color: rgb(243, 47, 47);
-    border: 0.1px solid black;
-  }
-
-  .item-action-cart {
-    /* background-color: red; */
-    width: 20%
-  }
+  

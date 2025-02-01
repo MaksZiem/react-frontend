@@ -1,0 +1,76 @@
+.add-to-cart-button {
+  background-color: rgb(12, 16, 23);
+  /* width: 90px;
+    height: 35px;; */
+  border: none;
+  padding: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  border-radius: 5px;
+  color: white;
+  outline: none;
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s;
+  border: 1px solid #676363;
+}
+
+.add-to-cart-button:hover {
+  background-color: white;
+  color: black;
+}
+
+.cart-item-ingredient {
+  display: flex;
+  flex-direction: row;
+  color: black;
+  justify-content: space-between;
+  font-weight: 600;
+  /* background-color: ; */
+  height: 45px;
+  border-bottom: 3px solid rgb(222, 225, 236);
+  /* background: rgb(222, 225, 236); */
+  padding: 10px;
+  background-color: rgb(255, 255, 255);
+  text-align: center;
+  /* margin: 10px; */
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.last-ingredient2 {
+  border-bottom-left-radius: 15px;
+  border-bottom-right-radius: 15px;
+  display: flex;
+  flex-direction: row;
+  color: black;
+  justify-content: space-between;
+  font-weight: 600;
+  /* background-color: ; */
+  height: 45px;
+  border-bottom: 3px solid rgb(222, 225, 236);
+  /* background: rgb(222, 225, 236); */
+  padding: 10px;
+  background-color: rgb(255, 255, 255);
+  text-align: center;
+  /* margin: 10px; */
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.ingredient-details-button2 {
+  background-color: rgb(235, 235, 235);
+  color: black;
+  border: none;
+  padding: 5px;
+  font-size: 16px;
+  font-weight: 600;
+  border-radius: 5px;
+  cursor: pointer;
+  width: 160px;
+  border: 0.1px solid transparent;
+  transition: all 0.2s;
+  /* margin-right: 10px; */
+}
+
+.ingredient-details-button2:hover {
+  background-color: rgb(255, 255, 255);
+  border: 0.1px solid black;
+}

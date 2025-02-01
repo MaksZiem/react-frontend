@@ -36,9 +36,9 @@ const NavLinks = () => {
                 <NavLink to="/cook" exact>kucharz</NavLink>
             </li>
             )}
-            {auth.isLoggedIn && (auth.userRole === 'admin' || auth.userRole === "cook") && (
+            {auth.isLoggedIn && auth.userRole === "cook" && (
             <li>
-                <NavLink to="/cook-statistics" exact>statystyki kucharza</NavLink>
+                <NavLink to="/statistics/cooks/details" exact>statystyki kucharza</NavLink>
             </li>
             )} 
             {auth.isLoggedIn  && (
@@ -51,14 +51,19 @@ const NavLinks = () => {
                 <NavLink to="/statistics" exact>statystyki</NavLink>
             </li>
             )}
-            {auth.isLoggedIn && (auth.userRole === 'admin' || auth.userRole === "waiter") && (
+            {auth.isLoggedIn && (auth.userRole === 'admin') && (
+            <li>
+                <NavLink to="/config" exact>ustawienia</NavLink>
+            </li>
+            )}
+            {/* {auth.isLoggedIn && (auth.userRole === 'kelner' || auth.userRole === "waiter") && (
             <li>
                 <NavLink to="/waiter-statistics" exact>statystyki kelnera</NavLink>
             </li>
-            )}
+            )} */}
             {!auth.isLoggedIn && (
             <li>
-              <NavLink to="/auth">Authenticate</NavLink>  
+              <NavLink to="/">Authenticate</NavLink>  
             </li>
             )}
             {auth.isLoggedIn && (

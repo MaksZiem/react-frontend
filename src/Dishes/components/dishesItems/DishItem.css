@@ -84,3 +84,22 @@
   background-color: rgb(232, 232, 232);
   border: 0.1px solid black;
 } */
+
+.dish-item-name {
+  margin-top: 15px;
+  font-size: 28px;
+  font-weight: 600;
+}
+
+.dish-item-price {
+  margin-top: 10px;
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.dish-item-category {
+  margin-top: 10px;
+  font-size: 20px;
+  font-weight: 600;
+  margin-bottom: 10px;
+}

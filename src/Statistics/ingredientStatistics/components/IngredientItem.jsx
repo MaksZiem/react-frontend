@@ -17,9 +17,7 @@ const IngredientItem = (props) => {
   return (
     <>
     
-      <li>
-        {/* <Card className='place-item__content'> */}
-        <div className="cart-item-ingredient">
+      <li className={props.isLast ? "last-ingredient2" : "cart-item-ingredient"}> 
           <span className="item-name-ingredient">{props.name}</span>
           <span className="item-category">{props.category}</span>
           <div className="item-action">
@@ -32,15 +30,13 @@ const IngredientItem = (props) => {
 
             <button
               type="button"
-              className="ingredient-details-button2"
+              className="ingredient-details-button8"
               onClick={() => handleCookClick(props.name, props.id)}
             >
               Szczegóły
             </button>
           </form>
           </div>
-        </div>
-        {/* </Card> */}
       </li>
     </>
   );

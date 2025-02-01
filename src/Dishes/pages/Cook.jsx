@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { useHttpClient } from "../../shared/hooks/http-hook";
-import Card from "../../shared/components/UIElements/Card";
 import "./Tables.css";
 import { useContext } from "react";
 import { AuthContext } from "../../shared/context/auth-context";
+import { convertToPolishTime } from "../../shared/util/formatToConvertDate";
 import "./Cook.css";
+import { URL } from "../../shared/consts";
+import { io } from "socket.io-client";
 
 const Cook = () => {
   const auth = useContext(AuthContext);
@@ -19,7 +21,7 @@ const Cook = () => {
       setError(null);
       try {
         const responseData = await sendRequest(
-          "http://localhost:8000/api/cook/waiting-orders",
+          `${URL}/api/cook/waiting-orders`,
           "GET",
           null,
           { Authorization: "Bearer " + auth.token }
@@ -32,27 +34,16 @@ const Cook = () => {
       setIsLoading(false);
     };
     fetchWaitingOrders();
+
+    const socket = io("http://localhost:8001");
+    socket.on("newOrder", (newOrder) => {
+      setWaitingOrders((prevOrders) => [...prevOrders, newOrder]);
+    });
+
+    return () => {
+      socket.disconnect();
+    };
   }, [sendRequest]);
-
-  const handleMarkAsDelivered = async (orderId) => {
-    try {
-      await sendRequest(
-        `http://localhost:8000/api/cook/${orderId}/delivered`,
-        "PATCH",
-        null,
-        {
-          Authorization: "Bearer " + auth.token,
-          "Content-Type": "application/json",
-        }
-      );
-
-      setWaitingOrders((prevOrders) =>
-        prevOrders.filter((order) => order.orderId !== orderId)
-      );
-    } catch (err) {
-      console.error(err);
-    }
-  };
 
   const handleMarkDishAsReady = async (orderId, dishName) => {
     try {
@@ -88,21 +79,16 @@ const Cook = () => {
 
   return (
     <div>
-      {/* Obsługa stanów ładowania i błędów */}
-      {isLoading && <p>Ładowanie zamówień...</p>}
-      {error && <p>{error}</p>}
-
-      {!isLoading && waitingOrders.length === 0 && !error && (
-        <span className="text3">Brak zamówień</span>
-      )}
+      {error && <h1 className="text3">{error}</h1>}
 
       {!isLoading && waitingOrders.length > 0 && (
-        <ul className="orders-list">
+        <ul className="dish-to-cook">
           {waitingOrders.map((order) => (
-            <li key={order.orderId} className="order-item">
+            <li key={order.orderId} className="order-item-cook">
               <div className="order-info">
                 <p>
-                  <strong>Data zamówienia:</strong> {order.orderDate}
+                  <strong>Data zamówienia:</strong>{" "}
+                  {convertToPolishTime(order.orderDate)}
                 </p>
                 <p>
                   <strong>Numer stolika:</strong> {order.tableNumber}
@@ -125,14 +111,9 @@ const Cook = () => {
                       {dishItem.status}
                     </span>
 
-                    {/* Przycisk zmieniający status dania na "gotowy" */}
-                    {dishItem.status === "gotowy" ? (
-                      <button
-                        
-                        className="dish-ready"
-                      >
-                        Oznacz jako gotowe
-                      </button>
+                    {dishItem.status === "gotowy" ||
+                    dishItem.status === "wydane" ? (
+                      <button className="dish-ready">Oznacz jako gotowe</button>
                     ) : (
                       <button
                         className="make-dish-ready"
@@ -150,13 +131,6 @@ const Cook = () => {
                   </li>
                 ))}
               </ul>
-
-              {/* <button
-                className="submit-button4"
-                onClick={() => handleMarkAsDelivered(order.orderId)}
-              >
-                Oznacz jako wykonane
-              </button> */}
             </li>
           ))}
         </ul>

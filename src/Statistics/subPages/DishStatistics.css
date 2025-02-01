@@ -1,0 +1,58 @@
+.order-cook-item {
+    background-color: white;
+    color: black;
+    padding: 0;
+    border-radius: 15px;
+    /* border-top-left-radius: 15px; */
+    /* border-top-right-radius: 15px; */
+    width: 700px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+}
+
+.order-cook-item span {
+    /* background-color: red; */
+    padding: 5px;
+}
+
+.order-cook-id {
+    text-align: center;
+    color: white;
+    /* padding: 1px; */
+    height: 40px;
+    background-color: rgb(117, 148, 215);
+    width: 100%;
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.last-item {
+    /* background-color: red; */
+    margin-bottom: 10px;
+}
+
+.ingredient-details-button4 {
+    background-color: rgb(235, 235, 235);
+    color: black;
+    border: none;
+    padding: 5px;
+    font-size: 16px;
+    font-weight: 600;
+    border-radius: 5px;
+    cursor: pointer;
+    /* height: 30px; */
+    width: 160px;
+    border: 0.1px solid transparent;
+    transition: all 0.2s;
+    
+}
+
+.ingredient-details-button4:hover {
+      background-color: rgb(255, 255, 255);
+    border: 0.1px solid black;
+  }

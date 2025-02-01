@@ -1,7 +1,7 @@
 import React from 'react'
-import Button from '../../shared/components/FormElements/Button'
+import Button from '../../../shared/components/FormElements/Button'
 import IngredientItem from './IngredientItem'
-import Card from '../../shared/components/UIElements/Card';
+import Card from '../../../shared/components/UIElements/Card';
 // import './IngredientList.css';
 
 const IngredientList = (props) => {
@@ -20,7 +20,7 @@ const IngredientList = (props) => {
 
   return (
     <>
-     <h1 className="text">Wybrane składniki</h1>
+     {/* <h1 className="text">Wybrane składniki</h1> */}
       <div className="place-list-form-placeholder-ingredient">
         <div className="ingredients-list-desc">
           <span className="item-name-ingredient">nazwa</span>
@@ -31,12 +31,13 @@ const IngredientList = (props) => {
         </div>
     <ul className="place-list-form-ingredient">
       {/* <h1>elo</h1> */}
-        {props.ingredientTemplates.map(ingredient => (
+        {props.ingredientTemplates.map((ingredient, index) => (
             <IngredientItem 
                 key={ingredient.id}
                 id={ingredient.id}
                 name={ingredient.name}
                 category={ingredient.category}
+                isLast={index === props.ingredientTemplates.length - 1} 
             />
         ))}
     </ul>

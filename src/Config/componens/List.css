@@ -1,0 +1,157 @@
+.dish-config-list-form {
+  list-style: none;
+  margin: auto;
+  padding: 0;
+  width: 700px;
+  max-width: 60rem;
+  color: white;
+  text-align: center;
+  gap: 10px;
+}
+
+.dish-config-list-form li:first-child {
+  border-radius: 10px 10px 0 0; /* Górne rogi */
+}
+
+.dish-config-list-form li:last-child {
+  border-radius: 0 0 10px 10px; /* Dolne rogi */
+}
+
+.item-column {
+  width: 30%;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.ingredient-details-button9 {
+  background-color: rgb(235, 235, 235);
+  color: black;
+  border: none;
+  padding: 5px;
+  font-size: 16px;
+  font-weight: 600;
+  border-radius: 5px;
+  cursor: pointer;
+  /* height: 30px; */
+  width: 100%;
+  border: 0.1px solid transparent;
+  transition: all 0.2s;
+}
+
+.ingredient-details-button9:hover {
+  background-color: red;
+  color: white;
+  border: 1px solid transparent;
+}
+
+.ingredient-details-button8 {
+  background-color: rgb(235, 235, 235);
+  color: black;
+  border: none;
+  padding: 5px;
+  font-size: 16px;
+  font-weight: 600;
+  border-radius: 5px;
+  cursor: pointer;
+  /* height: 30px; */
+  width: 100%;
+  border: 0.1px solid transparent;
+  transition: all 0.2s;
+}
+
+.ingredient-details-button8:hover {
+  background-color: rgb(255, 255, 255);
+  border: 0.1px solid black;
+}
+
+.btn-white-submit-config {
+  background-color: white;
+  padding: 12px;
+  font-size: 16px;
+  border: 1px solid transparent;
+  font-weight: 600;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s;
+  margin-bottom: 30px;
+}
+
+.btn-white-submit-config:hover {
+  background-color: black;
+  color: white;
+  /* border: 1px solid; */
+}
+
+.btn-white-submit-config1 {
+  background-color: white;
+  padding: 12px;
+  font-size: 16px;
+  border: 1px solid transparent;
+  font-weight: 600;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s;
+  margin-bottom: 30px;
+  margin-left: 15px;
+}
+
+.btn-white-submit-config1:hover {
+  background-color: black;
+  color: white;
+  /* border: 1px solid; */
+}
+
+.btn-white-submit-config2 {
+  background-color: white;
+  padding: 12px;
+  font-size: 16px;
+  border: 1px solid transparent;
+  font-weight: 600;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s;
+  margin-bottom: 30px;
+  margin-right: 15px;
+}
+
+.btn-white-submit-config2:hover {
+  background-color: black;
+  color: white;
+  /* border: 1px solid; */
+}
+
+.config-input {
+  background-color: rgb(235, 235, 235);
+  color: black;
+  border: none;
+  padding: 5px;
+  font-size: 16px;
+  font-weight: 600;
+  border-radius: 5px;
+  cursor: pointer;
+  /* height: 30px; */
+  text-align: center;
+  width: 100%;
+  border: 0.1px solid transparent;
+  transition: all 0.2s;
+}
+
+.config-input-add {
+  background-color: rgb(235, 235, 235);
+  color: black;
+  border: none;
+  padding: 5px;
+  font-size: 20px;
+  /* font-weight: 600; */
+  border-radius: 5px;
+  cursor: pointer;
+  text-align: center;
+  width: 300px;
+  border: 0.1px solid transparent;
+  transition: all 0.2s;
+  margin-bottom: 20px;
+}
+
+

@@ -11,9 +11,13 @@ import Modal from "../../shared/components/UIElements/Modal";
 import { useNavigate } from "react-router-dom";
 import Button from "../../shared/components/FormElements/Button";
 import Card from "../../shared/components/UIElements/Card";
+import { useContext } from "react";
+import { AuthContext } from "../../shared/context/auth-context";
 
 const CreateIngredientTemplate = () => {
   const [showConfirmModal, setShowConfirmModal] = useState(false);
+  const [categories, setCategories] = useState([]);
+  const auth = useContext(AuthContext);
   const { isLoading, error, sendRequest, clearError } = useHttpClient();
   const navigate = useNavigate();
   const [formState, inputHandler, setFormData] = useForm(
@@ -26,10 +30,6 @@ const CreateIngredientTemplate = () => {
         value: "warzywo",
         isValid: true,
       },
-      expirationDate: {
-        value: "",
-        isValid: false,
-      },
       image: {
         value: "",
         isValid: false,
@@ -38,9 +38,30 @@ const CreateIngredientTemplate = () => {
     false
   );
 
-  // useEffect(()=> {
-  //   console.log(formState)
-  // }, [formState])
+  useEffect(()=> {
+    console.log(formState)
+  }, [formState])
+
+  useEffect(() => {
+    const fetchCategories = async () => {
+      try {
+        const response = await sendRequest(
+          'http://localhost:8000/api/config/ingredient-categories',
+          'GET',
+          null,
+          {
+            Authorization: "Bearer " + auth.token,
+          }
+        );
+        console.log(response.categories)
+        setCategories(response.categories);
+      } catch (err) {
+        console.error(err);
+      }
+    };
+
+    fetchCategories();
+  }, [sendRequest]);
 
   const ingredientSubmitHandler = async (event) => {
     event.preventDefault();
@@ -49,23 +70,17 @@ const CreateIngredientTemplate = () => {
       const formData = new FormData();
       formData.append("name", formState.inputs.name.value);
       formData.append("category", formState.inputs.category.value);
-      formData.append("expirationDate", formState.inputs.expirationDate.value);
       formData.append("image", formState.inputs.image.value);
-      // console.log(formData);
       await sendRequest(
         "http://localhost:8000/api/magazine/create-ingredient-template",
         "POST",
         formData
-        // { 'Content-Type': 'application/json' }
       );
-      // Reset form po sukcesie
-      // setFormState({ name: '', category: '', expirationDate: '' });
       setShowConfirmModal(true);
       setFormData(
         {
           name: { value: "", isValid: false },
           category: { value: "", isValid: false },
-          expirationDate: { value: "", isValid: false },
           image: { value: "", isValid: false },
         },
         false
@@ -110,15 +125,6 @@ const CreateIngredientTemplate = () => {
             errorText="Please enter a valid name."
             onInput={inputHandler}
           />
-          {/* <Input
-            id="category"
-            element="input"
-            type="text"
-            label="category"
-            validators={[VALIDATOR_REQUIRE()]}
-            errorText="Please enter a valid name."
-            onInput={inputHandler}
-          /> */}
           <div className="form-control">
             <label htmlFor="category">Kategoria</label>
             <select
@@ -127,35 +133,20 @@ const CreateIngredientTemplate = () => {
               value={formState.inputs.category.value}
               className="select-dropdown"
             >
-              <option value="warzywo">warzywo</option>
-              <option value="owoc">owoc</option>
-              <option value="mieso">mieso</option>
-              <option value="owoce morza">owoce morza</option>
-              <option value="produkt zbozowy">produkt zbozowy</option>
-              <option value="nabial i jajka">nabial i jajka</option>
-              <option value="przyprawa">przyprawa</option>
-              <option value="oleje i tluscze">oleje i tluscze</option>
-              <option value="przetwor">przetwor</option>
-              <option value="mrozonka">mrozonka</option>
-              <option value="oki i wody">soki i wody</option>
+              {categories.map((cat) => (
+                <option key={cat._id} value={cat.name}>
+                  {cat.name}
+                </option>
+              ))}
             </select>
           </div>
-          <Input
-            id="expirationDate"
-            element="input"
-            type="date"
-            label="Data waności"
-            validators={[VALIDATOR_REQUIRE()]}
-            errorText="Please enter a valid name."
-            onInput={inputHandler}
-          />
           <ImageUpload
             center
             id="image"
             onInput={inputHandler}
             onErrorText="Dodaj zdjecie"
           />
-          <Button type="submit" disabled={!formState.isValid}>
+          <Button type="submit"  disabled={!formState.isValid}>
             Dodaj składnik
           </Button>
         </form>

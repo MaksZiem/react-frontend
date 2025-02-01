@@ -1,0 +1,76 @@
+.grid-container-cook {
+    width: 90%;
+    color: white;
+    display: grid;
+    margin-top: 0;
+      grid-template-columns: repeat(2, 1fr); 
+      grid-template-rows: repeat(1, 1fr);
+  }
+
+  .container-statistics-cook {
+    display: flex;
+    flex-direction: column;
+    background-color: rgb(222, 225, 236);
+    height: 94vh;
+    /* justify-content: flex-start; */
+    position: relative;
+    margin-left: 13rem;
+  }
+
+  .cook-orders-button {
+    background-color: rgb(255, 255, 255);
+    color: black;
+    border: none;
+    padding: 10px;
+    font-size: 16px;
+    font-weight: 600;
+    border-radius: 10px;
+    cursor: pointer;
+    width: 180px;
+    border: 0.1px solid transparent;
+    transition: all 0.2s;
+    margin-bottom: 40px;
+    /* margin-right: 10px; */
+  }
+  
+  .cook-orders-button:hover {
+    background-color: rgb(232, 232, 232);
+    border: 0.1px solid black;
+  }
+
+  .cart-item-dish {
+    display: flex;
+    flex-direction: row;
+    color: black;
+    justify-content: space-between;
+    font-weight: 600;
+    /* background-color: ; */
+    height: 45px;
+    border-bottom: 3px solid rgb(222, 225, 236);
+    /* background: rgb(222, 225, 236); */
+    padding: 10px;
+   background-color: rgb(255, 255, 255);
+   text-align: center;
+   /* margin: 10px; */
+   transition: background-color 0.3s, color 0.3s; 
+}
+
+.last-dish {
+  /* background-color: red; */
+  border-bottom-right-radius: 15px;
+  border-bottom-left-radius: 15px;
+  display: flex;
+  flex-direction: row;
+  color: black;
+  justify-content: space-between;
+  font-weight: 600;
+  /* background-color: ; */
+  height: 45px;
+  border-bottom: 3px solid rgb(222, 225, 236);
+  /* background: rgb(222, 225, 236); */
+  padding: 10px;
+ background-color: rgb(255, 255, 255);
+ text-align: center;
+ /* margin: 10px; */
+ transition: background-color 0.3s, color 0.3s; 
+}

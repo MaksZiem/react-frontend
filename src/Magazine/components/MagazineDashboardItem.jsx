@@ -4,7 +4,6 @@ import { useNavigate } from "react-router-dom";
 import "./MagazineDashboardItem.css";
 import { useHttpClient } from "../../shared/hooks/http-hook";
 import { useState, useContext } from "react";
-import Button from "../../shared/components/FormElements/Button";
 import Modal from "../../shared/components/UIElements/Modal";
 import { AuthContext } from "../../shared/context/auth-context";
 import LoadingSpinner from "../../shared/components/UIElements/LoadingSpinner";
@@ -16,7 +15,6 @@ const MagazineDashboardItem = (props) => {
   const auth = useContext(AuthContext);
 
   const handleButtonClick = () => {
-    // Navigate to the new route with the ingredient ID in the URL
     navigate(`/magazine/${props.name}`, {
       state: {
         name: props.name,
@@ -35,15 +33,17 @@ const MagazineDashboardItem = (props) => {
         "DELETE",
         JSON.stringify({
           ingredientTemplateId: props.id,
+          ingredientTemplateName: props.name,
         }),
         {
           Authorization: "Bearer " + auth.token,
           "Content-Type": "application/json",
         }
       );
-        props.onDelete(props.id);
-      
-    } catch (err) {}
+      props.onDelete(props.id);
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   const showDeleteWarningHandler = () => {
@@ -59,16 +59,22 @@ const MagazineDashboardItem = (props) => {
       <Modal
         show={showConfirmModal}
         onCancel={cancelDeleteHandler}
-        header="Are you sure?"
+        header="Czy na pewno?"
         footerClass="place-item__modal-actions"
         footer={
           <React.Fragment>
-            <Button inverse onClick={cancelDeleteHandler}>
+            <button
+              className={"modal-button-accept"}
+              onClick={cancelDeleteHandler}
+            >
               Anuluj
-            </Button>
-            <Button danger onClick={ingredientTemplateDeleteHandler}>
+            </button>
+            <button
+              className={"modal-button-decline"}
+              onClick={ingredientTemplateDeleteHandler}
+            >
               Usuń
-            </Button>
+            </button>
           </React.Fragment>
         }
       >
@@ -80,11 +86,13 @@ const MagazineDashboardItem = (props) => {
           <div className="ingredient-item__info">
             <h2>{props.name}</h2>
             <h3>{props.category}</h3>
-            <img
-              src={`http://localhost:8000/${props.image}`}
-              className="ingredient-image"
-              alt={props.name}
-            />
+            <div className="ingredient-image">
+              <img
+                src={`http://localhost:8000/${props.image}`}
+                className="ingredient-image"
+                alt={props.name}
+              />
+            </div>
           </div>
           <div className="ingredient-item__actions">
             <button

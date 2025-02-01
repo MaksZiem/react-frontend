@@ -1,0 +1,52 @@
+.dish-stats-item-name {
+  width: 140px;
+  text-align: start;
+}
+
+.dish-stats-item-count {
+  width: 150px;
+  text-align: start;
+}
+
+.dish-stats-item-price {
+  width: 150px;
+  text-align: start;
+}
+
+.dish-stats-item-percentage {
+
+  width: 240px;
+  text-align: start;
+}
+
+.dish-info2 {
+  margin-top: 15px;
+  align-items: center;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  /* width: ; */
+}
+
+.dish-info-content2 {
+  background-color: rgb(255, 255, 255);
+  width: 700px;
+  color: black;
+  padding: 20px;
+  border-radius: 15px;
+  /* display: flex;
+  flex-direction: column;
+  justify-content: center; */
+  box-shadow: 0 5px 16px rgb(239, 236, 236, 0.05);
+  margin-bottom: 30px;
+}
+
+.dish-info-content2 > ul {
+  margin: 0;
+  list-style: none;
+
+}
+
+.dish-stats-container {
+  display: flex;
+}

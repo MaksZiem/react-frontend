@@ -8,146 +8,354 @@ import { AuthContext } from "../../shared/context/auth-context";
 import { Link } from "react-router-dom";
 import DishList from "../components/DishList";
 import { useNavigate } from "react-router-dom";
+import Navbar from "../components/Navbar";
+import { BarChart } from "@mui/x-charts/BarChart";
+import { LineChart } from "@mui/x-charts/LineChart";
+import "./EmpCookStats.css";
 
 const EmpCookStats = () => {
   const { isLoading, error, sendRequest, clearError } = useHttpClient();
   const [orders, setOrders] = useState([]);
-  const [counts, setCounts] = useState({});
+  const [userData, setUserData] = useState()
   const [dishes, setDishes] = useState([]);
   const location = useLocation();
-  const { cookId } = location.state || {};
   const auth = useContext(AuthContext);
+  let { cookId } = location.state || {};
   const navigate = useNavigate();
+  const [periodDishCount, setPeriodDishCount] = useState("tydzien");
+  const [periodPreparationTime, setPeriodPreparationTime] = useState("tydzien");
+  const [dishCount, setDishCount] = useState();
+  const [preparationTime, setPreparationTime] = useState();
+
+  const fetchDishes = async () => {
+    try {
+      const responseDishes = await sendRequest(
+        `http://localhost:8000/api/dishes/`,
+        "GET",
+        null,
+        { Authorization: "Bearer " + auth.token }
+      );
+
+      setDishes(responseDishes.dishes);
+    } catch (err) {}
+  };
+
+  const fetchDishCount = async () => {
+    if (!cookId) {
+      cookId = auth.userId;
+      console.log(cookId);
+    }
+    try {
+      const cookStats = await sendRequest(
+        `http://localhost:8000/api/cook/dishes-count/${cookId}`,
+        "POST",
+        JSON.stringify({ period: periodDishCount }),
+        {
+          Authorization: "Bearer " + auth.token,
+          "Content-Type": "application/json",
+        }
+      );
+      setDishCount(cookStats);
+      console.log(cookStats)
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const fetchPreparationTime = async () => {
+    if (!cookId) {
+      cookId = auth.userId;
+      // console.log(cookId);
+    }
+    try {
+      const cookStats = await sendRequest(
+        `http://localhost:8000/api/cook/preparation-time/${cookId}`,
+        "POST",
+        JSON.stringify({ period: periodPreparationTime }),
+        {
+          Authorization: "Bearer " + auth.token,
+          "Content-Type": "application/json",
+        }
+      );
+      // console.log(cookStats);
+      setPreparationTime(cookStats);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const fetchUserData = async () => {
+    if (!cookId) {
+      cookId = auth.userId;
+      // console.log(cookId);
+    }
+    try {
+      const userData = await sendRequest(
+        `http://localhost:8000/api/users/${cookId}`,
+        "POST",
+        JSON.stringify({ period: periodPreparationTime }),
+        {
+          Authorization: "Bearer " + auth.token,
+          "Content-Type": "application/json",
+        }
+      );
+      console.log(userData);
+      setUserData(userData.user);
+    } catch (error) {
+      console.error(error)
+    }
+  }
 
   useEffect(() => {
-    if (!cookId) {
-      console.error("Cook ID is not provided");
-      return;
-    }
+    fetchUserData()
+    fetchDishes();
+  }, []);
 
-    const fetchCookOrders = async () => {
-      try {
-        const responseData = await sendRequest(
-          `http://localhost:8000/api/cook/${cookId}`,
-          "GET",
-          null,
-          { Authorization: "Bearer " + auth.token }
-        );
+  useEffect(() => {
+    fetchDishCount();
+  }, [periodDishCount]);
 
-        const responseData2 = await sendRequest(
-          `http://localhost:8000/api/cook/dishes-count/${cookId}`,
-          "GET",
-          null,
-          { Authorization: "Bearer " + auth.token }
-        );
+  useEffect(() => {
+    fetchPreparationTime();
+  }, [periodPreparationTime]);
 
-        const responseDishes = await sendRequest(
-          `http://localhost:8000/api/dishes/`,
-          "GET",
-          null,
-          { Authorization: "Bearer " + auth.token }
-        );
-
-        setCounts(responseData2.counts);
-        setOrders(responseData.orders);
-        setDishes(responseDishes.dishes);
-      } catch (err) {}
-    };
-    fetchCookOrders();
-  }, [sendRequest, cookId]);
-
-  const handleCookClick = (dishId) => {
-    console.log("dishId: " + dishId);
-    console.log("cookId" + cookId);
+  const handleCookClick = (dishId, dishName) => {
     navigate(`/dish/stats`, {
-      state: { cookId: cookId, dishId: dishId },
+      state: { cookId: cookId, dishId: dishId, dishName: dishName },
     });
   };
 
+  const handlePeriodDishCountChange = (newPeriod) => {
+    setPeriodDishCount(newPeriod);
+  };
+
+  const handlePeriodPreparationTimeChange = (newPeriod) => {
+    setPeriodPreparationTime(newPeriod);
+  };
+
+  const navigateToOrdersHistory = () => {
+    navigate("/statistics/cook/orders", {
+      state: { cookId: cookId },
+    });
+  };
+
+  console.log(auth)
+
   return (
     <>
-      <ErrorModal error={error} onClear={clearError} />
-      {isLoading && <LoadingSpinner asOverlay />}
+      <div className="container-statistics-cook">
+        <Navbar />
+        <div className="statistics">
+        <div className="dish-info">
+            {userData ? (
+              <>
+                <h1>
+                  Statystyki kucharza: {userData.name} {userData.surname}
+                </h1>
+              </>
+            ) : (
+              <p>dsdas.</p>
+            )}
+        </div>
+        
+          <div className="dish-info">
+            <div className="grid-container-cook">
+              <div className="ranking">
+                {dishCount && (
+                  <>
+                    <h2>Zamówienia na przestrzeni dni tygodnia</h2>
+                    <div className="pie-chart-statistics-placeholder">
+                      <LineChart
+                        xAxis={[
+                          {
+                            scaleType: "band",
+                            data: dishCount.labels,
+                            legend: { text: { fill: "white" } },
+                            ticks: {
+                              line: { stroke: "white", strokeWidth: 1 },
+                              text: { fill: "white" },
+                            },
+                          },
+                        ]}
+                        series={[
+                          {
+                            data: dishCount.dishesCount,
+                            color: "rgb(117, 148, 215)",
+                            area: true,
+                          },
+                        ]}
+                        height={300}
+                      />
+                    </div>
+                  </>
+                )}
+                <div className="date-pickers">
+                  <button
+                    className={`picker-btn ${
+                      periodDishCount === "rok" ? "active-period-button" : ""
+                    }`}
+                    onClick={() => handlePeriodDishCountChange("rok")}
+                  >
+                    rok
+                  </button>
+                  <button
+                    className={`picker-btn ${
+                      periodDishCount === "miesiac"
+                        ? "active-period-button"
+                        : ""
+                    }`}
+                    onClick={() => handlePeriodDishCountChange("miesiac")}
+                  >
+                    miesiąc
+                  </button>
+                  <button
+                    className={`picker-btn ${
+                      periodDishCount === "tydzien"
+                        ? "active-period-button"
+                        : ""
+                    }`}
+                    onClick={() => handlePeriodDishCountChange("tydzien")}
+                  >
+                    tydzień
+                  </button>
+                </div>
+              </div>
+              <div className="ranking">
+                {preparationTime && (
+                  <>
+                    <h2>Wykres średniego czasu na przygotowanie dania</h2>
+                    <div className="pie-chart-statistics">
+                      <LineChart
+                        xAxis={[
+                          {
+                            scaleType: "band",
+                            data: preparationTime.labels, // 7 dni tygodnia
 
-      {!isLoading && orders && (
-        <>
-          <ul className="orders-list">
-            {orders.map((order) => (
-              <li key={order.orderId} className="order-item">
-                <h2>Zamówienie ID: {order.orderId}</h2>
-                <p>Data zamówienia: {order.orderDate}</p>
-
+                            legend: {
+                              text: {
+                                fill: "white",
+                              },
+                            },
+                            ticks: {
+                              line: {
+                                stroke: "white",
+                                strokeWidth: 1,
+                              },
+                              text: {
+                                fill: "white",
+                              },
+                            },
+                          },
+                        ]}
+                        series={[
+                          {
+                            data: preparationTime.preparationTime,
+                            color: "rgb(117, 148, 215)",
+                            area: true,
+                          },
+                        ]}
+                        colors={{ scheme: "nivo" }}
+                        height={300}
+                      />
+                    </div>
+                    <div className="date-pickers">
+                      <button
+                        className={`picker-btn ${
+                          periodPreparationTime === "rok"
+                            ? "active-period-button"
+                            : ""
+                        }`}
+                        onClick={() => handlePeriodPreparationTimeChange("rok")}
+                      >
+                        rok
+                      </button>
+                      <button
+                        className={`picker-btn ${
+                          periodPreparationTime === "miesiac"
+                            ? "active-period-button"
+                            : ""
+                        }`}
+                        onClick={() =>
+                          handlePeriodPreparationTimeChange("miesiac")
+                        }
+                      >
+                        miesiąc
+                      </button>
+                      <button
+                        className={`picker-btn ${
+                          periodPreparationTime === "tydzien"
+                            ? "active-period-button"
+                            : ""
+                        }`}
+                        onClick={() =>
+                          handlePeriodPreparationTimeChange("tydzien")
+                        }
+                      >
+                        tydzień
+                      </button>
+                    </div>
+                  </>
+                )}
+              </div>
+            </div>
+            {orders && (
+              <>
                 <div>
-                  <h3>Dania w zamówieniu:</h3>
-                  <ul>
-                    {order.dishes.map((dish, index) => (
-                      <li key={index} className="dish-item">
-                        <p>Nazwa dania: {dish.dishName}</p>
-                        <p>Ilość: {dish.quantity}</p>
-                        <p>
-                          Czas przygotowania:
-                          {dish.cookingTime
-                            ? `${dish.cookingTime} sekund`
-                            : "Brak danych"}
-                        </p>
-                        {/* Dodajemy przycisk do nawigacji */}
-                        {/* <Link to={`/dishes/${dish.dishId}/stats`}>
-                          <button>Statystyki dania</button>
-                        </Link> */}
+                  <h3 className="text2">Dania:</h3>
+                  <div className="place-list-form-placeholder-ingredient">
+                    <div className="ingredients-list-desc">
+                      <span className="item-name-ingredient">nazwa</span>
+                      <span className="item-category">cena</span>
+                      <span className="item-category">dostepnosc</span>
+                      <span className="item-action">akcje</span>
+                    </div>
+                  </div>
+                  <ul className="place-list-form-ingredient">
+                    {dishes.map((dish, index) => (
+                      <li
+                        key={dish._id}
+                        className={
+                          index === dishes.length - 1
+                            ? "last-dish"
+                            : "cart-item-dish"
+                        }
+                      >
+                        {/* <div className="cart-item-ingredient"> */}
+                        <span className="item-name-ingredient">
+                          {dish.name}
+                        </span>
+                        <span className="item-category">{dish.price} PLN</span>
+                        <span className="item-category">
+                          {dish.isAvailable ? "Dostępne" : "Niedostępne"}
+                        </span>
+                        <div className="item-action">
+                          <button
+                            className="ingredient-details-button4"
+                            onClick={() => {
+                              handleCookClick(dish._id, dish.name);
+                            }}
+                          >
+                            Statystyki dania
+                          </button>
+                        </div>
+                        {/* </div> */}
                       </li>
                     ))}
                   </ul>
                 </div>
-              </li>
-            ))}
-          </ul>
-
-          <div>
-            <h3>Statystyki:</h3>
-            <ul>
-              <li>Dzisiaj: {counts.today || 0}</li>
-              <li>Ostatni tydzień: {counts.lastWeek || 0}</li>
-              <li>Ostatni miesiąc: {counts.lastMonth || 0}</li>
-              <li>Ostatni rok: {counts.lastYear || 0}</li>
-            </ul>
+              </>
+            )}
           </div>
-
-          <div>
-            <h3>Dania:</h3>
-            <div className="place-list-form-placeholder-ingredient">
-              <div className="ingredients-list-desc">
-                <span className="item-name-ingredient">nazwa</span>
-                <span className="item-category">cena</span>
-                <span className="item-category">dostepnosc</span>
-                <span className="item-action">akcje</span>
-              </div>
-            </div>
-            <ul className="place-list-form-ingredient">
-              {dishes.map((dish) => (
-                <li key={dish._id}>
-                  <div className="cart-item-ingredient">
-                    <span className="item-name-ingredient">{dish.name}</span>
-                    <span className="item-category">{dish.price} PLN</span>
-                    <span className="item-category">
-                      {dish.isAvailable ? "Dostępne" : "Niedostępne"}
-                    </span>
-                    <div className="item-action">
-                    <button
-                      className="ingredient-details-button4"
-                      onClick={() => {
-                        handleCookClick(dish._id);
-                      }}
-                    >
-                      Statystyki dania
-                    </button>
-                    </div>
-                  </div>
-                </li>
-              ))}
-            </ul>
-          </div>
-        </>
-      )}
+        </div>
+        <div className="text2">
+          <button
+            onClick={navigateToOrdersHistory}
+            className="cook-orders-button"
+          >
+            Przejdź do historii zamówień
+          </button>
+        </div>
+      </div>
     </>
   );
 };

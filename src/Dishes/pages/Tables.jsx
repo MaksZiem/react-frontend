@@ -5,6 +5,8 @@ import ErrorModal from '../../shared/components/UIElements/ErrorModal';
 import LoadingSpinner from '../../shared/components/UIElements/LoadingSpinner';
 import './Tables.css';
 import { AuthContext } from '../../shared/context/auth-context';
+import { io } from 'socket.io-client';
+import { URL } from '../../shared/consts';
 
 const TablesList = () => {
   const { isLoading, error, sendRequest, clearError } = useHttpClient();
@@ -15,19 +17,46 @@ const TablesList = () => {
   const auth = useContext(AuthContext);
 
   useEffect(() => {
-    const fetchTables = async () => {
-      try {
-        const responseData = await sendRequest('http://localhost:8000/api/waiter/tables');
-        setTables(responseData.tables);
-      } catch (err) {
-        console.log(err);
-      }
-    };
-    fetchTables();
-  }, [sendRequest]);
+  const fetchTables = async () => {
+    try {
+      const responseData = await sendRequest(`${URL}/api/waiter/tables`);
+      setTables(responseData.tables);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+  fetchTables();
+
+  const socket = io('http://localhost:8001', { transports: ['websocket'] });
+
+  socket.on('connect', () => {
+    console.log('Connected to WebSocket server');
+  });
+
+  
+
+  // Obsługa zmiany statusu stolika
+  socket.on('tableStatusChanged', (updatedTable) => {
+    setTables((prevTables) =>
+      prevTables.map((table) =>
+        table._id === updatedTable.tableId
+          ? { ...table, status: updatedTable.status }
+          : table
+      )
+    );
+  });
+
+  socket.on('disconnect', () => {
+    console.log('Disconnected from WebSocket server');
+  });
+
+  return () => {
+    socket.disconnect();
+  };
+}, [sendRequest]);
 
   const viewTableDetailsHandler = (tableNumber) => {
-    navigate(`/table-details/${tableNumber}`);
+    navigate(`/tables/${tableNumber}`);
   };
 
   const handleTipChange = (orderId, value) => {
@@ -37,8 +66,9 @@ const TablesList = () => {
     }));
   };
 
-  const submitTipHandler = async (orderId) => {
+  const submitTipHandler = async (orderId, tableNumber) => {
     const tipAmount = tips[orderId] || 0;
+    console.log(tableNumber)
     try {
       await sendRequest(
         'http://localhost:8000/api/waiter/add-tip',
@@ -46,6 +76,7 @@ const TablesList = () => {
         JSON.stringify({
           amount: tipAmount,
           orderId: orderId,
+          tableNumber: tableNumber
         }),
         { Authorization: 'Bearer ' + auth.token, 'Content-Type': 'application/json' }
       );
@@ -119,8 +150,8 @@ const TablesList = () => {
                         value={tips[table.order._id] || ''}
                         onChange={(e) => handleTipChange(table.order._id, e.target.value)}
                       />
-                      <button className="add-order-table-button" onClick={() => submitTipHandler(table.order._id)}>
-                        Dodaj napiwek
+                      <button className="add-order-table-button" onClick={() => submitTipHandler(table.order._id, table.number)}>
+                        Zakończ
                       </button>
                     </>
                   )}

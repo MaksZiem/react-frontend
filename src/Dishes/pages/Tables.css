@@ -206,18 +206,20 @@
 
 .select3 {
     margin-top: 25px;
-    background-color: rgb(12, 16, 23);
-    outline: none;
+    background-color: white;
     height: 45px;
+    font-weight: 600;
+    border: none;
     border-radius: 8px;
-    color: white;
+    color: black;
     padding: 0.35rem 0.45rem;
-    width: 150px;
+    font-size: 16px;
+    width: 160px;
     outline: none;
 }
 
 .select3:focus {
-    background-color: rgb(17, 23, 33);
+    background-color: rgb(232, 232, 232);
 }
 
 .status {

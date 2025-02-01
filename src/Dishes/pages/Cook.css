@@ -1,154 +1,238 @@
 .orders-list {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); 
-    /* background-color: red; */
-    gap: 20px;
-    padding: 20px;
-    width: 100%;
-    margin-right: 40px;
-    scrollbar-width: thin; /* For Firefox */
-    scrollbar-color: #888 #f4f4f4; /* For Firefox */
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+  /* background-color: red; */
+  gap: 20px;
+  padding: 20px;
+  width: 100%;
+  margin-right: 40px;
+  scrollbar-width: thin; /* For Firefox */
+  scrollbar-color: #888 #f4f4f4; /* For Firefox */
 }
 
-
 .order-item {
-    background-color: rgb(117, 148, 215);
-    /* box-shadow: 0 5px 16px rgb(239, 236, 236, 0.05); */
-    /* box-shadow: 7px 13px 26px -15px rgba(66, 68, 90, 1); */
-    color: white;
-    font-weight: 400;
-    min-width: 400px;
-    max-width: 500px;
-    /* min-height: 400px; */
-    padding: 30px 10px 30px 10px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    align-items: center;
-    margin-top: 20px;
-    border-radius: 10px;
-    font-size: 18px;
+  background-color: rgb(117, 148, 215);
+  /* box-shadow: 0 5px 16px rgb(239, 236, 236, 0.05); */
+  /* box-shadow: 7px 13px 26px -15px rgba(66, 68, 90, 1); */
+  color: white;
+  font-weight: 400;
+  min-width: 400px;
+  max-width: 500px;
+  /* min-height: 400px; */
+  padding: 30px 10px 30px 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 20px;
+  border-radius: 10px;
+  font-size: 18px;
 }
 
 .dishes-in-order {
-    /* background-color: red; */
-    height: 50px;
-    display: flex;
-    flex-direction: column;
-    justify-content: start;
+  /* background-color: red; */
+  height: 50px;
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
 }
 
 .order-name {
-    font-size: 16px;
-    width: 120px;
-    /* background-color: red; */
+  font-size: 16px;
+  width: 130px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  /* background-color: red; */
 }
 
 .order-quantity {
-    /* background-color: red; */
-    font-size: 16px;
+  /* background-color: red; */
+  width: 22px;
+  font-size: 16px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .order-dish-status {
-    
-    font-size: 16px;
+  width: 80px;
+  font-size: 16px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .order-list {
-    list-style: none;
-    padding: 0;
-    min-width: 420px;
-    max-width:  100%;
-    height: 300px;
-    margin: 0;
-    max-height: 200px;
-    overflow-y: auto;
-    /* background-color: red; */
+  list-style: none;
+  padding: 0;
+  min-width: 440px;
+  max-width: 100%;
+  height: 300px;
+  margin: 0;
+  max-height: 200px;
+  overflow-y: auto;
+  /* background-color: red; */
 }
 
 .order-list li {
-    display: flex;
-    justify-content: space-between;
-    padding: 8px 0;
-    border-bottom: 1px solid #ddd;
+  display: flex;
+  justify-content: space-between;
+  padding: 8px 0;
+  border-bottom: 1px solid #ddd;
 }
 
 .order-list li:last-child {
-    border-bottom: none;
+  border-bottom: none;
 }
 
 .order-list {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    padding: 10px;
-    max-height: 200px;
-    overflow-y: auto;
-    scrollbar-width: thin; 
-    scrollbar-color: #3f3f3f #000000; 
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  padding: 10px;
+  max-height: 200px;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: #3f3f3f #000000;
 }
 
 .make-dish-ready {
-    background-color: rgb(255, 255, 255);
-    color: black;
-    border: none;
-    padding: 8px;
-    width: 140px;
-    height: 35px;
-    font-size: 12px;
-    font-weight: 600;
-    border-radius: 5px;
-    cursor: pointer;
-    /* width: 160px; */
-    border: 0.1px solid transparent;
-    transition: all 0.2s;
-    /* margin-right: 10px; */
-  }
+  background-color: rgb(232, 232, 232);
+  color: black;
+  border: none;
+  padding: 8px;
+  width: 140px;
+  height: 35px;
+  font-size: 12px;
+  font-weight: 600;
+  border-radius: 5px;
+  cursor: pointer;
+  /* width: 160px; */
+  border: 0.1px solid transparent;
+  transition: all 0.2s;
+  /* margin-right: 10px; */
+}
 
-  .dish-ready {
-    visibility: hidden;
-    background-color: rgb(255, 255, 255);
-    color: black;
-    border: none;
-    padding: 8px;
-    width: 140px;
-    height: 35px;
-    font-size: 12px;
-    font-weight: 600;
-    border-radius: 5px;
-    cursor: pointer;
-    /* width: 160px; */
-    border: 0.1px solid transparent;
-    transition: all 0.2s;
-    /* margin-right: 10px; */
-  }
-  
-  .make-dish-ready:hover {
-    background-color: rgb(232, 232, 232);
-    border: 0.1px solid black;
-  }
+.dish-ready {
+  visibility: hidden;
+  background-color: rgb(255, 255, 255);
+  color: black;
+  border: none;
+  padding: 8px;
+  width: 140px;
+  height: 35px;
+  font-size: 12px;
+  font-weight: 600;
+  border-radius: 5px;
+  cursor: pointer;
+  /* width: 160px; */
+  border: 0.1px solid transparent;
+  transition: all 0.2s;
+  /* margin-right: 10px; */
+}
+
+.make-dish-ready:hover {
+  background-color: white;
+  border: 0.1px solid black;
+}
 
 .order-list::-webkit-scrollbar {
-    width: 5em; 
-    background-color: #000000; 
+  width: 5em;
+  background-color: #000000;
 }
 
 .order-list::-webkit-scrollbar-thumb {
-    background-color: #3f3f3f; 
-    border-radius: 20px; 
+  background-color: #3f3f3f;
+  border-radius: 20px;
 }
 
 .order-list::-webkit-scrollbar-thumb:hover {
-    background-color: #555; 
+  background-color: #555;
 }
-
-
 
 .order-list::-webkit-scrollbar-track {
-    background-color: #1a1a1a; 
+  background-color: #1a1a1a;
 }
 
-
 .order-list::-webkit-scrollbar-button {
-    display: none; 
+  display: none;
+}
+
+/* .order-item-cook {
+  background-color: white;
+  color: black;
+  font-weight: 400;
+  padding: 30px 10px 30px 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 20px;
+  border-radius: 10px;
+  font-size: 18px;
+}
+
+.dish-to-cook {
+  background-color: red;
+  margin-left: 0;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); 
+  gap: 16px; 
+}
+
+@media (max-width: 768px) {
+  .dish-to-cook {
+    grid-template-columns: repeat(2, 1fr); 
+  }
+}
+
+@media (max-width: 480px) {
+  .dish-to-cook {
+    grid-template-columns: 1fr;
+  }
+} */
+
+.order-item-cook {
+  background-color: white;
+  color: black;
+  font-weight: 400;
+  width: 500px; /* Stała szerokość elementu */
+  padding: 30px 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 20px;
+  border-radius: 10px;
+  font-size: 18px;
+}
+
+.dish-to-cook {
+  /* background-color: red; */
+  margin: 0;
+  display: grid;
+  padding: 0;
+  justify-content: center; /* Wyśrodkowanie elementów w siatce */
+  gap: 16px; /* Odstępy między elementami */
+  grid-template-columns: repeat(
+    auto-fill,
+    500px
+  ); /* Automatyczne dopasowanie kolumn o szerokości 400px */
+  margin-block-start: 0;
+  margin-block-end: 0;
+  margin-inline-start: 0px;
+  margin-inline-end: 0px;
+}
+
+@media (max-width: 1200px) {
+  .dish-to-cook {
+    grid-template-columns: repeat(2, 500px); /* 2 elementy w rzędzie */
+  }
+}
+
+@media (max-width: 1100px) {
+  .dish-to-cook {
+    grid-template-columns: 500px; /* 1 element w rzędzie */
+  }
 }

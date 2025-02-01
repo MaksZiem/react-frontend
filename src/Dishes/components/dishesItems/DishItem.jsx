@@ -4,13 +4,17 @@ import { useNavigate } from 'react-router-dom';
 import { useHttpClient } from '../../../shared/hooks/http-hook';
 import ErrorModal from '../../../shared/components/UIElements/ErrorModal';
 import './DishItem.css';
+import Modal from '../../../shared/components/UIElements/Modal';
+import Button from '../../../shared/components/FormElements/Button';
+import { useState } from 'react';
 
 const DishItem = (props) => {
   const navigate = useNavigate();
   const { isLoading, error, sendRequest, clearError } = useHttpClient();
-
+  const [showConfirmModal, setShowConfirmModal] = useState(false);
   const ingredientSubmitHandler = async (event) => {
     event.preventDefault();
+    console.log(props.tableId)
     try {
       await sendRequest(
         'http://localhost:8000/api/waiter/add-to-table',
@@ -20,25 +24,43 @@ const DishItem = (props) => {
           tableNumber: props.tableId,
         }),
         { 'Content-Type': 'application/json' }
-      );
-      
-      // Po dodaniu dania do koszyka, wywołaj props.onAddDish, aby odświeżyć koszyk
+      );  
+      setShowConfirmModal(true);
       props.onAddDish();  
     } catch (err) {
       console.log(err);
     }
   };
 
+  const cancelDeleteHandler = () => {
+    setShowConfirmModal(false);
+    navigate(`/tables/${props.tableId}`);
+  };
+
   const buttonClass = props.isAvailable ? 'ingredient-details-button' : 'ingredient-details-button disabled';
 
   return (
+    <>
+    <Modal
+        show={showConfirmModal}
+        onCancel={cancelDeleteHandler}
+        header="Aktualizacja"
+        footerClass="place-item__modal-actions"
+        footer={
+          <React.Fragment>
+            <Button onClick={cancelDeleteHandler}>Ok</Button>
+          </React.Fragment>
+        }
+      >
+        <p>Pomyślnie dodano składnik</p>
+      </Modal>
     <li lassName='one-item'>
       <ErrorModal error={error} onClear={clearError} />
       <Card className="ingredient-item__content">
         <div className="ingredient-item__info">
-          <h2>{props.name}</h2>
-          <h3>{props.price} $</h3>
-          <h3>{props.isAvailable}</h3>
+          <div className='dish-item-name'>{props.name}</div>
+          <div className='dish-item-price'>{props.price} $</div>
+          <div className='dish-item-category'>{props.category}</div>
           <img src={`http://localhost:8000/${props.image}`} className='ingredient-image'  alt={props.name} />
         </div>
         <div className="ingredient-item__actions">
@@ -51,6 +73,7 @@ const DishItem = (props) => {
         </div>
       </Card>
     </li>
+    </>
   );
 };
 

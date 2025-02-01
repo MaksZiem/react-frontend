@@ -43,6 +43,7 @@ const AllCooksStats = () => {
           { Authorization: "Bearer " + auth.token }
         );
         setCookStats(responseData);
+        console.log(responseData)
       } catch (err) {}
     };
     fetchCookStats();
@@ -64,13 +65,13 @@ const AllCooksStats = () => {
   const labels = cookStats
     ? cookStats.cookRanking.map((cook) => cook.cookName)
     : [];
-  
+
   const data = cookStats
     ? cookStats.cookRanking.map((cook) => cook.dishCount)
     : [];
 
   const handleCookClick = (cookId) => {
-    navigate(`/statistic/cook`, {
+    navigate(`/statistics/cooks/details`, {
       state: { cookId: cookId },
     });
   };
@@ -103,158 +104,129 @@ const AllCooksStats = () => {
       <div className="container-statistics">
         <Navbar />
         <div className="content">
-        <Employes tab={"cook"} />
-        <ErrorModal error={error} onClear={clearError} />
-        {isLoading && <LoadingSpinner asOverlay />}
-        {console.log(console.log(cookStats))}
-        {!isLoading && cookStats && (
+          <Employes tab={"cook"} />
+          <ErrorModal error={error} onClear={clearError} />
+          {isLoading && <LoadingSpinner asOverlay />}
+          {!isLoading && cookStats && (
             <div className="cook-stats-details">
-            <h2 className="text2">Ogólne statystyki przygotowanych dań</h2>
-            <div className="dishes-counts">
-              <div className="dishes-counts-item">
-                <div className="count">
-                {cookStats.counts.today}
-                </div> 
-                <div className="date">
-                dzisiaj 
+              <h2 className="text2">Ogólne statystyki przygotowanych dań</h2>
+              <div className="dishes-counts">
+                <div className="dishes-counts-item">
+                  <div className="count">{cookStats.counts.today}</div>
+                  <div className="date">dzisiaj</div>
+                </div>
+                <div className="dishes-counts-item">
+                  <div className="count">{cookStats.counts.lastWeek}</div>
+                  <div className="date">ostatni tydzien</div>
+                </div>
+                <div className="dishes-counts-item">
+                  <div className="count">{cookStats.counts.lastMonth}</div>
+                  <div className="date">ostatni miesiąc</div>
+                </div>
+                <div className="dishes-counts-item">
+                  <div className="count">{cookStats.counts.lastYear}</div>
+                  <div className="date">ostatni rok</div>
                 </div>
               </div>
-              <div className="dishes-counts-item">
-              <div className="count">
-              {cookStats.counts.lastWeek}
-                </div> 
-                <div className="date">
-                ostatni tydzien
+
+              <h2 className="text2">
+                Ranking kucharzy według liczby przygotowanych dań
+              </h2>
+              <div className="cooks-charts">
+                <div className="cook-chart-statistics">
+                  <h2 className="text">udział we wszystkich daniach</h2>
+                  <PieChart
+                    colors={result}
+                    series={[
+                      {
+                        data: cookData,
+                        arcLabel: (item) => `${item.label}: ${item.value}%`,
+                        arcLabelMinAngle: 35,
+                        arcLabelRadius: "60%",
+                        highlightScope: { fade: "global", highlight: "item" },
+                        faded: {
+                          innerRadius: 30,
+                          additionalRadius: -30,
+                          color: "gray",
+                        },
+                      },
+                    ]}
+                    sx={{
+                      "& .MuiChartsLegend-series text": {
+                        fontSize: "0.9em !important",
+                        fontWeight: "bold",
+                      },
+                      [`& .${pieArcLabelClasses.root}`]: {
+                        fontWeight: "bold",
+                        fill: "white",
+                      },
+                    }}
+                    height={250}
+                    width={500}
+                  />
                 </div>
-              </div>
-              <div className="dishes-counts-item">
-              <div className="count">
-              {cookStats.counts.lastMonth}
-                </div> 
-                <div className="date">
-                ostatni miesiąc
-                </div>
-              </div>
-              <div className="dishes-counts-item">
-              <div className="count">
-              {cookStats.counts.lastYear}
-                </div> 
-                <div className="date">
-                ostatni rok
+                <div className="cook-chart-statistics">
+                  <h2 className="text">liczby wykonanych dan</h2>
+                  <BarChart
+                    xAxis={[
+                      {
+                        scaleType: "band",
+                        data: labels, // 7 dni tygodnia
+
+                        legend: {
+                          text: {
+                            fill: "white",
+                          },
+                        },
+                        ticks: {
+                          line: {
+                            stroke: "white",
+                            strokeWidth: 1,
+                          },
+                          text: {
+                            fill: "white",
+                          },
+                        },
+                      },
+                    ]}
+                    series={[
+                      {
+                        data: data,
+                        // data: [1,2,3,4,56,7,7],
+                        color: "rgb(117, 148, 215)",
+                      }, // Kolor i dane dla kolumn
+                    ]}
+                    colors={{ scheme: "nivo" }}
+                    width={600}
+                    height={300}
+                  />
                 </div>
               </div>
             </div>
-            
+          )}
 
-            {/* Ranking kucharzy */}
-            <h2 className="text2">Ranking kucharzy według liczby przygotowanych dań</h2>
-            
-            {/* <ol>
-              {cookStats.cookRanking.map((cook, index) => (
-                <li key={cook.cookId}>
-                  <strong>
-                    {index + 1}. {cook.cookName}{" "}
-                  </strong>{" "}
-                  - Liczba przygotowanych dań: {cook.dishCount}
-                </li>
-              ))}
-            </ol> */}
-            <div className="cooks-charts">
-
-            <div className="cook-chart-statistics">
-              <h2 className="text">udział we wszystkich daniach</h2>
-            <PieChart
-              colors={result}
-              series={[
-                {
-                  data: cookData,
-                  arcLabel: (item) => `${item.label}: ${item.value}%`,
-                  arcLabelMinAngle: 35,
-                  arcLabelRadius: "60%",
-                  highlightScope: { fade: "global", highlight: "item" },
-                  faded: {
-                    innerRadius: 30,
-                    additionalRadius: -30,
-                    color: "gray",
-                  },
-                },
-              ]}
-              sx={{
-                "& .MuiChartsLegend-series text": {
-                  fontSize: "0.9em !important",
-                  fontWeight: "bold",
-                },
-                [`& .${pieArcLabelClasses.root}`]: {
-                  fontWeight: "bold",
-                  fill: "white",
-                },
-              }}
-              height={250}
-              width={500}
-              />
+          <h1 className="text">Lista kucharzy</h1>
+          <div className="place-list-form-placeholder-ingredient">
+            <div className="cook-list-desc">
+              <div className="cook-image">zdjecie</div>
+              <span className="cook-name">imię</span>
+              <span className="cook-surname">nazwisko</span>
+              <span className="cook-pesel">pesel</span>
+              <span className="cook-action">akcje</span>
             </div>
-            <div className="cook-chart-statistics">
-            <h2 className="text">liczby wykonanych dan</h2>
-            <BarChart
-              xAxis={[
-                {
-                  scaleType: "band",
-                  data: labels, // 7 dni tygodnia
-                  
-                  legend: {
-                    text: {
-                      fill: "white",
-                    },
-                  },
-                  ticks: {
-                    line: {
-                      stroke: "white",
-                      strokeWidth: 1,
-                    },
-                    text: {
-                      fill: "white",
-                    },
-                  },
-                },
-              ]}
-              series={[
-                {
-                  data: data,
-                  // data: [1,2,3,4,56,7,7],
-                  color: "rgb(117, 148, 215)",
-                }, // Kolor i dane dla kolumn
-              ]}
-              colors={{ scheme: "nivo" }}
-              width={600}
-              height={300}
-              />
-              </div>
-              </div>
           </div>
-        )}
-
-        <h1 className="text">Lista kucharzy</h1>
-        <div className="place-list-form-placeholder-ingredient">
-          <div className="cook-list-desc">
-            <div className="cook-image">zdjecie</div>
-            <span className="cook-name">nazwa</span>
-            <span className="cook-surname">kategoria</span>
-            <span className="cook-pesel">pesel</span>
-            <span className="cook-action">akcje</span>
-          </div>
-        </div>
-        {!isLoading && cooks && (
-          <ul className="place-list-form-ingredient">
-            {cooks.map((cook) => (
+          {!isLoading && cooks.length > 0 && (
+            <ul className="list-form-cooks">
+            {cooks.map((cook, index) => (
               <li
                 key={cook.id}
                 onClick={() => handleCookClick(cook._id)}
-                // className="cook-item"
+                className={index === cooks.length - 1 ? "last-ingredient" : "cook-list-item"}
               >
-                <div className="cook-item-ingredient">
+                {/* <div className="cook-list-item"> */}
                   <div className="cook-image">
                     <img
-                        className="image"
+                      className="image"
                       src={`http://localhost:8000/${cook.image}`}
                       alt={cook.name}
                     />
@@ -271,11 +243,13 @@ const AllCooksStats = () => {
                       Szczegóły
                     </button>
                   </div>
-                </div>
+                {/* </div> */}
               </li>
             ))}
+              
           </ul>
-        )}
+          
+          )}
         </div>
       </div>
     </>

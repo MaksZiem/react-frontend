@@ -1,4 +1,4 @@
-import React from 'react'
+import React from "react";
 import Button from "../../../shared/components/FormElements/Button";
 import Modal from "../../../shared/components/UIElements/Modal";
 import ErrorModal from "../../../shared/components/UIElements/ErrorModal";
@@ -18,14 +18,13 @@ const DishCartItem = (props) => {
         "DELETE",
         JSON.stringify({
           dishId: props.id,
-          tableNumber: props.tableId
+          tableNumber: props.tableId,
         }),
         { "Content-Type": "application/json" }
       );
       props.onDelete(props.id, props.tableId);
     } catch (err) {}
   };
-
 
   const showDeleteWarningHandler = () => {
     setShowConfirmModal(true);
@@ -35,11 +34,10 @@ const DishCartItem = (props) => {
     setShowConfirmModal(false);
   };
 
-
   return (
     <>
       <ErrorModal error={error} onClear={clearError} />
-      
+
       <Modal
         show={showConfirmModal}
         onCancel={cancelDeleteHandler}
@@ -47,35 +45,35 @@ const DishCartItem = (props) => {
         footerClass="place-item__modal-actions"
         footer={
           <React.Fragment>
-            <Button inverse onClick={cancelDeleteHandler} >
-              CANCEL
+            <Button inverse onClick={cancelDeleteHandler}>
+              Anuluj
             </Button>
             <Button danger onClick={ingredientSubmitHandler}>
-              DELETE
+              Usuń
             </Button>
           </React.Fragment>
         }
       >
-        <p>
-          Do you want to proceed and delete this place? Please note that it
-          can't be undone thereafter.
-        </p>
+        <p>Czy na pewno chcesz usunąć?</p>
       </Modal>
-      <li > 
+      <li
+        className={props.isLast ? "last-ingredient2" : "cart-item-ingredient"}
+      >
         {isLoading && <LoadingSpinner asOverlay />}
-          <div className="cart-item-ingredient">
-            <span className="item-name-ingredient">{props.name}</span>
-            <span className="item-category">{props.price}</span>
-            <span className="item-category">{props.quantity}</span>
-            <div className="item-action-cart" >
-            <button onClick={showDeleteWarningHandler} className='delete-ingredient-from-cart'>
-              Usuń
-            </button>
-            </div>
-          </div>
+        <span className="item-name-ingredient">{props.name}</span>
+        <span className="item-category">{props.price}</span>
+        <span className="item-category">{props.quantity}</span>
+        <div className="item-action">
+          <button
+            onClick={showDeleteWarningHandler}
+            className="ingredient-details-button2"
+          >
+            Usuń
+          </button>
+        </div>
       </li>
     </>
-  )
-}
+  );
+};
 
-export default DishCartItem
+export default DishCartItem;

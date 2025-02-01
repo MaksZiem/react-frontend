@@ -1,32 +1,76 @@
 .submit-button2 {
-    background-color: rgb(12, 16, 23);
-    width: 150px;
-    height: 45px;;
-    border: none;
-    padding: 8px;
-    font-size: 14px;
-    font-weight: 600;
-    border-radius: 5px;
-    color: white;
-    outline: none;
-    cursor: pointer;
-    transition: background-color 0.3s, color 0.3s;
-    border: 1px solid #676363;
+  background-color: rgb(12, 16, 23);
+  width: 150px;
+  height: 45px;
+  border: none;
+  padding: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  border-radius: 5px;
+  color: white;
+  outline: none;
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s;
+  border: 1px solid #676363;
 }
 
 .submit-button2:hover {
-    background-color: white;
-    color: black;
+  background-color: white;
+  color: black;
 }
 
 .item-name-ingredient {
-    /* background-color: red; */
-    text-align: center;
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
+  /* background-color: red; */
+  text-align: center;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
 }
 
 .magazine-ingredient-input {
-    background-color: red;
+  background-color: red;
+}
+
+.ingredient-details-button3 {
+  cursor: pointer;
+  width: 130px;
+  border: 1px solid transparent;
+  font-size: 16px;
+  color: black;
+  padding: 3px;
+  border-radius: 7px;
+  font-weight: 600;
+  transition: all 0.3s;
+}
+
+.ingredient-details-button3:hover {
+  background-color: red;
+  color: white;
+  border: 1px solid transparent;
+}
+
+.ingredient-item-ingredient {
+  display: flex;
+  flex-direction: row;
+  color: black;
+  justify-content: space-between;
+  font-weight: 600;
+  /* background-color: ; */
+  height: 45px;
+  border-bottom: 3px solid rgb(222, 225, 236);
+  /* background: rgb(222, 225, 236); */
+  padding: 10px;
+  background-color: rgb(255, 255, 255);
+  text-align: center;
+  /* margin: 10px; */
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.expired-ingredient {
+  background-color: rgb(255, 86, 86);
+}
+
+.last-ingredient {
+  border-bottom-left-radius: 15px;
+  border-bottom-right-radius: 15px;
 }

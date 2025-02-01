@@ -6,14 +6,51 @@
   width: 80%;
   background: white;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
-  border-radius: 8px;
+  border-radius: 15px;
 }
 
 .modal__header {
   width: 100%;
   padding: 1rem 0.5rem;
-  background: #2a006e;
+  background: rgb(117, 148, 215);
   color: white;
+  border-top-left-radius: 15px;
+  border-top-right-radius: 15px;
+}
+
+/* .modal-button-accept {
+  background-color: rgb(234, 234, 234);
+  border: 1px solid transparent;
+  padding: 10px;
+  width: 100px;
+  font-size: 16px;
+  margin-right: 20px;
+  font-weight: 600;
+  border-radius: 8px;
+} */
+
+.modal-button-decline, .modal-button-accept {
+  background-color: rgb(234, 234, 234);
+  border: 1px solid transparent;
+  padding: 10px;
+  width: 100px;
+  font-size: 16px;
+  margin-right: 20px;
+  font-weight: 600;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.modal-button-decline:hover {
+  background-color: red;
+  border: 1px solid transparent;
+  color: white;
+}
+
+.modal-button-accept:hover {
+  background-color: rgb(255, 255, 255);
+  border: 1px solid black;
 }
 
 .modal__header h2 {
@@ -22,10 +59,13 @@
 
 .modal__content {
   padding: 1rem 0.5rem;
+  font-size: 20px;
+  /* gap: 10px; */
 }
 
 .modal__footer {
   padding: 1rem 0.5rem;
+  /* gap: 10px; */
 }
 
 @media (min-width: 768px) {

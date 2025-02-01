@@ -1,0 +1,161 @@
+.dish-details-button4 {
+  background-color:  rgb(235, 235, 235);
+  color: black;
+  /* border: none; */
+  /* padding: 5px; */
+
+  font-size: 16px;
+  font-weight: 600;
+  border-radius: 5px;
+  cursor: pointer;
+  height: 30px;
+  width: 160px;
+  border: 0.1px solid transparent;
+  transition: all 0.2s;
+  /* margin: 4px; */
+}
+
+.dish-details-button4:hover {
+  background-color: rgb(255, 255, 255);
+  border: 0.1px solid black;
+}
+
+.item-action-dishes {
+  width: 20%;
+  display: flex;
+}
+
+.dish-update-list-form-placeholder-ingredient {
+  margin-top: 100px;
+  font-weight: 600;
+  width: 1000px;
+  max-width: 60rem;
+  margin: auto;
+}
+
+.dish-update-list-desc {
+  display: flex;
+  flex-direction: row;
+  color: white;
+  justify-content: space-between;
+  padding: 10px;
+  height: 45px;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  /* border-bottom: 1px solid rgb(91, 86, 86); */
+  background-color: rgb(117, 148, 215);
+  text-align: center;
+  /* margin: 10px; */
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.dish-update-list-form {
+  list-style: none;
+  margin: auto;
+  padding: 0;
+  width: 1000px;
+  max-width: 60rem;
+  color: white;
+  text-align: center;
+  gap: 10px;
+}
+
+.dish-details-button7 {
+  background-color:  rgb(235, 235, 235);
+  color: black;
+  /* border: none; */
+  /* padding: 5px; */
+
+  font-size: 16px;
+  font-weight: 600;
+  border-radius: 5px;
+  cursor: pointer;
+  height: 30px;
+  width: 110px;
+  border: 0.1px solid transparent;
+  transition: all 0.2s;
+  /* margin: 4px; */
+}
+
+.dish-details-button7:hover {
+  background-color: rgb(255, 255, 255);
+  border: 0.1px solid black;
+}
+
+.dish-details-button7-delete {
+  background-color:  rgb(235, 235, 235);
+  color: black;
+  /* border: none; */
+  /* padding: 5px; */
+
+  font-size: 16px;
+  font-weight: 600;
+  border-radius: 5px;
+  cursor: pointer;
+  height: 30px;
+  width: 110px;
+  border: 0.1px solid transparent;
+  transition: all 0.2s;
+  /* margin: 4px; */
+}
+
+.dish-details-button7-delete:hover {
+  background-color: red;
+  color: white;
+  border: 0.1px solid transparent;
+}
+
+.btn-dish-update-category,
+.btn-dish-update-name, 
+.btn-dish-update-weight {
+  background-color: rgb(117, 148, 215);
+  width: 20%;
+  padding: 0;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  border: none;
+  font-size: 16px;
+  color: white;
+  text-align: center;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.dish-update-name,
+.dish-update-category,
+.dish-update-weight {
+  width: 20%;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.dishes-action {
+  width: 40%;
+  padding: 0;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.dish-action {
+  width: 33%;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.testowe {
+  width: 20%;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center; 
+}
+
+.dish-update-name {
+  text-align: start;
+}

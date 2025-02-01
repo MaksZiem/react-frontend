@@ -8,11 +8,10 @@ import LoadingSpinner from "../../../shared/components/UIElements/LoadingSpinner
 import './IngredientCartItem.css';
 import { useContext } from "react";
 import { AuthContext } from "../../../shared/context/auth-context";
-
 const IngredientCartItem = (props) => {
   const [showConfirmModal, setShowConfirmModal] = useState(false);
   const { isLoading, error, sendRequest, clearError } = useHttpClient();
-  const auth = useContext(AuthContext)
+  const auth = useContext(AuthContext);
 
   const showDeleteWarningHandler = () => {
     setShowConfirmModal(true);
@@ -31,7 +30,7 @@ const IngredientCartItem = (props) => {
         JSON.stringify({
           ingredientTemplateId: props.id,
         }),
-        { Authorization: 'Bearer ' + auth.token, 'Content-Type': 'application/json'  } 
+        { Authorization: 'Bearer ' + auth.token, 'Content-Type': 'application/json' }
       );
       props.onDelete(props.id);
     } catch (err) {}
@@ -44,36 +43,35 @@ const IngredientCartItem = (props) => {
       <Modal
         show={showConfirmModal}
         onCancel={cancelDeleteHandler}
-        header="Are you sure?"
+        header="Czy na pewno?"
         footerClass="place-item__modal-actions"
         footer={
-          <React.Fragment>
+          <>
             <Button inverse onClick={cancelDeleteHandler}>
-              CANCEL
+              Anuluj
             </Button>
             <Button danger onClick={ingredientSubmitHandler}>
-              DELETE
+              Usuń
             </Button>
-          </React.Fragment>
+          </>
         }
       >
         <p>
-          Do you want to proceed and delete this place? Please note that it
-          can't be undone thereafter.
+          Czy na pewno chcesz usunąć składnik z koszyka?
         </p>
       </Modal>
-      <li > 
+      <li className={props.isLast ? "last-ingredient2" : "cart-item-ingredient-fix"}> 
         {isLoading && <LoadingSpinner asOverlay />}
-          <div className="cart-item-ingredient">
-            <span className="item-name-ingredient">{props.name}</span>
-            <span className="item-category">{props.category}</span>
-            <span className="item-category">{props.weight}</span>
-            <div className="item-action-cart" >
-            <button onClick={showDeleteWarningHandler} className="delete-ingredient-from-cart">
+        {/* <div className="cart-item-ingredient-fix"> */}
+          <span className="item-name-ingredient">{props.name}</span>
+          <span className="item-category">{props.category}</span>
+          <span className="item-category">{props.weight}</span>
+          <div className="item-action-cart">
+            <button onClick={showDeleteWarningHandler} className="ingredient-details-button3">
               Usuń
             </button>
-            </div>
           </div>
+        {/* </div> */}
       </li>
     </>
   );
