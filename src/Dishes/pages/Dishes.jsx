@@ -102,7 +102,7 @@ const Dishes = (props) => {
           </React.Fragment>
         }
       >
-        <p>Pomyślnie dodano danie</p>
+        <p>Operacja przebiegła pomyślnie</p>
       </Modal>
       <h1 className="text3">Numer stolika: {tableId}</h1>
       <ErrorModal error={error} onClear={clearError} />
@@ -147,9 +147,6 @@ const Dishes = (props) => {
         </form>
       </div>
 
-      {/* {!isLoading && dishesByCategory && (
-        <DishList items={dishesByCategory} tableId={tableId} onAddDish={updateCartHandler} />
-      )} */}
       {dishesByCategory &&
         Object.keys(dishesByCategory).map((category) => (
           <div key={category} className="category-section">

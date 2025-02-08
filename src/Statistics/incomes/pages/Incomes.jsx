@@ -13,11 +13,36 @@ const Incomes = () => {
   const [dishes, setDishes] = useState(null);
   const { isLoading, error, sendRequest, clearError } = useHttpClient();
   const auth = useContext(AuthContext);
+  const [selectedCategory, setSelectedCategory] = useState("wszystkie");
+  const [inputName, setInputName] = useState("");
+  const [categories, setCategories] = useState([]);
+
+  useEffect(() => {
+    const fetchCategories = async () => {
+      try {
+        const response = await sendRequest(
+          "http://localhost:8000/api/config/dish-categories",
+          "GET",
+          null,
+          {
+            Authorization: "Bearer " + auth.token,
+          }
+        );
+        console.log(response.categories);
+        setCategories(response.categories);
+      } catch (err) {
+        console.error(err);
+      }
+    };
+
+    fetchCategories();
+  }, [sendRequest]);
+
 
   const fetchData = async () => {
     try {
       const responseData = await sendRequest(
-        `http://localhost:8000/api/statistics/dishes/test`,
+        `http://localhost:8000/api/statistics/dishes/dish-revenue-prediction/?name=${inputName}&category=${selectedCategory}`,
         "POST",
         null,
         {
@@ -26,9 +51,18 @@ const Incomes = () => {
         }
       );
 
-      
+      const responseData2 = await sendRequest(
+        `http://localhost:8000/api/statistics/dishes/dishes-count`,
+        "POST",
+        null,
+        {
+          Authorization: "Bearer " + auth.token,
+          "Content-Type": "application/json",
+        }
+      );
       
       console.log(responseData);
+      console.log(responseData2);
   
       setDishes(responseData);
     } catch (err) {
@@ -38,7 +72,16 @@ const Incomes = () => {
 
   useEffect(() => {
     fetchData();
-  }, []);
+  }, [sendRequest, inputName, selectedCategory]);
+
+  const categoryChangeHandler = (event) => {
+    setSelectedCategory(event.target.value);
+  };
+
+  const nameChangeHandler = (event) => {
+    setInputName(event.target.value);
+  };
+
 
   if (isLoading) {
     return (
@@ -83,7 +126,36 @@ const Incomes = () => {
     <div className="container-statistics">
       <Navbar />
       <div className="content">
-      <h1 className="text2">Ogólne statystyki przygotowanych dań</h1>
+      <h1 className="text2">Prognozy wyników dań</h1>
+      {/* <div className="search-container">
+        <form className="search-forms">
+          <div className="select-category">
+            <label htmlFor="name">Nazwa:</label>
+            <input
+              className="select"
+              type="text"
+              id="name"
+              value={inputName}
+              onChange={nameChangeHandler}
+            />
+          </div>
+          <div className="select-category">
+            <label htmlFor="category">Kategoria:</label>
+            <select
+              className="select"
+              id="category"
+              value={selectedCategory}
+              onChange={categoryChangeHandler}
+            >
+              {categories.map((cat) => (
+                <option key={cat._id} value={cat.name}>
+                  {cat.name}
+                </option>
+              ))}
+            </select>
+          </div>
+        </form>
+      </div> */}
         {dishes &&
           dishes.map((dish, index) => (
             <div key={index} className="dish-info2">

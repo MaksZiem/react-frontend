@@ -105,6 +105,8 @@ const App = () => {
   if (token) {
     routes = (
       <Routes>
+        {/* <Route exact path="/" element={<Magazine />} /> */}
+        <Route exact path="/" element={<Navigate to="/magazine" />} />
         <Route exact path="/ingredients-dashboard" element={<Ingredients />} />
         <Route path="/weight-checkout" element={<IngredientWeight />} />
         <Route exact path="/magazine" element={<Magazine />} />

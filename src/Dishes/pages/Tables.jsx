@@ -138,9 +138,7 @@ const TablesList = () => {
                     </ul>
                   ) : (
                     <p>No dishes found.</p>
-                  )}
-
-                  {/* Formularz napiwku tylko dla zamówień, dla których nie dodano jeszcze napiwku */}
+                  )}  
                   {table.status === 'delivered' && !tipSubmittedTables.includes(table.order._id) && (
                     <>
                       <input

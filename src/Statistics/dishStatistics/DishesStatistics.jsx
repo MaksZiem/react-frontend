@@ -110,8 +110,7 @@ const DishesStatistics = () => {
         <div className="statistics">
           <h1 className="text">Lista dań</h1>
           <div className="dish-update-list-form-placeholder-ingredient">
-            <div className="dish-update-list-desc">
-              {/* Przyciski do sortowania */}
+            <div className="dish-update-list-desc">        
               <button
                 onClick={() => handleSort("name")}
                 className="btn-dish-update-name"

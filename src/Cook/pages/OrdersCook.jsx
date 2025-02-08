@@ -19,9 +19,8 @@ const CookStatistics = () => {
       console.log(cookId);
     }
     try {
-      // console.log(auth.userId);
       const responseData = await sendRequest(
-        `http://localhost:8000/api/cook/dish-prepared-by-cook/${cookId}`,
+        `http://localhost:8000/api/cook/dishes-period/${cookId}`,
         "POST",
         JSON.stringify({
           startDate,
@@ -45,8 +44,6 @@ const CookStatistics = () => {
 
   return (
     <>
-      {/* <h1>welcome</h1> */}
-      {/* <ErrorModal error={error} onClear={clearError} /> */}
       <div className="dates-pickers">
         <div className="select-date">
           <label>Data początkowa:</label>

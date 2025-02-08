@@ -52,11 +52,9 @@ const EditDish = () => {
         );
 
         
-        console.log(responseData2)
         setIngredientsByCategory(responseData.ingredientsByCategory);
         setLoadedCartItems(responseData.cartIngredients);
       } catch (error) {
-        // console.error(error)
       }
     };
     fetchIngredients();
@@ -222,8 +220,7 @@ const EditDish = () => {
       <div className="statistics">
         <div className="dish-info">
           <h1>Edycja dania</h1>
-          <Card className="edit-dish">
-            {/* <h1>{formState.inputs.name.value}</h1> */}
+          <Card className="edit-dish">            
             {formState.inputs.name.value && (
               <form onSubmit={handleSubmit}>
                 <div>
@@ -357,8 +354,7 @@ const EditDish = () => {
                   <option value="meat">Meat</option>
                   <option value="vegetable">Vegetable</option>
                 </select>
-              </div>
-              {/* <button type="submit" className="submit-button" >Filter</button> */}
+              </div>            
             </form>
           </div>
 

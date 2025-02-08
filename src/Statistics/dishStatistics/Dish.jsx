@@ -10,7 +10,7 @@ import { PieChart, pieArcLabelClasses } from "@mui/x-charts/PieChart";
 import { darkenColor } from "../../shared/helpers/darkenColor";
 import { LineChart } from "@mui/x-charts/LineChart";
 import Navbar from "../components/Navbar";
-import './Dish.css'
+import "./Dish.css";
 
 const Dish = () => {
   const { isLoading, error, sendRequest, clearError } = useHttpClient();
@@ -20,7 +20,6 @@ const Dish = () => {
   const location = useLocation();
   const { dishId } = location.state || {};
   const auth = useContext(AuthContext);
-  const [customWeights, setCustomWeights] = useState({});
   const [periodWeekDays, setPeriodWeekDays] = useState("tydzien");
   const [periodTotal, setPeriodTotal] = useState("tydzien");
   const [periodProfit, setPeriodProfit] = useState("tydzien");
@@ -28,14 +27,6 @@ const Dish = () => {
   const initialColor = "rgb(117, 148, 215)";
   const steps = 10;
   const result = darkenColor(initialColor, steps);
-
-  const prepareIngredientsData = (data) => {
-    return Object.entries(data).map(([name, itemData], index) => ({
-      id: index,
-      value: parseFloat(itemData.percentage),
-      label: name,
-    }));
-  };
 
   const fetchDishData = async () => {
     try {
@@ -48,13 +39,27 @@ const Dish = () => {
           "Content-Type": "application/json",
         }
       );
-      console.log("response data");
-      console.log(responseData);
-      setDishData(responseData);
+  
+      setDishData(responseData); // Ustawiamy pełne dane, jeśli nie ma błędu
     } catch (err) {
-      console.error(err);
+      console.error("Błąd podczas pobierania danych o daniu:", err);
+  
+      // Jeśli serwer zwrócił odpowiedź z danymi, ale np. brak statystyk, nadal zapisujemy podstawowe informacje o daniu
+      if (err.response && err.response.dish) {
+        setDishData({
+          dish: err.response.dish,
+          totalRevenue: "Brak danych",
+          totalQuantity: "Brak danych",
+          ingredients: err.response.ingredients || [],
+          profitMargin: err.response.profitMargin || { value: "Brak", percentage: "Brak" },
+          revenueByPeriod: [],
+        });
+      } else {
+        setDishData(null); // W skrajnym przypadku nic nie ustawiamy
+      }
     }
   };
+  
 
   const fetchDishLeftData = async () => {
     try {
@@ -99,7 +104,7 @@ const Dish = () => {
           "Content-Type": "application/json",
         }
       );
-      console.log(responseData)
+      console.log(responseData);
       setDishTotal(responseData);
     } catch (err) {}
   };
@@ -136,7 +141,7 @@ const Dish = () => {
     ? dishesWeekDays.popularity.map((item) => item.count)
     : [];
 
-  console.log(revenueData)
+  console.log(revenueData);
 
   let pieChartData;
 
@@ -159,13 +164,6 @@ const Dish = () => {
     console.log("Pie Chart Data:", pieChartData);
   }
 
-  const handleWeightChange = (ingredient, value) => {
-    setCustomWeights((prevWeights) => ({
-      ...prevWeights,
-      [ingredient]: value,
-    }));
-  };
-
   const handlePeriodweekDays = (newPeriod) => {
     setPeriodWeekDays(newPeriod);
   };
@@ -177,8 +175,6 @@ const Dish = () => {
   const handlePeriodProfitChange = (newPeriod) => {
     setPeriodProfit(newPeriod);
   };
-
-
 
   return (
     <div>
@@ -199,13 +195,17 @@ const Dish = () => {
                   {dishData.ingredients.map((ingredient, index) => (
                     <li key={index} className="dish-stats-container">
                       <div className="dish-stats-item-name">
-                        <strong>{ingredient.name}</strong> 
+                        <strong>{ingredient.name}</strong>
                       </div>
-                      <div className="dish-stats-item-count">- Koszt:{" "}{ingredient.totalCost} PLN,  </div>
+                      <div className="dish-stats-item-count">
+                        - Koszt: {ingredient.totalCost} PLN,{" "}
+                      </div>
                       <div className="dish-stats-item-price">
-                      -Ilość (g): {ingredient.totalWeight},
+                        -Ilość (g): {ingredient.totalWeight},
                       </div>
-                      <div className="dish-stats-item-percentage">Procent ceny dania:{" "}{ingredient.percentageOfDishPrice}%</div>
+                      <div className="dish-stats-item-percentage">
+                        Procent ceny dania: {ingredient.percentageOfDishPrice}%
+                      </div>
                     </li>
                   ))}
                 </ul>
@@ -219,11 +219,15 @@ const Dish = () => {
                   {dishData.profitMargin.percentage} %
                 </p>
                 <p>
-                  <strong>Łączny przychód w ostatnim tygodniu: </strong>
+                  <strong>
+                    Łączny przychód w wybranym okresie ({periodProfit}):{" "}
+                  </strong>
                   {dishData.totalRevenue} PLN
                 </p>
                 <p>
-                  <strong>Łączna liczba zamówień w ostatnim tygodniu: </strong>
+                  <strong>
+                    Łączna liczba zamówień w wybranym okresie ({periodProfit}):{" "}
+                  </strong>
                   {dishData.totalQuantity}
                 </p>
                 <p>
@@ -405,7 +409,10 @@ const Dish = () => {
             <div className="ranking">
               {dishTotal.length !== 0 && (
                 <>
-                  <h2 style={{textAlign: "center"}}>Wykres ilosci wystąpień dania w zamowieniach na przestrzeni czasu</h2>
+                  <h2 style={{ textAlign: "center" }}>
+                    Wykres ilosci wystąpień dania w zamowieniach na przestrzeni
+                    czasu
+                  </h2>
                   <div className="pie-chart-statistics">
                     <LineChart
                       xAxis={[

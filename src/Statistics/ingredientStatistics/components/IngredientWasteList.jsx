@@ -21,7 +21,6 @@ const IngredientWasteList = (props) => {
 
   return (
     <>
-     {/* <h1 className="text">Wybrane składniki</h1> */}
       <div className="place-list-form-placeholder-ingredient">
         <div className="ingredients-list-desc">
           <span className="item-name-ingredient">Nazwa</span>
@@ -30,8 +29,7 @@ const IngredientWasteList = (props) => {
           <span className="item-category">Dni do wyczerpania zapasów</span>
         </div>
         </div>
-    <ul className="place-list-form-ingredient">
-      {/* <h1>elo</h1> */}
+    <ul className="place-list-form-ingredient">      
         {props.ingredientTemplates.map((ingredient, index) => (
             <IngredientWasteItem
                 key={ingredient.id}

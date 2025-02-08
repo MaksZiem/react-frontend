@@ -18,8 +18,7 @@ const IngredientItem = (props) => {
   };
 
   return (
-    <li className={props.isLast ? "last-ingredient2" : "cart-item-ingredient"}>
-      {/* <div className="cart-item-ingredient"> */}
+    <li className={props.isLast ? "last-ingredient2" : "cart-item-ingredient"}>    
         <span className="item-name-ingredient">{props.name}</span>
         <span className="item-category">{props.category}</span>
         <div className="item-action">
@@ -33,8 +32,7 @@ const IngredientItem = (props) => {
               Dodaj do dania
             </button>
           </form>
-        </div>
-      {/* </div> */}
+        </div>      
     </li>
   );
 };

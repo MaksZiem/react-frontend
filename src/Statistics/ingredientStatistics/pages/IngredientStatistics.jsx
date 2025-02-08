@@ -48,7 +48,7 @@ const IngredientStatistics = () => {
     const fetchDishes = async () => {
       try {
         const responseniedobor = await sendRequest(
-          `http://localhost:8000/api/statistics/ingredients/ingredient-niedobor`,
+          `http://localhost:8000/api/statistics/ingredients/ingredient-deficiency`,
           "GET",
           null,
           { Authorization: "Bearer " + auth.token }
@@ -123,7 +123,6 @@ const IngredientStatistics = () => {
     <>
       <div className="container-statistics">
         <Navbar />
-        {/* <ErrorModal error={error} onClear={clearError} /> */}
         <div className="statistics">
           <h2 className="text4">Najwieksze pradopodobieństwo niedoboru</h2>
           {!isLoading && topIngredients.length > 0 && (
@@ -133,7 +132,7 @@ const IngredientStatistics = () => {
           <h1 className="text3">Składniki</h1>
           <div className="search-container">
             <form className="search-forms" onSubmit={filterIngredientsHandler}>
-              {/* Add your select input or other fields here */}
+             
               <div className="select-category">
                 <label htmlFor="name">Podaj nazwe:</label>
                 <input

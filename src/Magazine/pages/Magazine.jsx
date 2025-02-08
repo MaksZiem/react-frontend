@@ -49,10 +49,9 @@ const Magazine = () => {
 
   useEffect(() => {
     const fetchUsedIngredients = async () => {
-      console.log('a')
       try {
-        const respons2 = await sendRequest(
-          "http://localhost:8000/api/statistics/ingredients/bbb",
+        const response2 = await sendRequest(
+          "http://localhost:8000/api/statistics/ingredients/zero-weight",
           "GET",
           null,
           {
@@ -60,8 +59,7 @@ const Magazine = () => {
             Authorization: "Bearer " + auth.token,
           }
         );
-        setUsedIngredients(respons2.ingredients || []);
-        console.log(respons2)
+        setUsedIngredients(response2.ingredients || []);
       } catch (err) {
         console.error(err);
       }
@@ -70,7 +68,7 @@ const Magazine = () => {
     const fetchWastedIngredients = async () => {
       try {
         const respons = await sendRequest(
-          "http://localhost:8000/api/statistics/ingredients/aaa",
+          "http://localhost:8000/api/statistics/ingredients/expired",
           "GET",
           null,
           {
@@ -95,7 +93,6 @@ const Magazine = () => {
           }
         );
         setLoadedCartItems(responseData.cartIngredients);
-        console.log(responseData.cartIngredients);
       } catch (error) {}
     };
     fetchUsedIngredients();
@@ -198,7 +195,6 @@ const Magazine = () => {
       <h1 className="text3">Produkty</h1>
       <div className="search-container">
         <form className="search-forms" onSubmit={filterIngredientsHandler}>
-          {/* Add your select input or other fields here */}
           <div className="select-category">
             <label htmlFor="name">Nazwa:</label>
             <input

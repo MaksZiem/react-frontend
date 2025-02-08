@@ -29,14 +29,11 @@ const IngredientStats = () => {
   const result = darkenColor(initialColor, steps);
   const [fetchError, setFetchError] = useState(null);
 
-  console.log(ingredientName);
-
-  // Funkcja odpowiedzialna za pobieranie danych, gdy zmienia się okres użycia
   useEffect(() => {
     const fetchIngredientUsage = async () => {
       try {
         const responseData = await sendRequest(
-          `http://localhost:8000/api/statistics/ingredients/test4/${ingredientName}`,
+          `http://localhost:8000/api/statistics/ingredients/usage/${ingredientName}`,
           "POST",
           JSON.stringify({ period: periodUsage }),
           {
@@ -51,16 +48,14 @@ const IngredientStats = () => {
       }
     };
 
-    // Wywołanie funkcji, tylko jeśli zmienił się okres
     fetchIngredientUsage();
-  }, [periodUsage]); // Period zmienia się, ale nie powoduje pełnego renderowania
+  }, [periodUsage]);
 
-  // Funkcja odpowiedzialna za pobieranie danych, gdy zmienia się okres strat
   useEffect(() => {
     const fetchIngredientWaste = async () => {
       try {
         const responseDataWaste = await sendRequest(
-          `http://localhost:8000/api/statistics/ingredients/test5/${ingredientName}`,
+          `http://localhost:8000/api/statistics/ingredients/waste/${ingredientName}`,
           "POST",
           JSON.stringify({ period: periodWaste }),
           {
@@ -74,9 +69,8 @@ const IngredientStats = () => {
       }
     };
 
-    // Wywołanie funkcji, tylko jeśli zmienił się okres
     fetchIngredientWaste();
-  }, [periodWaste]); // Period zmienia się, ale nie powoduje pełnego renderowania
+  }, [periodWaste]);
 
   useEffect(() => {
     const fetchIngredients = async () => {
@@ -96,7 +90,7 @@ const IngredientStats = () => {
 
       try {
         const responseStats = await sendRequest(
-          `http://localhost:8000/api/statistics/ingredients/ingredient-waste/${ingredientName}`,
+          `http://localhost:8000/api/statistics/ingredients/waste-propability/${ingredientName}`,
           "GET",
           null,
           { Authorization: "Bearer " + auth.token }
@@ -126,9 +120,7 @@ const IngredientStats = () => {
         setPieChartData(formattedData);
       } catch (err) {
         console.error(err);
-        setFetchError(
-          "Wystąpił błąd podczas pobierania danych statystycznych."
-        );
+        setFetchError("Nie znaleziono zamówień dla tego składnika.");
       }
     };
 
@@ -151,13 +143,13 @@ const IngredientStats = () => {
 
   const handlePeriodUsage = (newPeriod) => {
     if (newPeriod !== periodUsage) {
-      setPeriodUsage(newPeriod); // Tylko zmiana stanu, bez pełnego renderowania strony
+      setPeriodUsage(newPeriod);
     }
   };
 
   const handlePeriodWaste = (newPeriod) => {
     if (newPeriod !== periodWaste) {
-      setPeriodWaste(newPeriod); // Tylko zmiana stanu, bez pełnego renderowania strony
+      setPeriodWaste(newPeriod);
     }
   };
 
@@ -206,7 +198,7 @@ const IngredientStats = () => {
                           data: revenueDataUsage,
                           color: initialColor,
                           area: true,
-                        }, // Kolor i dane dla kolumn
+                        },
                       ]}
                       colors={{ scheme: "nivo" }}
                       width={600}
@@ -314,6 +306,32 @@ const IngredientStats = () => {
                       height={300}
                     />
                   </div>
+                  <div className="date-pickers">
+                    <button
+                      className={`picker-btn ${
+                        periodWaste === "rok" ? "active-period-button" : ""
+                      }`}
+                      onClick={() => handlePeriodWaste("rok")}
+                    >
+                      rok
+                    </button>
+                    <button
+                      className={`picker-btn ${
+                        periodWaste === "miesiac" ? "active-period-button" : ""
+                      }`}
+                      onClick={() => handlePeriodWaste("miesiac")}
+                    >
+                      miesiąc
+                    </button>
+                    <button
+                      className={`picker-btn ${
+                        periodWaste === "tydzien" ? "active-period-button" : ""
+                      }`}
+                      onClick={() => handlePeriodWaste("tydzien")}
+                    >
+                      tydzień
+                    </button>
+                  </div>
                 </>
               </div>
               <div className="ranking">
@@ -363,7 +381,6 @@ const IngredientStats = () => {
                             endAngle={360}
                             innerRadius="80%"
                             outerRadius="100%"
-                            // ...
                           />
                         </div>
                         <span>Strata w sumie (PLN)</span>
@@ -375,8 +392,7 @@ const IngredientStats = () => {
             </div>
           )}
           {!isLoading && ingredientStats && ingredients.length > 0 && (
-            <div className="ingredient-info">
-              {/* <div className="ingredient-info-box"> */}
+            <div className="ingredient-info">              
               <div className="ingredient-info-content-left">
                 <div className="ingredient-info-content-header">
                   <h2 className="text">
@@ -435,7 +451,6 @@ const IngredientStats = () => {
                   ))}
                 </ul>
               </div>
-              {/* </div> */}
             </div>
           )}
         </div>

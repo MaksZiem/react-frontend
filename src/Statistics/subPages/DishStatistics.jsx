@@ -13,12 +13,8 @@ const DishStatistics = () => {
   const location = useLocation();
   const { cookId, dishId, dishName } = location.state || {};
   const { isLoading, error, sendRequest, clearError } = useHttpClient();
-  const [dishStats, setDishStats] = useState(null);
-  const [totalDishesPrepared, setTotalDishesPrepared] = useState(0);
-  const [averageCookingTime, setAverageCookingTime] = useState(0);
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
-  const [test2Data, setTest2Data] = useState([]);
   const [dishes, setDishes] = useState([]);
   const auth = useContext(AuthContext);
   const [userData, setUserData] = useState();
@@ -26,7 +22,7 @@ const DishStatistics = () => {
   const fetchDishStats2 = async () => {
     try {
       const responseData = await sendRequest(
-        `http://localhost:8000/api/cook/test2/${cookId}`,
+        `http://localhost:8000/api/cook/dishes/${cookId}`,
         "POST",
         JSON.stringify({
           dishId,
@@ -38,7 +34,6 @@ const DishStatistics = () => {
           "Content-Type": "application/json",
         }
       );
-      console.log(responseData);
       setDishes(responseData.dishes);
     } catch (err) {
       console.log(err);
@@ -48,7 +43,6 @@ const DishStatistics = () => {
   const fetchUserData = async () => {
     if (!cookId) {
       cookId = auth.userId;
-      // console.log(cookId);
     }
     try {
       const userData = await sendRequest(
@@ -60,17 +54,11 @@ const DishStatistics = () => {
           "Content-Type": "application/json",
         }
       );
-      console.log(userData);
       setUserData(userData.user);
     } catch (error) {
       console.error(error);
     }
   };
-
-  // useEffect(() => {
-  //   fetchUserData()
-
-  // }, []);
 
   useEffect(() => {
     fetchUserData();

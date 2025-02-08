@@ -16,7 +16,7 @@ import "./EmpCookStats.css";
 const EmpCookStats = () => {
   const { isLoading, error, sendRequest, clearError } = useHttpClient();
   const [orders, setOrders] = useState([]);
-  const [userData, setUserData] = useState()
+  const [userData, setUserData] = useState();
   const [dishes, setDishes] = useState([]);
   const location = useLocation();
   const auth = useContext(AuthContext);
@@ -56,7 +56,7 @@ const EmpCookStats = () => {
         }
       );
       setDishCount(cookStats);
-      console.log(cookStats)
+      console.log(cookStats);
     } catch (error) {
       console.log(error);
     }
@@ -102,12 +102,12 @@ const EmpCookStats = () => {
       console.log(userData);
       setUserData(userData.user);
     } catch (error) {
-      console.error(error)
+      console.error(error);
     }
-  }
+  };
 
   useEffect(() => {
-    fetchUserData()
+    fetchUserData();
     fetchDishes();
   }, []);
 
@@ -139,14 +139,14 @@ const EmpCookStats = () => {
     });
   };
 
-  console.log(auth)
+  console.log(auth);
 
   return (
     <>
       <div className="container-statistics-cook">
         <Navbar />
         <div className="statistics">
-        <div className="dish-info">
+          <div className="dish-info">
             {userData ? (
               <>
                 <h1>
@@ -156,8 +156,8 @@ const EmpCookStats = () => {
             ) : (
               <p>dsdas.</p>
             )}
-        </div>
-        
+          </div>
+
           <div className="dish-info">
             <div className="grid-container-cook">
               <div className="ranking">
@@ -320,7 +320,6 @@ const EmpCookStats = () => {
                             : "cart-item-dish"
                         }
                       >
-                        {/* <div className="cart-item-ingredient"> */}
                         <span className="item-name-ingredient">
                           {dish.name}
                         </span>
@@ -338,7 +337,6 @@ const EmpCookStats = () => {
                             Statystyki dania
                           </button>
                         </div>
-                        {/* </div> */}
                       </li>
                     ))}
                   </ul>

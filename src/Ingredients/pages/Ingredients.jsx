@@ -141,9 +141,7 @@ const Ingredients = () => {
             </select>
           </div>
         </form>
-      </div>
-
-      {/* {ingredientsByCategory && ( */}
+      </div>      
       <div className="ingredient-search-container">
         {Object.keys(ingredientsByCategory).map((category) => (
           <div key={category} className="category-section">

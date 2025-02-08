@@ -27,6 +27,7 @@ const AllCooksStats = () => {
           null,
           { Authorization: "Bearer " + auth.token }
         );
+        console.log(responseData);
         setCooks(responseData.users);
       } catch (err) {}
     };
@@ -43,7 +44,7 @@ const AllCooksStats = () => {
           { Authorization: "Bearer " + auth.token }
         );
         setCookStats(responseData);
-        console.log(responseData)
+        console.log(responseData);
       } catch (err) {}
     };
     fetchCookStats();
@@ -217,13 +218,16 @@ const AllCooksStats = () => {
           </div>
           {!isLoading && cooks.length > 0 && (
             <ul className="list-form-cooks">
-            {cooks.map((cook, index) => (
-              <li
-                key={cook.id}
-                onClick={() => handleCookClick(cook._id)}
-                className={index === cooks.length - 1 ? "last-ingredient" : "cook-list-item"}
-              >
-                {/* <div className="cook-list-item"> */}
+              {cooks.map((cook, index) => (
+                <li
+                  key={cook.id}
+                  onClick={() => handleCookClick(cook._id)}
+                  className={
+                    index === cooks.length - 1
+                      ? "last-ingredient"
+                      : "cook-list-item"
+                  }
+                >
                   <div className="cook-image">
                     <img
                       className="image"
@@ -243,12 +247,9 @@ const AllCooksStats = () => {
                       Szczegóły
                     </button>
                   </div>
-                {/* </div> */}
-              </li>
-            ))}
-              
-          </ul>
-          
+                </li>
+              ))}
+            </ul>
           )}
         </div>
       </div>

@@ -19,8 +19,7 @@ const Statistics = () => {
   const [percentageDish, setPercentageDish] = useState([]);
   const [mostPopularDish, setMostPopularDish] = useState(null);
   const [totalWeekProfit, setTotalWeekProfit] = useState();
-  const [topDishes, setTopDishes] = useState([]);
-  const [period, setPeriod] = useState("rok");
+
   const [periodTotal, setPeriodTotal] = useState("tydzien");
   const [periodDayOfWeek, setPeriodDayOfWeek] = useState("tydzien");
   const [periodPercentage, setPeriodPercentage] = useState("tydzien");
@@ -137,8 +136,6 @@ const Statistics = () => {
     navigate("/statistics/orders/details");
   };
 
-  console.log(percentageDish)
-
   return (
     <div>
       <div className="container-statistics">
@@ -212,7 +209,6 @@ const Statistics = () => {
             )}
           </div>
           <div className="ranking">
-            {/* {ordersLastWeek.length !== 0 && totalWeekProfit && ( */}
               <>
                 <h2>Ogólne statystyki</h2>
                 <div className="ranking2">
@@ -268,8 +264,7 @@ const Statistics = () => {
                     <span>Ilość zamówień</span>
                   </div>
                 </div>
-              </>
-            {/* )} */}
+              </>            
           </div>
           <div className="ranking">
             {ordersByDayOfWeek.length !== 0 && (

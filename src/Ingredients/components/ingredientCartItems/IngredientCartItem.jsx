@@ -61,8 +61,7 @@ const IngredientCartItem = (props) => {
         </p>
       </Modal>
       <li className={props.isLast ? "last-ingredient2" : "cart-item-ingredient-fix"}> 
-        {isLoading && <LoadingSpinner asOverlay />}
-        {/* <div className="cart-item-ingredient-fix"> */}
+        {isLoading && <LoadingSpinner asOverlay />}       
           <span className="item-name-ingredient">{props.name}</span>
           <span className="item-category">{props.category}</span>
           <span className="item-category">{props.weight}</span>
@@ -71,7 +70,6 @@ const IngredientCartItem = (props) => {
               Usuń
             </button>
           </div>
-        {/* </div> */}
       </li>
     </>
   );

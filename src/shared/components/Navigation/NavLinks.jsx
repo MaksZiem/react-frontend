@@ -8,15 +8,12 @@ const NavLinks = () => {
     const auth = useContext(AuthContext)
     return (
         <ul className='nav-links'>
-            {/* <li>
-                <NavLink to="/" exact>all users</NavLink>
-            </li> */}
             {auth.isLoggedIn && auth.userRole === 'admin' && (
             <li>
                 <NavLink to="/magazine" exact>magazyn</NavLink>
             </li>
             )}
-            {auth.isLoggedIn &&  (auth.userRole === 'admin' || auth.userRole === "waiter") && (
+            {auth.isLoggedIn &&  (auth.userRole === 'admin') && (
             <li>
                 <NavLink to="/ingredients-dashboard" exact>tworzenie dania</NavLink>
             </li>
@@ -33,7 +30,7 @@ const NavLinks = () => {
             )}
             {auth.isLoggedIn && (auth.userRole === 'admin' || auth.userRole === "cook") && (
             <li>
-                <NavLink to="/cook" exact>kucharz</NavLink>
+                <NavLink to="/cook" exact>nowe zamówienia</NavLink>
             </li>
             )}
             {auth.isLoggedIn && auth.userRole === "cook" && (
