@@ -170,6 +170,16 @@
   height: 300px;
 }
 
+.ranking3 {
+  /* width: 680px; */
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  height: 300px;
+}
+
 .gauge-item {
   width: 200px;
   height: 150px;

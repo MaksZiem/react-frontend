@@ -12,3 +12,73 @@
   margin: 0;
   list-style: none;
 }
+
+.list-form-placeholder-ingredient-incomes {
+  margin-top: 100px;
+  font-weight: 600;
+  width: 850px;
+  max-width: 60rem;
+  margin: auto ;
+}
+
+
+.ingredients-list-desc-statistics {
+  display: flex;
+  flex-direction: row;
+  color: white;
+  justify-content: space-between;
+  padding: 10px;
+  height: 45px;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  /* border-bottom: 1px solid rgb(91, 86, 86); */
+  background-color: rgb(117, 148, 215);
+ text-align: center;
+ /* margin: 10px; */
+ transition: background-color 0.3s, color 0.3s; 
+ 
+ 
+}
+
+.ingredients-list-desc-statistics form {
+  padding: 0;
+  margin: 0;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.dish-update-list-form-incomes {
+  list-style: none;
+  margin: auto;
+  padding: 0;
+  width: 850px;
+  max-width: 60rem;
+  color: white;
+  text-align: center;
+  gap: 10px;
+}
+
+.cart-item-ingredient-incomes {
+  display: flex;
+  flex-direction: row;
+  color: black;
+  justify-content: space-between;
+  font-weight: 600;
+  /* background-color: ; */
+  height: 45px;
+  border-bottom: 3px solid rgb(222, 225, 236);
+  /* background: rgb(222, 225, 236); */
+  padding: 10px;
+  background-color: rgb(255, 255, 255);
+  text-align: center;
+  /* margin: 10px; */
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.dish-update-name-incomes {
+  width: 40%;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
