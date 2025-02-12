@@ -7,6 +7,7 @@ import { useState, useContext } from "react";
 import Modal from "../../shared/components/UIElements/Modal";
 import { AuthContext } from "../../shared/context/auth-context";
 import LoadingSpinner from "../../shared/components/UIElements/LoadingSpinner";
+import { URL } from "../../shared/consts";
 
 const MagazineDashboardItem = (props) => {
   const navigate = useNavigate();
@@ -29,7 +30,7 @@ const MagazineDashboardItem = (props) => {
     setShowConfirmModal(false);
     try {
       await sendRequest(
-        "http://localhost:8000/api/ingredients/delete-ingredient-template",
+        `${URL}/api/ingredients/delete-ingredient-template`,
         "DELETE",
         JSON.stringify({
           ingredientTemplateId: props.id,
@@ -88,7 +89,7 @@ const MagazineDashboardItem = (props) => {
             <h3>{props.category}</h3>
             <div className="ingredient-image">
               <img
-                src={`http://localhost:8000/${props.image}`}
+                src={`${URL}/${props.image}`}
                 className="ingredient-image"
                 alt={props.name}
               />

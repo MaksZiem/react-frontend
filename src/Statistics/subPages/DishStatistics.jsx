@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useHttpClient } from "../../shared/hooks/http-hook";
-import ErrorModal from "../../shared/components/UIElements/ErrorModal";
-import LoadingSpinner from "../../shared/components/UIElements/LoadingSpinner";
-import { useParams } from "react-router-dom";
+import { URL } from "../../shared/consts";
 import { useContext } from "react";
 import { AuthContext } from "../../shared/context/auth-context";
 import { useLocation } from "react-router-dom";
@@ -22,7 +20,7 @@ const DishStatistics = () => {
   const fetchDishStats2 = async () => {
     try {
       const responseData = await sendRequest(
-        `http://localhost:8000/api/cook/dishes/${cookId}`,
+        `${URL}/api/cook/dishes/${cookId}`,
         "POST",
         JSON.stringify({
           dishId,
@@ -46,7 +44,7 @@ const DishStatistics = () => {
     }
     try {
       const userData = await sendRequest(
-        `http://localhost:8000/api/users/${cookId}`,
+        `${URL}/api/users/${cookId}`,
         "POST",
         null,
         {

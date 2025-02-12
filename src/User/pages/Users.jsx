@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-
+import { URL } from '../../shared/consts';
 import UsersList from '../components/UsersList';
 import ErrorModal from '../../shared/components/UIElements/ErrorModal';
 import LoadingSpinner from '../../shared/components/UIElements/LoadingSpinner';
@@ -13,7 +13,7 @@ const Users = () => {
     const fetchUsers = async () => {
       try {
         const responseData = await sendRequest(
-          'http://localhost:8000/api/auth'
+          `${URL}/api/auth`
         );
 
         setLoadedUsers(responseData.users);

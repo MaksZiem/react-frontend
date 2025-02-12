@@ -1,15 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { useHttpClient } from "../../shared/hooks/http-hook";
-import ErrorModal from "../../shared/components/UIElements/ErrorModal";
-import LoadingSpinner from "../../shared/components/UIElements/LoadingSpinner";
 import { useLocation } from "react-router-dom";
 import { useContext } from "react";
 import { AuthContext } from "../../shared/context/auth-context";
-import { Link } from "react-router-dom";
-import DishList from "../components/DishList";
 import { useNavigate } from "react-router-dom";
 import Navbar from "../components/Navbar";
-import { BarChart } from "@mui/x-charts/BarChart";
+import { URL } from "../../shared/consts";
 import { LineChart } from "@mui/x-charts/LineChart";
 import "./EmpCookStats.css";
 
@@ -30,7 +26,7 @@ const EmpCookStats = () => {
   const fetchDishes = async () => {
     try {
       const responseDishes = await sendRequest(
-        `http://localhost:8000/api/dishes/`,
+        `${URL}/api/dishes/`,
         "GET",
         null,
         { Authorization: "Bearer " + auth.token }
@@ -47,7 +43,7 @@ const EmpCookStats = () => {
     }
     try {
       const cookStats = await sendRequest(
-        `http://localhost:8000/api/cook/dishes-count/${cookId}`,
+        `${URL}/api/cook/dishes-count/${cookId}`,
         "POST",
         JSON.stringify({ period: periodDishCount }),
         {
@@ -69,7 +65,7 @@ const EmpCookStats = () => {
     }
     try {
       const cookStats = await sendRequest(
-        `http://localhost:8000/api/cook/preparation-time/${cookId}`,
+        `${URL}/api/cook/preparation-time/${cookId}`,
         "POST",
         JSON.stringify({ period: periodPreparationTime }),
         {
@@ -91,7 +87,7 @@ const EmpCookStats = () => {
     }
     try {
       const userData = await sendRequest(
-        `http://localhost:8000/api/users/${cookId}`,
+        `${URL}/api/users/${cookId}`,
         "POST",
         JSON.stringify({ period: periodPreparationTime }),
         {

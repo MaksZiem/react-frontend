@@ -3,7 +3,7 @@ import { useHttpClient } from '../../shared/hooks/http-hook';
 import { AuthContext } from '../../shared/context/auth-context';
 import ErrorModal from '../../shared/components/UIElements/ErrorModal';
 import LoadingSpinner from '../../shared/components/UIElements/LoadingSpinner';
-
+import { URL } from '../../shared/consts';
 
 const WaiterStatistics = () => {
     const { isLoading, error, sendRequest, clearError } = useHttpClient();
@@ -14,7 +14,7 @@ const WaiterStatistics = () => {
         const fetchUserOrders = async () => {
             try {
                 const responseData = await sendRequest(
-                    `http://localhost:8000/api/waiter/${auth.userId}`, 
+                    `${URL}/api/waiter/${auth.userId}`, 
                     'GET',
                     null,
                     { Authorization: 'Bearer ' + auth.token }

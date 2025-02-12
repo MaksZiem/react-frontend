@@ -6,6 +6,7 @@ import LoadingSpinner from "../../../shared/components/UIElements/LoadingSpinner
 import { useContext } from "react";
 import { AuthContext } from "../../../shared/context/auth-context";
 import { useNavigate } from "react-router-dom";
+import { URL } from "../../../shared/consts";
 
 const DishCartList = (props) => {
   const auth = useContext(AuthContext);
@@ -15,7 +16,7 @@ const DishCartList = (props) => {
     event.preventDefault();
     try {
       await sendRequest(
-        "http://localhost:8000/api/waiter/add-order",
+        `${URL}/api/waiter/add-order`,
         "POST",
         JSON.stringify({
           tableNumber: props.tableId,

@@ -5,6 +5,7 @@ import Navbar from "../componens/Navbar";
 import "../componens/List.css";
 import Modal from "../../shared/components/UIElements/Modal";
 import Button from "../../shared/components/FormElements/Button";
+import { URL } from "../../shared/consts";
 
 const IngredientCategoryConfig = () => {
   const { sendRequest, isLoading, error } = useHttpClient();
@@ -26,7 +27,7 @@ const IngredientCategoryConfig = () => {
     const fetchCategories = async () => {
       try {
         const responseData = await sendRequest(
-          `http://localhost:8000/api/config/ingredient-categories?page=${currentPage}&limit=${itemsPerPage}`,
+          `${URL}/api/config/ingredient-categories?page=${currentPage}&limit=${itemsPerPage}`,
           "GET",
           null,
           {
@@ -48,7 +49,7 @@ const IngredientCategoryConfig = () => {
   const saveNewCategoryHandler = async () => {
     try {
       const newCategory = await sendRequest(
-        "http://localhost:8000/api/config/ingredient-categories",
+        `${URL}/api/config/ingredient-categories`,
         "POST",
         JSON.stringify({ name: newCategoryName }),
         {
@@ -72,7 +73,7 @@ const IngredientCategoryConfig = () => {
   const deleteCategoryHandler = async (id) => {
     try {
       await sendRequest(
-        `http://localhost:8000/api/config/ingredient-categories/${id}`,
+        `${URL}/api/config/ingredient-categories/${id}`,
         "DELETE",
         null,
         {
@@ -83,7 +84,7 @@ const IngredientCategoryConfig = () => {
 
       // Po usunięciu pobierz aktualne dane, aby zapewnić poprawne wyświetlanie
       const responseData = await sendRequest(
-        `http://localhost:8000/api/config/ingredient-categories?page=${currentPage}&limit=${itemsPerPage}`,
+        `${URL}/api/config/ingredient-categories?page=${currentPage}&limit=${itemsPerPage}`,
         "GET",
         null,
         {
@@ -122,7 +123,7 @@ const IngredientCategoryConfig = () => {
   const saveEditHandler = async () => {
     try {
       const updatedCategory = await sendRequest(
-        `http://localhost:8000/api/config/ingredient-categories/${editingCategory._id}`,
+        `${URL}/api/config/ingredient-categories/${editingCategory._id}`,
         "PUT",
         JSON.stringify({ name: newCategoryName }),
         {

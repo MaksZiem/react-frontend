@@ -4,6 +4,7 @@ import { AuthContext } from '../../shared/context/auth-context';
 import { useNavigate } from 'react-router-dom';
 import Navbar from '../componens/Navbar';
 import './UsersConfig.css'
+import { URL } from '../../shared/consts';
 
 const UsersConfig = () => {
   const [cooks, setCooks] = useState([]);
@@ -18,7 +19,7 @@ const UsersConfig = () => {
     const fetchCooks = async () => {
       try {
         const responseData = await sendRequest(
-          `http://localhost:8000/api/auth/users?page=${currentPage}&limit=${itemsPerPage}`,
+          `${URL}/api/auth/users?page=${currentPage}&limit=${itemsPerPage}`,
           "GET",
           null,
           { Authorization: "Bearer " + auth.token }
@@ -75,7 +76,7 @@ const UsersConfig = () => {
                   <div className="cook-image">
                     <img
                       className="image"
-                      src={`http://localhost:8000/${cook.image}`}
+                      src={`${URL}/${cook.image}`}
                       alt={cook.name}
                     />
                   </div>

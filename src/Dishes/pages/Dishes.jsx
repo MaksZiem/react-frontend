@@ -9,6 +9,7 @@ import { AuthContext } from "../../shared/context/auth-context";
 import { useContext } from "react";
 import Modal from "../../shared/components/UIElements/Modal";
 import Button from "../../shared/components/FormElements/Button";
+import { URL } from "../../shared/consts";
 
 const Dishes = (props) => {
   const { isLoading, error, sendRequest, clearError } = useHttpClient();
@@ -24,7 +25,7 @@ const Dishes = (props) => {
   const fetchTableCart = async () => {
     try {
       const responseData = await sendRequest(
-        `http://localhost:8000/api/waiter/table-cart/${tableId}?name=${inputName}&category=${selectedCategory}`
+        `${URL}/api/waiter/table-cart/${tableId}?name=${inputName}&category=${selectedCategory}`
       );
       console.log(responseData);
       setDishesByCategory(responseData.dishesByCategory);
@@ -43,7 +44,7 @@ const Dishes = (props) => {
     const fetchCategories = async () => {
       try {
         const response = await sendRequest(
-          "http://localhost:8000/api/config/dish-categories",
+          `${URL}/api/config/dish-categories`,
           "GET",
           null,
           {

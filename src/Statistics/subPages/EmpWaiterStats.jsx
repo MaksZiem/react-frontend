@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useContext } from "react";
 import { useHttpClient } from "../../shared/hooks/http-hook";
 import { AuthContext } from "../../shared/context/auth-context";
-import ErrorModal from "../../shared/components/UIElements/ErrorModal";
+import { URL } from "../../shared/consts";
 import LoadingSpinner from "../../shared/components/UIElements/LoadingSpinner";
 import { useLocation } from "react-router-dom";
 import Navbar from "../components/Navbar";
@@ -20,7 +20,7 @@ const EmpWaiterStats = () => {
 
       try {
         const responseData = await sendRequest(
-          `http://localhost:8000/api/waiter/${waiterId ? waiterId : auth.userId}`,
+          `${URL}/api/waiter/${waiterId ? waiterId : auth.userId}`,
           "GET",
           null,
           { Authorization: "Bearer " + auth.token }
@@ -36,7 +36,7 @@ const EmpWaiterStats = () => {
     const fetchTipStats = async () => {
       try {
         const responseData = await sendRequest(
-          `http://localhost:8000/api/waiter/${auth.userId}/waiter-tip-stats`,
+          `${URL}/api/waiter/${auth.userId}/waiter-tip-stats`,
           "POST",
           JSON.stringify({ periodTotal }),
           {

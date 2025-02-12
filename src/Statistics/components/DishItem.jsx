@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { useHttpClient } from '../../shared/hooks/http-hook';
 import ErrorModal from '../../shared/components/UIElements/ErrorModal';
 import './DishItem.css';
+import { URL } from '../../shared/consts';
 
 const DishItem = (props) => {
   const navigate = useNavigate();
@@ -13,7 +14,7 @@ const DishItem = (props) => {
     event.preventDefault();
     try {
       await sendRequest(
-        'http://localhost:8000/api/waiter/add-to-table',
+        `${URL}/api/waiter/add-to-table`,
         'POST',
         JSON.stringify({
           dishId: props.id,

@@ -14,6 +14,7 @@ import { VALIDATOR_REQUIRE } from "../../shared/util/validators";
 import Input from "../../shared/components/FormElements/Input";
 import Modal from "../../shared/components/UIElements/Modal";
 import Button from "../../shared/components/FormElements/Button";
+import { URL } from "../../shared/consts";
 
 const EditDish = () => {
   const { dishId } = useParams();
@@ -42,7 +43,7 @@ const EditDish = () => {
     const fetchIngredients = async () => {
       try {
         const responseData = await sendRequest(
-          `http://localhost:8000/api/ingredients?name=${inputName}&category=${selectedCategory}`,
+          `${URL}/api/ingredients?name=${inputName}&category=${selectedCategory}`,
           "GET",
           null,
           {
@@ -64,7 +65,7 @@ const EditDish = () => {
     const fetchDish = async () => {
       try {
         const responseData = await sendRequest(
-          `http://localhost:8000/api/statistics/dishes/${dishId}`,
+          `${URL}/api/statistics/dishes/${dishId}`,
           "GET",
           null,
           {
@@ -103,7 +104,7 @@ const EditDish = () => {
     try {
       // Wyślij żądanie DELETE do API
       await sendRequest(
-        `http://localhost:8000/api/statistics/dishes/delete-ingredient/${dishId}/${ingredientId}`,
+        `${URL}/api/statistics/dishes/delete-ingredient/${dishId}/${ingredientId}`,
         "DELETE",
         null,
         {
@@ -158,7 +159,7 @@ const EditDish = () => {
       });
       
       const responseDishes = await sendRequest(
-        `http://localhost:8000/api/statistics/dishes/update/${dishId}`,
+        `${URL}/api/statistics/dishes/update/${dishId}`,
         "PUT",
         formData,
         {
@@ -270,7 +271,7 @@ const EditDish = () => {
                     onInput={inputHandler}
                     initialPreviewUrl={
                       formState.inputs.image.value
-                        ? `http://localhost:8000/${formState.inputs.image.value}`
+                        ? `${URL}/${formState.inputs.image.value}`
                         : ""
                     }
                     onErrorText="Dodaj zdjęcie"

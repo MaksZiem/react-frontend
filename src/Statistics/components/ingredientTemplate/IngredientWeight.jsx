@@ -9,6 +9,7 @@ import { VALIDATOR_REQUIRE } from "../../../shared/util/validators";
 import "./ingredientWeight.css";
 import { AuthContext } from "../../../shared/context/auth-context";
 import { useContext } from "react";
+import { URL } from "../../../shared/consts";
 
 const IngredientUpdateWeight = () => {
   const location = useLocation();
@@ -33,7 +34,7 @@ const IngredientUpdateWeight = () => {
     console.log("dishId to be sent:", dishId);
     try {
       await sendRequest(
-        `http://localhost:8000/api/statistics/dishes/add-ingredient/${dishId}`,
+        `${URL}/api/statistics/dishes/add-ingredient/${dishId}`,
         "POST",
         JSON.stringify({
           ingredientTemplateId: id,

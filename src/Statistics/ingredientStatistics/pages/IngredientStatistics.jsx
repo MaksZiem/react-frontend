@@ -4,7 +4,7 @@ import LoadingSpinner from "../../../shared/components/UIElements/LoadingSpinner
 import ErrorModal from "../../../shared/components/UIElements/ErrorModal";
 import { useEffect, useState } from "react";
 import { useHttpClient } from "../../../shared/hooks/http-hook";
-
+import { URL } from "../../../shared/consts";
 import { useNavigate } from "react-router-dom";
 import { useContext } from "react";
 import { AuthContext } from "../../../shared/context/auth-context";
@@ -27,7 +27,7 @@ const IngredientStatistics = () => {
     const fetchCategories = async () => {
       try {
         const response = await sendRequest(
-          "http://localhost:8000/api/config/ingredient-categories",
+          `${URL}/api/config/ingredient-categories`,
           "GET",
           null,
           {
@@ -48,7 +48,7 @@ const IngredientStatistics = () => {
     const fetchDishes = async () => {
       try {
         const responseniedobor = await sendRequest(
-          `http://localhost:8000/api/statistics/ingredients/ingredient-deficiency`,
+          `${URL}/api/statistics/ingredients/ingredient-deficiency`,
           "GET",
           null,
           { Authorization: "Bearer " + auth.token }
@@ -56,7 +56,7 @@ const IngredientStatistics = () => {
         setTopIngredients(responseniedobor);
 
         const responseData = await sendRequest(
-          "http://localhost:8000/api/ingredients",
+          `${URL}/api/ingredients`,
           "GET",
           null,
           {
@@ -76,7 +76,7 @@ const IngredientStatistics = () => {
     const fetchIngredients = async () => {
       try {
         const responseData = await sendRequest(
-          `http://localhost:8000/api/ingredients?name=${inputName}&category=${selectedCategory}`,
+          `${URL}/api/ingredients?name=${inputName}&category=${selectedCategory}`,
           "GET",
           null,
           {
@@ -112,7 +112,7 @@ const IngredientStatistics = () => {
 
     try {
       const responseData = await sendRequest(
-        `http://localhost:8000/api/ingredients?name=${inputName}&category=${selectedCategory}`,
+        `${URL}/api/ingredients?name=${inputName}&category=${selectedCategory}`,
         "GET"
       );
       setLoadedIngredientsTemplates(responseData.ingredientTemplates); // Update with filtered data

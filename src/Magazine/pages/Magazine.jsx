@@ -10,6 +10,7 @@ import { AuthContext } from "../../shared/context/auth-context";
 import "./Magazine.css";
 import IngredientItem from "../components/IngredientItem";
 import Modal from "../../shared/components/UIElements/Modal";
+import { URL } from "../../shared/consts";
 
 const Magazine = () => {
   const { isLoading, error, sendRequest, clearError } = useHttpClient();
@@ -30,7 +31,7 @@ const Magazine = () => {
     const fetchCategories = async () => {
       try {
         const response = await sendRequest(
-          'http://localhost:8000/api/config/ingredient-categories',
+          `${URL}/api/config/ingredient-categories`,
           'GET',
           null,
           {
@@ -51,7 +52,7 @@ const Magazine = () => {
     const fetchUsedIngredients = async () => {
       try {
         const response2 = await sendRequest(
-          "http://localhost:8000/api/statistics/ingredients/zero-weight",
+          `${URL}/api/statistics/ingredients/zero-weight`,
           "GET",
           null,
           {
@@ -68,7 +69,7 @@ const Magazine = () => {
     const fetchWastedIngredients = async () => {
       try {
         const respons = await sendRequest(
-          "http://localhost:8000/api/statistics/ingredients/expired",
+          `${URL}/api/statistics/ingredients/expired`,
           "GET",
           null,
           {
@@ -84,7 +85,7 @@ const Magazine = () => {
     const fetchMagazineDashboard = async () => {
       try {
         const responseData = await sendRequest(
-          "http://localhost:8000/api/ingredients/magazine",
+          `${URL}/api/ingredients/magazine`,
           "GET",
           null,
           {
@@ -128,7 +129,7 @@ const Magazine = () => {
   const filterIngredientsHandler = async (event) => {
     try {
       const responseData = await sendRequest(
-        `http://localhost:8000/api/ingredients?name=${inputName}&category=${selectedCategory}`,
+        `${URL}/api/ingredients?name=${inputName}&category=${selectedCategory}`,
         "GET",
         null,
         {
@@ -156,7 +157,7 @@ const Magazine = () => {
   const ingredientDeleteHandler = async (id) => {
     try {
       await sendRequest(
-        "http://localhost:8000/api/magazine/delete-ingredient",
+        `${URL}/api/magazine/delete-ingredient`,
         "POST",
         JSON.stringify({
           ingredientId: id,

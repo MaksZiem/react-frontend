@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useHttpClient } from "../../shared/hooks/http-hook";
-import ErrorModal from "../../shared/components/UIElements/ErrorModal";
-import LoadingSpinner from "../../shared/components/UIElements/LoadingSpinner";
+import { URL } from "../../shared/consts";
 import { useContext } from "react";
 import { AuthContext } from "../../shared/context/auth-context";
 import { useNavigate } from "react-router-dom";
@@ -24,7 +23,7 @@ const DishesStatistics = () => {
     const fetchDishes = async () => {
       try {
         const responseDishes = await sendRequest(
-          `http://localhost:8000/api/dishes/?sort=${sortOption}`,
+          `${URL}/api/dishes/?sort=${sortOption}`,
           "GET"
         );
         setDishes(responseDishes.dishes);
@@ -36,7 +35,7 @@ const DishesStatistics = () => {
   const handleDelete = async (id) => {
     try {
       await sendRequest(
-        `http://localhost:8000/api/statistics/dishes/delete-dish/${id}`,
+        `${URL}/api/statistics/dishes/delete-dish/${id}`,
         "DELETE",
         null,
         {

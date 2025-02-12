@@ -48,7 +48,7 @@ const Cook = () => {
   const handleMarkDishAsReady = async (orderId, dishName) => {
     try {
       await sendRequest(
-        `http://localhost:8000/api/cook/${orderId}/dish/${dishName}/ready`,
+        `${URL}/api/cook/${orderId}/dish/${dishName}/ready`,
         "PATCH",
         null,
         {

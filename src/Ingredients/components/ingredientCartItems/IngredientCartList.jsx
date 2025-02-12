@@ -1,7 +1,6 @@
 import React from "react";
 import Button from "../../../shared/components/FormElements/Button";
 import IngredientCartItem from "./IngredientCartItem";
-import LoadingSpinner from "../../../shared/components/UIElements/LoadingSpinner";
 import { useHttpClient } from "../../../shared/hooks/http-hook";
 import { useForm } from "../../../shared/hooks/form-hook";
 import ErrorModal from "../../../shared/components/UIElements/ErrorModal";
@@ -14,6 +13,7 @@ import ImageUpload from "../../../shared/components/FormElements/ImageUpload";
 import Card from "../../../shared/components/UIElements/Card";
 import { useEffect } from "react";
 import { useState } from "react";
+import { URL } from "../../../shared/consts";
 
 const IngredientCartList = (props) => {
   const auth = useContext(AuthContext);
@@ -45,7 +45,7 @@ const IngredientCartList = (props) => {
     const fetchCategories = async () => {
       try {
         const response = await sendRequest(
-          "http://localhost:8000/api/config/dish-categories",
+          `${URL}/api/config/dish-categories`,
           "GET",
           null,
           {
@@ -72,7 +72,7 @@ const IngredientCartList = (props) => {
       formData.append("category", formState.inputs.category.value)
       console.log(formData);
       await sendRequest(
-        "http://localhost:8000/api/ingredients/add-dish",
+        `${URL}/api/ingredients/add-dish`,
         "POST",
         formData,
         { Authorization: "Bearer " + auth.token }

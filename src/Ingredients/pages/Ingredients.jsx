@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useContext } from "react";
 import IngredientList from "../components/ingredientTemplate/IngredientList";
-import LoadingSpinner from "../../shared/components/UIElements/LoadingSpinner";
+import { URL } from "../../shared/consts";
 import ErrorModal from "../../shared/components/UIElements/ErrorModal";
 import IngredientCartList from "../components/ingredientCartItems/IngredientCartList";
 import { useHttpClient } from "../../shared/hooks/http-hook";
@@ -25,7 +25,7 @@ const Ingredients = () => {
     const fetchIngredients = async () => {
       try {
         const responseData = await sendRequest(
-          `http://localhost:8000/api/ingredients?name=${inputName}&category=${selectedCategory}`,
+          `${URL}/api/ingredients?name=${inputName}&category=${selectedCategory}`,
           "GET",
           null,
           {
@@ -58,7 +58,7 @@ const Ingredients = () => {
     const fetchCategories = async () => {
       try {
         const response = await sendRequest(
-          "http://localhost:8000/api/config/ingredient-categories",
+          `${URL}/api/config/ingredient-categories`,
           "GET",
           null,
           {

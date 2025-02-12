@@ -6,6 +6,7 @@ import { useContext } from "react";
 import { AuthContext } from "../../shared/context/auth-context";
 import "./OrdersWithDetails.css";
 import Navbar from "../components/Navbar";
+import { URL } from "../../shared/consts";
 
 const OrdersWithDetails = () => {
   const { isLoading, error, sendRequest, clearError } = useHttpClient();
@@ -17,7 +18,7 @@ const OrdersWithDetails = () => {
   const fetchOrders = async () => {
     try {
       const responseData = await sendRequest(
-        "http://localhost:8000/api/statistics/orders/orders-with-details",
+        `${URL}/api/statistics/orders/orders-with-details`,
         "POST",
         JSON.stringify({
           startDate,

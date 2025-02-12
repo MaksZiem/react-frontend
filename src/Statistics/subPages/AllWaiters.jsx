@@ -7,6 +7,7 @@ import { useNavigate } from "react-router-dom";
 import "./AllWaiters.css";
 import Employes from "../pages/Employes";
 import Navbar from "../components/Navbar";
+import { URL } from "../../shared/consts";
 
 const AllWaiters = () => {
   const { isLoading, error, sendRequest, clearError } = useHttpClient();
@@ -18,7 +19,7 @@ const AllWaiters = () => {
     const fetchWaiters = async () => {
       try {
         const responseData = await sendRequest(
-          "http://localhost:8000/api/statistics/waiters",
+          `${URL}/api/statistics/waiters`,
           "GET",
           null,
           { Authorization: "Bearer " + auth.token }
@@ -72,7 +73,7 @@ const AllWaiters = () => {
                   <div className="cook-image">
                     <img
                       className="image"
-                      src={`http://localhost:8000/${waiter.image}`}
+                      src={`${URL}/${waiter.image}`}
                       alt={waiter.name}
                     />
                   </div>

@@ -71,7 +71,7 @@ const TablesList = () => {
     console.log(tableNumber)
     try {
       await sendRequest(
-        'http://localhost:8000/api/waiter/add-tip',
+        `${URL}/api/waiter/add-tip`,
         'POST',
         JSON.stringify({
           amount: tipAmount,

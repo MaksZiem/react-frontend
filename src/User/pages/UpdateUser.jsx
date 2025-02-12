@@ -15,6 +15,7 @@ import Modal from "../../shared/components/UIElements/Modal";
 import { useNavigate } from "react-router-dom";
 import { useLocation } from "react-router-dom";
 import ImageUpload from "../../shared/components/FormElements/ImageUpload";
+import { URL } from "../../shared/consts";
 
 const UpdateUser = () => {
   const [showConfirmModal, setShowConfirmModal] = useState(false);
@@ -48,7 +49,7 @@ const UpdateUser = () => {
   const fetchUser = async () => {
     try {
       const responseData = await sendRequest(
-        `http://localhost:8000/api/auth/${cookId}`
+        `${URL}/api/auth/${cookId}`
       );
       setLoadedUser(responseData.user);
       setFormData(
@@ -83,7 +84,7 @@ const UpdateUser = () => {
   
     try {
       await sendRequest(
-        `http://localhost:8000/api/auth/${cookId}`,
+        `${URL}/api/auth/${cookId}`,
         "PUT",
         formData,
         {
@@ -179,7 +180,7 @@ const UpdateUser = () => {
             />
             <ImageUpload center id="image" onInput={inputHandler} initialPreviewUrl={
                       formState.inputs.image.value
-                        ? `http://localhost:8000/${formState.inputs.image.value}`
+                        ? `${URL}/${formState.inputs.image.value}`
                         : ""
                     }/>
             <Input

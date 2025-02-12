@@ -8,6 +8,8 @@ import LoadingSpinner from "../../../shared/components/UIElements/LoadingSpinner
 import './IngredientCartItem.css';
 import { useContext } from "react";
 import { AuthContext } from "../../../shared/context/auth-context";
+import { URL } from "../../../shared/consts";
+
 const IngredientCartItem = (props) => {
   const [showConfirmModal, setShowConfirmModal] = useState(false);
   const { isLoading, error, sendRequest, clearError } = useHttpClient();
@@ -25,7 +27,7 @@ const IngredientCartItem = (props) => {
     setShowConfirmModal(false);
     try {
       await sendRequest(
-        "http://localhost:8000/api/ingredients/delete-from-cart",
+        `${URL}/api/ingredients/delete-from-cart`,
         "DELETE",
         JSON.stringify({
           ingredientTemplateId: props.id,

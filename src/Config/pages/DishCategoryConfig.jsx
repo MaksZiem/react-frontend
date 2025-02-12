@@ -5,28 +5,27 @@ import Navbar from "../componens/Navbar";
 import "../componens/List.css";
 import Modal from "../../shared/components/UIElements/Modal";
 import Button from "../../shared/components/FormElements/Button";
+import { URL } from "../../shared/consts";
 
 const DishCategoryConfig = () => {
   const { sendRequest, isLoading, error } = useHttpClient();
   const auth = useContext(AuthContext);
   const [ingredientCategories, setIngredientCategories] = useState([]);
-  const [editingCategory, setEditingCategory] = useState(null); // Przechowuje kategorię w edycji
-  const [newCategoryName, setNewCategoryName] = useState(""); // Nowa nazwa kategorii
-  const [addingCategory, setAddingCategory] = useState(false); // Czy dodajemy nową kategorię
+  const [editingCategory, setEditingCategory] = useState(null);
+  const [newCategoryName, setNewCategoryName] = useState("");
+  const [addingCategory, setAddingCategory] = useState(false);
   const [showConfirmModal, setShowConfirmModal] = useState(false);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [selectedId, setSelectedId] = useState(null);
-
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
   const [itemsPerPage, setItemsPerPage] = useState(5);
 
-  // Pobierz kategorie składników
   useEffect(() => {
     const fetchCategories = async () => {
       try {
         const responseData = await sendRequest(
-          `http://localhost:8000/api/config/dish-categories?page=${currentPage}&limit=${itemsPerPage}`,
+          `${URL}/api/config/dish-categories?page=${currentPage}&limit=${itemsPerPage}`,
           "GET",
           null,
           {
@@ -43,11 +42,10 @@ const DishCategoryConfig = () => {
     fetchCategories();
   }, [sendRequest, auth.token, currentPage, itemsPerPage]);
 
-  // Dodaj nową kategorię
   const saveNewCategoryHandler = async () => {
     try {
       const newCategory = await sendRequest(
-        "http://localhost:8000/api/config/dish-categories",
+        `${URL}/api/config/dish-categories`,
         "POST",
         JSON.stringify({ name: newCategoryName }),
         {
@@ -67,11 +65,10 @@ const DishCategoryConfig = () => {
     }
   };
 
-  // Usuń kategorię
   const deleteCategoryHandler = async (id) => {
     try {
       await sendRequest(
-        `http://localhost:8000/api/config/dish-categories/${id}`,
+        `${URL}/api/config/dish-categories/${id}`,
         "DELETE",
         null,
         {
@@ -88,23 +85,20 @@ const DishCategoryConfig = () => {
     }
   };
 
-  // Rozpocznij edycję kategorii
   const startEditHandler = (category) => {
     setEditingCategory(category);
-    setNewCategoryName(category.name); // Ustaw obecną nazwę jako początkową wartość
+    setNewCategoryName(category.name);
   };
 
-  // Anuluj edycję
   const cancelEditHandler = () => {
     setEditingCategory(null);
     setNewCategoryName("");
   };
 
-  // Zapisz zmiany w nazwie kategorii
   const saveEditHandler = async () => {
     try {
       const updatedCategory = await sendRequest(
-        `http://localhost:8000/api/config/dish-categories/${editingCategory._id}`,
+        `${URL}/api/config/dish-categories/${editingCategory._id}`,
         "PUT",
         JSON.stringify({ name: newCategoryName }),
         {
@@ -144,7 +138,7 @@ const DishCategoryConfig = () => {
 
   const handleItemsPerPageChange = (newLimit) => {
     setItemsPerPage(newLimit);
-    setCurrentPage(1); // Resetuj na pierwszą stronę
+    setCurrentPage(1);
   };
 
   return (

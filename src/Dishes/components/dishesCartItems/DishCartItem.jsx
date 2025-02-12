@@ -5,6 +5,7 @@ import ErrorModal from "../../../shared/components/UIElements/ErrorModal";
 import { useHttpClient } from "../../../shared/hooks/http-hook";
 import { useState } from "react";
 import LoadingSpinner from "../../../shared/components/UIElements/LoadingSpinner";
+import { URL } from "../../../shared/consts";
 
 const DishCartItem = (props) => {
   const [showConfirmModal, setShowConfirmModal] = useState(false);
@@ -14,7 +15,7 @@ const DishCartItem = (props) => {
     setShowConfirmModal(false);
     try {
       await sendRequest(
-        "http://localhost:8000/api/waiter/delete-from-table",
+        `${URL}/api/waiter/delete-from-table`,
         "DELETE",
         JSON.stringify({
           dishId: props.id,

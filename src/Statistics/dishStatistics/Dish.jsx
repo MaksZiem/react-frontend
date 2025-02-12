@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useHttpClient } from "../../shared/hooks/http-hook";
-import ErrorModal from "../../shared/components/UIElements/ErrorModal";
-import LoadingSpinner from "../../shared/components/UIElements/LoadingSpinner";
+import { URL } from "../../shared/consts";
 import { useLocation } from "react-router-dom";
 import { useContext } from "react";
 import { AuthContext } from "../../shared/context/auth-context";
@@ -31,7 +30,7 @@ const Dish = () => {
   const fetchDishData = async () => {
     try {
       const responseData = await sendRequest(
-        `http://localhost:8000/api/statistics/dishes/dish-revenue/${dishId}`,
+        `${URL}/api/statistics/dishes/dish-revenue/${dishId}`,
         "POST",
         JSON.stringify({ period: periodProfit }),
         {
@@ -64,7 +63,7 @@ const Dish = () => {
   const fetchDishLeftData = async () => {
     try {
       const responseData = await sendRequest(
-        `http://localhost:8000/api/statistics/dishes/dishes-left/${dishId}`,
+        `${URL}/api/statistics/dishes/dishes-left/${dishId}`,
         "GET",
         null,
         {
@@ -80,7 +79,7 @@ const Dish = () => {
   const fetchDishWeekDays = async () => {
     try {
       const responseData = await sendRequest(
-        `http://localhost:8000/api/statistics/dishes/dish-week-days-stats/${dishId}`,
+        `${URL}/api/statistics/dishes/dish-week-days-stats/${dishId}`,
         "POST",
         JSON.stringify({ period: periodWeekDays }),
         {
@@ -96,7 +95,7 @@ const Dish = () => {
   const fetchDishTotal = async () => {
     try {
       const responseData = await sendRequest(
-        `http://localhost:8000/api/statistics/dishes/dish-total/${dishId}`,
+        `${URL}/api/statistics/dishes/dish-total/${dishId}`,
         "POST",
         JSON.stringify({ period: periodTotal }),
         {

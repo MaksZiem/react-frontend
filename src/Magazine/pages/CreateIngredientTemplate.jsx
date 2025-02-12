@@ -13,6 +13,7 @@ import Button from "../../shared/components/FormElements/Button";
 import Card from "../../shared/components/UIElements/Card";
 import { useContext } from "react";
 import { AuthContext } from "../../shared/context/auth-context";
+import { URL } from "../../shared/consts";
 
 const CreateIngredientTemplate = () => {
   const [showConfirmModal, setShowConfirmModal] = useState(false);
@@ -46,7 +47,7 @@ const CreateIngredientTemplate = () => {
     const fetchCategories = async () => {
       try {
         const response = await sendRequest(
-          'http://localhost:8000/api/config/ingredient-categories',
+          `${URL}/api/config/ingredient-categories`,
           'GET',
           null,
           {
@@ -72,7 +73,7 @@ const CreateIngredientTemplate = () => {
       formData.append("category", formState.inputs.category.value);
       formData.append("image", formState.inputs.image.value);
       await sendRequest(
-        "http://localhost:8000/api/magazine/create-ingredient-template",
+        `${URL}/api/magazine/create-ingredient-template`,
         "POST",
         formData
       );

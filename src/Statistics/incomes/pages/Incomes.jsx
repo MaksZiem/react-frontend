@@ -7,6 +7,7 @@ import LoadingSpinner from "../../../shared/components/UIElements/LoadingSpinner
 import { LineChart } from "@mui/x-charts/LineChart";
 import "./Incomes.css";
 import { Gauge, gaugeClasses } from "@mui/x-charts/Gauge";
+import { URL } from "../../../shared/consts";
 
 const initialColor = "rgb(117, 148, 215)";
 
@@ -24,7 +25,7 @@ const Incomes = () => {
     const fetchCategories = async () => {
       try {
         const response = await sendRequest(
-          "http://localhost:8000/api/config/dish-categories",
+          `${URL}/api/config/dish-categories`,
           "GET",
           null,
           {
@@ -44,7 +45,7 @@ const Incomes = () => {
   const fetchData = async () => {
     try {
       const responseData = await sendRequest(
-        `http://localhost:8000/api/statistics/dishes/dish-revenue-prediction/?name=${inputName}&category=${selectedCategory}`,
+        `${URL}/api/statistics/dishes/dish-revenue-prediction/?name=${inputName}&category=${selectedCategory}`,
         "POST",
         null,
         {
@@ -54,7 +55,7 @@ const Incomes = () => {
       );
 
       const responseData2 = await sendRequest(
-        `http://localhost:8000/api/statistics/dishes/dishes-count`,
+        `${URL}/api/statistics/dishes/dishes-count`,
         "POST",
         null,
         {
@@ -116,7 +117,7 @@ const Incomes = () => {
     ];
 
     const months = [];
-    const currentMonthIndex = new Date().getMonth(); // Get current month (0 - 11)
+    const currentMonthIndex = new Date().getMonth(); 
     for (let i = 0; i < numMonths; i++) {
       const monthIndex = (currentMonthIndex + i) % 12;
       months.push(monthNames[monthIndex]);

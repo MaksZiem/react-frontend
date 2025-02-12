@@ -10,13 +10,12 @@ import { useContext } from "react";
 import { AuthContext } from "../../shared/context/auth-context";
 import { darkenColor } from "../../shared/helpers/darkenColor";
 import { useNavigate } from "react-router-dom";
+import { URL } from "../../shared/consts";
 
 const Statistics = () => {
   const { isLoading, error, sendRequest, clearError } = useHttpClient();
   const [percentageDish, setPercentageDish] = useState([]);
-  const [mostPopularDish, setMostPopularDish] = useState(null);
   const [totalWeekProfit, setTotalWeekProfit] = useState();
-
   const [periodTotal, setPeriodTotal] = useState("tydzien");
   const [periodDayOfWeek, setPeriodDayOfWeek] = useState("tydzien");
   const [periodPercentage, setPeriodPercentage] = useState("tydzien");
@@ -31,7 +30,7 @@ const Statistics = () => {
   const fetchStatistics = async () => {
     try {
       const responseDataStats = await sendRequest(
-        "http://localhost:8000/api/statistics/orders/percentage-stats",
+        `${URL}/api/statistics/orders/percentage-stats`,
         "POST",
         JSON.stringify({ periodPercentage }),
         {
@@ -51,7 +50,7 @@ const Statistics = () => {
       console.log(responseDataStats.dishPercentage);
 
       const fetchTotalWeekProfit = await sendRequest(
-        `http://localhost:8000/api/statistics/orders/total-profit`,
+        `${URL}/api/statistics/orders/total-profit`,
         "POST",
         JSON.stringify({ periodPercentage }),
         {
@@ -69,7 +68,7 @@ const Statistics = () => {
   const fetchOrdersTotal = async () => {
     try {
       const responseData = await sendRequest(
-        "http://localhost:8000/api/statistics/orders/last-week-stats",
+        `${URL}/api/statistics/orders/last-week-stats`,
         "POST",
         JSON.stringify({ periodTotal }),
         {
@@ -87,7 +86,7 @@ const Statistics = () => {
   const fetchOrdersByDayOfWeek = async () => {
     try {
       const responseData = await sendRequest(
-        "http://localhost:8000/api/statistics/orders/by-day-of-week",
+        `${URL}/api/statistics/orders/by-day-of-week`,
         "POST",
         JSON.stringify({ period: periodDayOfWeek }),
         {

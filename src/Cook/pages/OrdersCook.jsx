@@ -1,9 +1,10 @@
 import React, { useEffect, useState, useContext } from "react";
 import { useHttpClient } from "../../shared/hooks/http-hook";
 import { AuthContext } from "../../shared/context/auth-context";
-import ErrorModal from "../../shared/components/UIElements/ErrorModal";
 import LoadingSpinner from "../../shared/components/UIElements/LoadingSpinner";
 import { useLocation } from "react-router-dom";
+import { URL } from "../../shared/consts";
+
 const CookStatistics = () => {
   const { isLoading, error, sendRequest, clearError } = useHttpClient();
   const [orders, setOrders] = useState([]);
@@ -20,7 +21,7 @@ const CookStatistics = () => {
     }
     try {
       const responseData = await sendRequest(
-        `http://localhost:8000/api/cook/dishes-period/${cookId}`,
+        `${URL}/api/cook/dishes-period/${cookId}`,
         "POST",
         JSON.stringify({
           startDate,

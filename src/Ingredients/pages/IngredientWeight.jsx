@@ -9,6 +9,7 @@ import { VALIDATOR_REQUIRE } from "../../shared/util/validators";
 import "./ingredientWeight.css";
 import { AuthContext } from "../../shared/context/auth-context";
 import { useContext } from "react";
+import { URL } from "../../shared/consts";
 
 const IngredientWeight = () => {
   const location = useLocation();
@@ -32,7 +33,7 @@ const IngredientWeight = () => {
     console.log(formState.inputs.weight.value);
     try {
       await sendRequest(
-        "http://localhost:8000/api/ingredients/add-to-cart",
+        `${URL}/api/ingredients/add-to-cart`,
         "POST",
         JSON.stringify({
           ingredientTemplateId: id,

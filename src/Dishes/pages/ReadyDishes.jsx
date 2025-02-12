@@ -4,6 +4,8 @@ import ErrorModal from '../../shared/components/UIElements/ErrorModal';
 import LoadingSpinner from '../../shared/components/UIElements/LoadingSpinner';
 import './Tables.css';
 import { io } from 'socket.io-client';
+import { URL } from '../../shared/consts';
+
 const ReadyDishes = () => {
   const { isLoading, error, sendRequest, clearError } = useHttpClient();
   const [readyDishes, setReadyDishes] = useState([]);
@@ -12,8 +14,8 @@ const ReadyDishes = () => {
     // Funkcja do pobrania początkowych danych
     const fetchReadyDishes = async () => {
       try {
-        const responseData = await sendRequest('http://localhost:8000/api/waiter/ready-dishes');
-        setReadyDishes(responseData.readyDishes || []); // Obsługa braku danych
+        const responseData = await sendRequest(`${URL}/api/waiter/ready-dishes`);
+        setReadyDishes(responseData.readyDishes || []); 
       } catch (err) {
         console.log('Error fetching ready dishes:', err);
       }
@@ -21,8 +23,7 @@ const ReadyDishes = () => {
 
     fetchReadyDishes();
 
-    // Połączenie z Socket.IO
-    // const socket = io('http://localhost:8000'); // Backend Socket.IO URL
+    
     const socket = io('http://localhost:8001', { transports: ['websocket'] });
 
 
@@ -53,7 +54,7 @@ const ReadyDishes = () => {
   
   const markDishAsDelivered = async (orderId, dishName) => {
     try {
-      await sendRequest(`http://localhost:8000/api/waiter/${orderId}/dish/${dishName}/delivered`, 'PATCH');
+      await sendRequest(`${URL}/api/waiter/${orderId}/dish/${dishName}/delivered`, 'PATCH');
       // setReadyDishes((prevDishes) => prevDishes.filter(dish => !(dish.orderId === orderId && dish.dishName === dishName)));
       setReadyDishes((prevDishes) =>
         prevDishes.filter((dish) => !(dish.orderId === orderId && dish.dishName === dishName))

@@ -9,6 +9,7 @@ import { PieChart, pieArcLabelClasses } from "@mui/x-charts/PieChart";
 import "./AllCooks.css";
 import Employes from "../pages/Employes";
 import { BarChart } from "@mui/x-charts";
+import { URL } from "../../shared/consts";
 
 const AllCooksStats = () => {
   const { isLoading, error, sendRequest, clearError } = useHttpClient();
@@ -22,7 +23,7 @@ const AllCooksStats = () => {
     const fetchCooks = async () => {
       try {
         const responseData = await sendRequest(
-          `http://localhost:8000/api/statistics/cooks`,
+          `${URL}/api/statistics/cooks`,
           "GET",
           null,
           { Authorization: "Bearer " + auth.token }
@@ -38,7 +39,7 @@ const AllCooksStats = () => {
     const fetchCookStats = async () => {
       try {
         const responseData = await sendRequest(
-          `http://localhost:8000/api/statistics/all-cooks-stats`,
+          `${URL}/api/statistics/all-cooks-stats`,
           "GET",
           null,
           { Authorization: "Bearer " + auth.token }
@@ -231,7 +232,7 @@ const AllCooksStats = () => {
                   <div className="cook-image">
                     <img
                       className="image"
-                      src={`http://localhost:8000/${cook.image}`}
+                      src={`${URL}/${cook.image}`}
                       alt={cook.name}
                     />
                   </div>

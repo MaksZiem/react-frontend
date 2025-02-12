@@ -1,15 +1,14 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
 import { useHttpClient } from "../../shared/hooks/http-hook";
 import LoadingSpinner from "../../shared/components/UIElements/LoadingSpinner";
-import ErrorModal from "../../shared/components/UIElements/ErrorModal";
 import Button from "../../shared/components/FormElements/Button";
 import "./IngredientDetails.css";
 import { useLocation } from "react-router-dom";
 import { useContext } from "react";
 import Modal from "../../shared/components/UIElements/Modal";
-import { formatDate } from "../../shared/util/formatDate";
 import { AuthContext } from "../../shared/context/auth-context";
+import { URL } from "../../shared/consts";
+
 const IngredientDetails = (props) => {
   const { isLoading, error, sendRequest, clearError } = useHttpClient();
   const [ingredients, setIngredients] = useState([]);
@@ -37,7 +36,7 @@ const IngredientDetails = (props) => {
     const fetchIngredients = async () => {
       try {
         const responseData = await sendRequest(
-          `http://localhost:8000/api/magazine/${name}`
+          `${URL}/api/magazine/${name}`
         );
         setIngredients(responseData.ingredients);
         if (responseData.predictedExpirationDate) {
@@ -73,7 +72,7 @@ const IngredientDetails = (props) => {
     try {
       console.log(formData);
       await sendRequest(
-        "http://localhost:8000/api/magazine/add-ingredient",
+        `${URL}/api/magazine/add-ingredient`,
         "POST",
         JSON.stringify({
           name: formData.name,
@@ -86,7 +85,7 @@ const IngredientDetails = (props) => {
       );
 
       const responseData = await sendRequest(
-        `http://localhost:8000/api/magazine/${name}`
+        `${URL}/api/magazine/${name}`
       );
       setIngredients(responseData.ingredients);
       setShowConfirmModal(true);
@@ -99,7 +98,7 @@ const IngredientDetails = (props) => {
     
     try {
       await sendRequest(
-        "http://localhost:8000/api/magazine/delete-ingredient",
+        `${URL}/api/magazine/delete-ingredient`,
         "POST",
         JSON.stringify({
           ingredientId: id,

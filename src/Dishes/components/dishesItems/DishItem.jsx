@@ -7,6 +7,7 @@ import './DishItem.css';
 import Modal from '../../../shared/components/UIElements/Modal';
 import Button from '../../../shared/components/FormElements/Button';
 import { useState } from 'react';
+import { URL } from '../../../shared/consts';
 
 const DishItem = (props) => {
   const navigate = useNavigate();
@@ -17,7 +18,7 @@ const DishItem = (props) => {
     console.log(props.tableId)
     try {
       await sendRequest(
-        'http://localhost:8000/api/waiter/add-to-table',
+        `${URL}/api/waiter/add-to-table`,
         'POST',
         JSON.stringify({
           dishId: props.id,
@@ -61,7 +62,7 @@ const DishItem = (props) => {
           <div className='dish-item-name'>{props.name}</div>
           <div className='dish-item-price'>{props.price} $</div>
           <div className='dish-item-category'>{props.category}</div>
-          <img src={`http://localhost:8000/${props.image}`} className='ingredient-image'  alt={props.name} />
+          <img src={`${URL}/${props.image}`} className='ingredient-image'  alt={props.name} />
         </div>
         <div className="ingredient-item__actions">
           <form onSubmit={ingredientSubmitHandler}>

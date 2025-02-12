@@ -5,6 +5,7 @@ import Navbar from "../componens/Navbar";
 import "../componens/List.css";
 import Modal from "../../shared/components/UIElements/Modal";
 import Button from "../../shared/components/FormElements/Button";
+import { URL } from "../../shared/consts";
 
 const TablesConfig = () => {
   const { isLoading, error, sendRequest, clearError } = useHttpClient();
@@ -20,7 +21,7 @@ const TablesConfig = () => {
     const fetchTables = async () => {
       try {
         const responseData = await sendRequest(
-          "http://localhost:8000/api/config/tables",
+          `${URL}/api/config/tables`,
           "GET",
           null,
           {
@@ -38,7 +39,7 @@ const TablesConfig = () => {
   const addTableHandler = async () => {
     try {
       const responseData = await sendRequest(
-        "http://localhost:8000/api/config/tables",
+        `${URL}/api/config/tables`,
         "POST",
         null,
         {
@@ -56,7 +57,7 @@ const TablesConfig = () => {
     console.log(id);
     try {
       await sendRequest(
-        `http://localhost:8000/api/config/tables/${id}`,
+        `${URL}/api/config/tables/${id}`,
         "DELETE",
         null,
         {
@@ -87,7 +88,7 @@ const TablesConfig = () => {
   const saveEditHandler = async () => {
     try {
       const responseData = await sendRequest(
-        `http://localhost:8000/api/config/tables/${editingTable._id}`,
+        `${URL}/api/config/tables/${editingTable._id}`,
         "PUT",
         JSON.stringify({ newNumber }),
         {
