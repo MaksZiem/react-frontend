@@ -19,7 +19,7 @@ const AllWaiters = () => {
     const fetchWaiters = async () => {
       try {
         const responseData = await sendRequest(
-          `${URL}/api/statistics/waiters`,
+          `http://localhost:8000/api/statistics/waiters`,
           "GET",
           null,
           { Authorization: "Bearer " + auth.token }
@@ -73,7 +73,7 @@ const AllWaiters = () => {
                   <div className="cook-image">
                     <img
                       className="image"
-                      src={`${URL}/${waiter.image}`}
+                      src={`http://localhost:8000/${waiter.image}`}
                       alt={waiter.name}
                     />
                   </div>

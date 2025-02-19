@@ -10,6 +10,14 @@ const Navbar = () => {
         <hr />
         <li className="navbar-item">
         <NavLink 
+            to="/statistics/summary" 
+            className={({ isActive }) => isActive && window.location.pathname === '/statistics/summary' ? 'active' : ''}
+          >
+            Podsumowanie
+          </NavLink>
+        </li>
+        <li className="navbar-item">
+        <NavLink 
             to="/statistics" 
             className={({ isActive }) => isActive && window.location.pathname === '/statistics' ? 'active' : ''}
           >

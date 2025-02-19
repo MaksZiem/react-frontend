@@ -30,7 +30,7 @@ const Statistics = () => {
   const fetchStatistics = async () => {
     try {
       const responseDataStats = await sendRequest(
-        `${URL}/api/statistics/orders/percentage-stats`,
+        `http://localhost:8000/api/statistics/orders/percentage-stats`,
         "POST",
         JSON.stringify({ periodPercentage }),
         {
@@ -50,7 +50,7 @@ const Statistics = () => {
       console.log(responseDataStats.dishPercentage);
 
       const fetchTotalWeekProfit = await sendRequest(
-        `${URL}/api/statistics/orders/total-profit`,
+        `http://localhost:8000/api/statistics/orders/total-profit`,
         "POST",
         JSON.stringify({ periodPercentage }),
         {
@@ -68,7 +68,7 @@ const Statistics = () => {
   const fetchOrdersTotal = async () => {
     try {
       const responseData = await sendRequest(
-        `${URL}/api/statistics/orders/last-week-stats`,
+        `http://localhost:8000/api/statistics/orders/last-week-stats`,
         "POST",
         JSON.stringify({ periodTotal }),
         {
@@ -86,7 +86,7 @@ const Statistics = () => {
   const fetchOrdersByDayOfWeek = async () => {
     try {
       const responseData = await sendRequest(
-        `${URL}/api/statistics/orders/by-day-of-week`,
+        `http://localhost:8000/api/statistics/orders/by-day-of-week`,
         "POST",
         JSON.stringify({ period: periodDayOfWeek }),
         {

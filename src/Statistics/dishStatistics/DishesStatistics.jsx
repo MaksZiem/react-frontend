@@ -19,6 +19,8 @@ const DishesStatistics = () => {
   const auth = useContext(AuthContext);
   const navigate = useNavigate();
 
+  
+
   useEffect(() => {
     const fetchDishes = async () => {
       try {

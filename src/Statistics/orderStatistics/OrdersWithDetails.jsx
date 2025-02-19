@@ -18,7 +18,7 @@ const OrdersWithDetails = () => {
   const fetchOrders = async () => {
     try {
       const responseData = await sendRequest(
-        `${URL}/api/statistics/orders/orders-with-details`,
+        `http://localhost:8000/api/statistics/orders/orders-with-details`,
         "POST",
         JSON.stringify({
           startDate,

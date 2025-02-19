@@ -39,6 +39,8 @@ import TablesConfig from "./Config/pages/TablesConfig";
 import IngredientCategoryConfig from "./Config/pages/IngredientCategoryConfig";
 import DishCategoryConfig from "./Config/pages/DishCategoryConfig";
 import UsersConfig from "./Config/pages/UsersConfig";
+import DishHistory from "./Statistics/dishStatistics/DishHistory";
+import Summary from "./Statistics/summary/Summary";
 let logoutTimer;
 
 const App = () => {
@@ -128,6 +130,7 @@ const App = () => {
           element={<IngredientStatistics />}
         />
         <Route path="/statistics/dishes/dish" element={<Dish />} />
+        <Route path="/statistics/dishes/history" element={<DishHistory />} />
         <Route
           path="/statistics/ingredients/ingredient"
           element={<IngredientStats />}
@@ -137,6 +140,7 @@ const App = () => {
         <Route path="/dish/stats" element={<DishStatistics />} />
         <Route path="/update-user" element={<UpdateUser />} />
         <Route path="/statistics/employes" element={<AllCooksStats />} />
+        <Route path="/statistics/summary" element={<Summary />} />
         <Route path="/statistics/employes/waiters" element={<AllWaiters />} />
         <Route
           path="/statistics/orders/details"

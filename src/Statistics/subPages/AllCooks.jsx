@@ -23,7 +23,7 @@ const AllCooksStats = () => {
     const fetchCooks = async () => {
       try {
         const responseData = await sendRequest(
-          `${URL}/api/statistics/cooks`,
+          `http://localhost:8000/api/statistics/cooks`,
           "GET",
           null,
           { Authorization: "Bearer " + auth.token }
@@ -39,7 +39,7 @@ const AllCooksStats = () => {
     const fetchCookStats = async () => {
       try {
         const responseData = await sendRequest(
-          `${URL}/api/statistics/all-cooks-stats`,
+          `http://localhost:8000/api/statistics/all-cooks-stats`,
           "GET",
           null,
           { Authorization: "Bearer " + auth.token }
@@ -232,7 +232,7 @@ const AllCooksStats = () => {
                   <div className="cook-image">
                     <img
                       className="image"
-                      src={`${URL}/${cook.image}`}
+                      src={`http://localhost:8000/${cook.image}`}
                       alt={cook.name}
                     />
                   </div>

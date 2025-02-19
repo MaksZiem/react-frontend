@@ -20,7 +20,7 @@ const EmpWaiterStats = () => {
 
       try {
         const responseData = await sendRequest(
-          `${URL}/api/waiter/${waiterId ? waiterId : auth.userId}`,
+          `http://localhost:8000/api/waiter/${waiterId ? waiterId : auth.userId}`,
           "GET",
           null,
           { Authorization: "Bearer " + auth.token }
@@ -36,7 +36,7 @@ const EmpWaiterStats = () => {
     const fetchTipStats = async () => {
       try {
         const responseData = await sendRequest(
-          `${URL}/api/waiter/${auth.userId}/waiter-tip-stats`,
+          `http://localhost:8000/api/waiter/${auth.userId}/waiter-tip-stats`,
           "POST",
           JSON.stringify({ periodTotal }),
           {

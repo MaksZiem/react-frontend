@@ -13,7 +13,7 @@ const Users = () => {
     const fetchUsers = async () => {
       try {
         const responseData = await sendRequest(
-          `${URL}/api/auth`
+          `http://localhost:8000/api/auth`
         );
 
         setLoadedUsers(responseData.users);

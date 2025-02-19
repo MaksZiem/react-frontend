@@ -77,7 +77,7 @@ const Auth = () => {
     if (isLoginMode) {
       try {
         const responseData = await sendRequest(
-          `${URL}/api/auth/login`,
+          `http://localhost:8000/api/auth/login`,
           "POST",
           JSON.stringify({
             email: formState.inputs.email.value,
@@ -106,7 +106,7 @@ const Auth = () => {
         formData.append("role", formState.inputs.role.value);
         formData.append("image", formState.inputs.image.value);
         const responseData = await sendRequest(
-          `${URL}/api/auth/signup`,
+          `http://localhost:8000/api/auth/signup`,
           "POST",
           formData
         );

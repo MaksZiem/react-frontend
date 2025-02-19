@@ -8,6 +8,7 @@ import { BarChart } from "@mui/x-charts/BarChart";
 import { PieChart, pieArcLabelClasses } from "@mui/x-charts/PieChart";
 import { darkenColor } from "../../shared/helpers/darkenColor";
 import { LineChart } from "@mui/x-charts/LineChart";
+import { useNavigate } from "react-router-dom";
 import Navbar from "../components/Navbar";
 import "./Dish.css";
 
@@ -26,6 +27,13 @@ const Dish = () => {
   const initialColor = "rgb(117, 148, 215)";
   const steps = 10;
   const result = darkenColor(initialColor, steps);
+  const navigate = useNavigate();
+
+  const navigateToOrdersHistory = () => {
+    navigate("/statistics/dishes/history", {
+      state: { dishId: dishId },
+    });
+  };
 
   const fetchDishData = async () => {
     try {
@@ -38,7 +46,8 @@ const Dish = () => {
           "Content-Type": "application/json",
         }
       );
-  
+
+      console.log(responseData)
       setDishData(responseData); // Ustawiamy pełne dane, jeśli nie ma błędu
     } catch (err) {
       console.error("Błąd podczas pobierania danych o daniu:", err);
@@ -476,6 +485,14 @@ const Dish = () => {
               )}
             </div>
           </div>
+          <div className="text2">
+        <button
+          onClick={navigateToOrdersHistory}
+          className="cook-orders-button"
+        >
+          Przejdź do historii zamówień
+        </button>
+      </div>
         </div>
       </div>
     </div>

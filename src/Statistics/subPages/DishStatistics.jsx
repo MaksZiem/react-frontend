@@ -20,7 +20,7 @@ const DishStatistics = () => {
   const fetchDishStats2 = async () => {
     try {
       const responseData = await sendRequest(
-        `${URL}/api/cook/dishes/${cookId}`,
+        `http://localhost:8000/api/cook/dishes/${cookId}`,
         "POST",
         JSON.stringify({
           dishId,
@@ -44,7 +44,7 @@ const DishStatistics = () => {
     }
     try {
       const userData = await sendRequest(
-        `${URL}/api/users/${cookId}`,
+        `http://localhost:8000/api/users/${cookId}`,
         "POST",
         null,
         {

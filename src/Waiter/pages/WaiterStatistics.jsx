@@ -14,7 +14,7 @@ const WaiterStatistics = () => {
         const fetchUserOrders = async () => {
             try {
                 const responseData = await sendRequest(
-                    `${URL}/api/waiter/${auth.userId}`, 
+                    `http://localhost:8000/api/waiter/${auth.userId}`, 
                     'GET',
                     null,
                     { Authorization: 'Bearer ' + auth.token }

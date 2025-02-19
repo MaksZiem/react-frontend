@@ -25,7 +25,7 @@ const Incomes = () => {
     const fetchCategories = async () => {
       try {
         const response = await sendRequest(
-          `${URL}/api/config/dish-categories`,
+          `http://localhost:8000/api/config/dish-categories`,
           "GET",
           null,
           {
@@ -45,7 +45,7 @@ const Incomes = () => {
   const fetchData = async () => {
     try {
       const responseData = await sendRequest(
-        `${URL}/api/statistics/dishes/dish-revenue-prediction/?name=${inputName}&category=${selectedCategory}`,
+        `http://localhost:8000/api/statistics/dishes/dish-revenue-prediction/?name=${inputName}&category=${selectedCategory}`,
         "POST",
         null,
         {
@@ -55,7 +55,7 @@ const Incomes = () => {
       );
 
       const responseData2 = await sendRequest(
-        `${URL}/api/statistics/dishes/dishes-count`,
+        `http://localhost:8000/api/statistics/dishes/dishes-count`,
         "POST",
         null,
         {

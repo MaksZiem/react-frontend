@@ -32,7 +32,7 @@ const IngredientStats = () => {
     const fetchIngredientUsage = async () => {
       try {
         const responseData = await sendRequest(
-          `${URL}/api/statistics/ingredients/usage/${ingredientName}`,
+          `http://localhost:8000/api/statistics/ingredients/usage/${ingredientName}`,
           "POST",
           JSON.stringify({ period: periodUsage }),
           {
@@ -54,7 +54,7 @@ const IngredientStats = () => {
     const fetchIngredientWaste = async () => {
       try {
         const responseDataWaste = await sendRequest(
-          `${URL}/api/statistics/ingredients/waste/${ingredientName}`,
+          `http://localhost:8000/api/statistics/ingredients/waste/${ingredientName}`,
           "POST",
           JSON.stringify({ period: periodWaste }),
           {
@@ -75,7 +75,7 @@ const IngredientStats = () => {
     const fetchIngredients = async () => {
       try {
         const responseData = await sendRequest(
-          `${URL}/api/magazine/${ingredientName}`
+          `http://localhost:8000/api/magazine/${ingredientName}`
         );
         setIngredients(responseData.ingredients);
       } catch (err) {}
@@ -89,7 +89,7 @@ const IngredientStats = () => {
 
       try {
         const responseStats = await sendRequest(
-          `${URL}/api/statistics/ingredients/waste-propability/${ingredientName}`,
+          `http://localhost:8000/api/statistics/ingredients/waste-propability/${ingredientName}`,
           "GET",
           null,
           { Authorization: "Bearer " + auth.token }
@@ -98,7 +98,7 @@ const IngredientStats = () => {
         setIngredientStats(responseStats);
 
         const responseUsage = await sendRequest(
-          `${URL}/api/statistics/ingredients/ingredient-in-dishes/${ingredientName}`,
+          `http://localhost:8000/api/statistics/ingredients/ingredient-in-dishes/${ingredientName}`,
           "GET",
           null,
           { Authorization: "Bearer " + auth.token }

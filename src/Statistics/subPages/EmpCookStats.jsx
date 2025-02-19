@@ -26,7 +26,7 @@ const EmpCookStats = () => {
   const fetchDishes = async () => {
     try {
       const responseDishes = await sendRequest(
-        `${URL}/api/dishes/`,
+        `http://localhost:8000/api/dishes/`,
         "GET",
         null,
         { Authorization: "Bearer " + auth.token }
@@ -43,7 +43,7 @@ const EmpCookStats = () => {
     }
     try {
       const cookStats = await sendRequest(
-        `${URL}/api/cook/dishes-count/${cookId}`,
+        `http://localhost:8000/api/cook/dishes-count/${cookId}`,
         "POST",
         JSON.stringify({ period: periodDishCount }),
         {
@@ -65,7 +65,7 @@ const EmpCookStats = () => {
     }
     try {
       const cookStats = await sendRequest(
-        `${URL}/api/cook/preparation-time/${cookId}`,
+        `http://localhost:8000/api/cook/preparation-time/${cookId}`,
         "POST",
         JSON.stringify({ period: periodPreparationTime }),
         {
@@ -87,7 +87,7 @@ const EmpCookStats = () => {
     }
     try {
       const userData = await sendRequest(
-        `${URL}/api/users/${cookId}`,
+        `http://localhost:8000/api/users/${cookId}`,
         "POST",
         JSON.stringify({ period: periodPreparationTime }),
         {
