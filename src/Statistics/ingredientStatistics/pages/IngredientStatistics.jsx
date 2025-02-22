@@ -54,6 +54,7 @@ const IngredientStatistics = () => {
           { Authorization: "Bearer " + auth.token }
         );
         setTopIngredients(responseniedobor);
+        console.log(responseniedobor)
 
         const responseData = await sendRequest(
           `http://localhost:8000/api/ingredients`,

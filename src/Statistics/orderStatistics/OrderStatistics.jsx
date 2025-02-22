@@ -23,6 +23,9 @@ const Statistics = () => {
   const [ordersByDayOfWeek, setOrdersByDayOfWeek] = useState([]);
   const auth = useContext(AuthContext);
   const initialColor = "rgb(117, 148, 215)";
+  const [incomeColor, setIncomeColor] = useState("rgb(117, 148, 215)");
+
+
   const steps = 10;
   const result = darkenColor(initialColor, steps);
   const navigate = useNavigate();
@@ -58,6 +61,10 @@ const Statistics = () => {
           "Content-Type": "application/json",
         }
       );
+
+      if(fetchTotalWeekProfit.totalProfit) {
+        setIncomeColor("rgb(235, 64, 52)")
+      }
 
       setTotalWeekProfit(fetchTotalWeekProfit.totalProfit);
     } catch (err) {
@@ -210,14 +217,14 @@ const Statistics = () => {
                 <div className="ranking2">
                   <div className="gauge-item">
                     <div className="gauge-item2">
-                      {totalWeekProfit && (
+                      {totalWeekProfit && incomeColor && (
                       <Gauge
                         sx={(theme) => ({
                           [`& .${gaugeClasses.valueText}`]: {
                             fontSize: 40,
                           },
                           [`& .${gaugeClasses.valueArc}`]: {
-                            fill: "rgb(117, 148, 215)",
+                            fill: incomeColor,
                           },
                           [`& .${gaugeClasses.referenceArc}`]: {
                             fill: theme.palette.text.disabled,
@@ -253,7 +260,6 @@ const Statistics = () => {
                         endAngle={360}
                         innerRadius="80%"
                         outerRadius="100%"
-                        // ...
                       />
                     )}
                     </div>

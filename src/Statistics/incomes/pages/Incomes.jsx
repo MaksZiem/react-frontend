@@ -20,6 +20,8 @@ const Incomes = () => {
   const [selectedCategory, setSelectedCategory] = useState("wszystkie");
   const [inputName, setInputName] = useState("");
   const [categories, setCategories] = useState([]);
+  const [years, setYears] = useState(2);
+  const [inputYears, setInputYears] = useState(2);
 
   useEffect(() => {
     const fetchCategories = async () => {
@@ -45,7 +47,7 @@ const Incomes = () => {
   const fetchData = async () => {
     try {
       const responseData = await sendRequest(
-        `http://localhost:8000/api/statistics/dishes/dish-revenue-prediction/?name=${inputName}&category=${selectedCategory}`,
+        `http://localhost:8000/api/statistics/dishes/dish-revenue-prediction/?years=${years}`,
         "POST",
         null,
         {
@@ -77,7 +79,7 @@ const Incomes = () => {
 
   useEffect(() => {
     fetchData();
-  }, [sendRequest, inputName, selectedCategory]);
+  }, [sendRequest, inputName, selectedCategory, years]);
 
   const categoryChangeHandler = (event) => {
     setSelectedCategory(event.target.value);
@@ -85,6 +87,16 @@ const Incomes = () => {
 
   const nameChangeHandler = (event) => {
     setInputName(event.target.value);
+  };
+
+  const handleYearsChange = (event) => {
+    setInputYears(event.target.value); // Aktualizuje wartość input, ale nie wysyła zapytania
+  };
+
+  const handleKeyDown = (event) => {
+    if (event.key === "Enter") {
+      setYears(inputYears); // Aktualizuje stan lat i uruchamia zapytanie
+    }
   };
 
   if (isLoading) {
@@ -117,7 +129,7 @@ const Incomes = () => {
     ];
 
     const months = [];
-    const currentMonthIndex = new Date().getMonth(); 
+    const currentMonthIndex = new Date().getMonth();
     for (let i = 0; i < numMonths; i++) {
       const monthIndex = (currentMonthIndex + i) % 12;
       months.push(monthNames[monthIndex]);
@@ -131,7 +143,10 @@ const Incomes = () => {
       <div className="content">
         {totalProfit && (
           <>
-            <h1 className="text5">Prognozowany przychód całkowity</h1>
+            <h1 className="text5">
+              Prognozowany przychód całkowity na {years}
+              {years == 1 ? " rok" : " lata"}
+            </h1>
             <div className="ranking3">
               <div className="gauge-item">
                 <div className="gauge-item2">
@@ -158,6 +173,26 @@ const Incomes = () => {
               </div>
             </div>
           </>
+        )}
+
+        {totalProfit && (
+          <div className="year-input">
+            <div className="year-input-content">
+
+            <label htmlFor="years">Liczba lat:</label>
+            <div className="year-input-input">
+
+            <input
+              id="years"
+              type="number"
+              min="1"
+              value={inputYears}
+              onChange={handleYearsChange}
+              onKeyDown={handleKeyDown} 
+              />
+              </div>
+              </div>
+          </div>
         )}
 
         {dishesRanking && !isLoading && (
@@ -222,9 +257,7 @@ const Incomes = () => {
           </div>
         </form>
       </div> */}
-      {dishes && (
-        <h1 className="text5">Statystyki poszczególnych dań</h1>
-      )}
+        {dishes && <h1 className="text5">Statystyki poszczególnych dań</h1>}
         {dishes &&
           !isLoading &&
           dishes.map((dish, index) => (
