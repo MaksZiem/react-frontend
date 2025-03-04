@@ -25,7 +25,7 @@ const IngredientWasteList = (props) => {
         <div className="ingredients-list-desc">
           <span className="item-name-ingredient">Nazwa</span>
           <span className="item-category">Średnie dzienne zużycie</span>
-          <span className="item-category">Szansa na brak zapasów</span>
+          <span className="item-category">Całkowita ilość w magazynie</span>
           <span className="item-category">Dni do wyczerpania zapasów</span>
         </div>
         </div>
@@ -35,7 +35,7 @@ const IngredientWasteList = (props) => {
                 key={ingredient.id}
                 daysUntilOutOfStock={ingredient.daysUntilOutOfStock}
                 averageDailyUsage={ingredient.averageDailyUsage}
-                shortageProbability={ingredient.shortageProbability}
+                shortageProbability={ingredient.totalWeight}
                 ingredientName={ingredient.ingredientName}
                 isLast={index === props.ingredientTemplates.length - 1} 
             />

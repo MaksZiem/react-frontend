@@ -166,7 +166,7 @@ const IngredientDetails = (props) => {
           <h1 className="text">Ilość wybranego składnika</h1>
           <div className="place-list-form-placeholder-ingredient">
             <div className="ingredients-list-desc">
-              <span className="item-name-ingredient">nazwa</span>
+              <span className="item-category">nazwa</span>
               <span className="item-category">kategoria</span>
               <span className="item-category">ilość</span>
               <span className="item-category">cena/ilość</span>

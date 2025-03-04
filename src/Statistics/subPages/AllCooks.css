@@ -1,366 +1,338 @@
 .grid {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
 }
 
 .last-ingredient {
-    border-bottom-right-radius: 15px;
-    border-bottom-left-radius: 15px;
-    display: flex;
-    flex-direction: row;
-    color: black;
-    justify-content: space-between;
-    font-weight: 600;
-    border-bottom: 3px solid rgb(222, 225, 236);
-    background: rgb(255, 255, 255);
-   
-   text-align: center;
-   transition: background-color 0.3s, color 0.3s; 
-   
-   
-  }
+  border-bottom-right-radius: 15px;
+  border-bottom-left-radius: 15px;
+  display: flex;
+  flex-direction: row;
+  color: black;
+  justify-content: space-between;
+  font-weight: 600;
+  border-bottom: 3px solid rgb(222, 225, 236);
+  text-align: center;
+  transition: background-color 0.3s, color 0.3s;
+}
 
 .grid-container {
-    width: 100%;
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); 
-    gap: 20px; 
-    padding: 20px; 
-    flex-wrap: wrap;
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+  gap: 20px;
+  padding: 20px;
+  flex-wrap: wrap;
 }
 
 .place-list-form-placeholder-ingredient {
-    margin-top: 100px;
-    font-weight: 600;
-    width: 800px;
-    max-width: 60rem;
-    margin: auto ;
+  margin-top: 100px;
+  font-weight: 600;
+  width: 800px;
+  max-width: 60rem;
+  margin: auto;
 }
 
 .cook-list-desc {
-    display: flex;
-    flex-direction: row;
-    color: white;
-    justify-content: space-between;
-    padding: 0px;
-    border-top-left-radius: 10px;
-    border-top-right-radius: 10px;
-    background-color: rgb(117, 148, 215);
-   text-align: center;
-   transition: background-color 0.3s, color 0.3s; 
-   
+  display: flex;
+  flex-direction: row;
+  color: white;
+  justify-content: space-between;
+  padding: 0px;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  background-color: rgb(117, 148, 215);
+  text-align: center;
+  transition: background-color 0.3s, color 0.3s;
 }
 
 .cook-list-item {
-    display: flex;
-    flex-direction: row;
-    color: black;
-    justify-content: space-between;
-    font-weight: 600;
-    border-bottom: 3px solid rgb(222, 225, 236);
-    background: rgb(255, 255, 255);
-   
-   text-align: center;
-   transition: background-color 0.3s, color 0.3s; 
-   
-   
+  display: flex;
+  flex-direction: row;
+  color: black;
+  justify-content: space-between;
+  font-weight: 600;
+  border-bottom: 3px solid rgb(222, 225, 236);
+  background: rgb(255, 255, 255);
+
+  text-align: center;
+  transition: background-color 0.3s, color 0.3s;
 }
 
 .list-form-cooks {
-    list-style: none;
-    margin:  auto;
-    padding: 0;
-    width: 800px;
-    max-width: 60rem;
-    color: white;
-    text-align: center;
-    gap: 10px;
-    padding-bottom: 40px;
-  }
-
+  list-style: none;
+  margin: auto;
+  padding: 0;
+  width: 800px;
+  max-width: 60rem;
+  color: white;
+  text-align: center;
+  gap: 10px;
+  padding-bottom: 40px;
+}
 
 .cook-list-form {
-    list-style: none;
-    margin:  auto;
-    padding: 0;
-    width: 800px;
-    color: white;
-    text-align: center;
-    gap: 10px;
-    font-size: 20px;
-    
-  }
+  list-style: none;
+  margin: auto;
+  padding: 0;
+  width: 800px;
+  color: white;
+  text-align: center;
+  gap: 10px;
+  font-size: 20px;
+}
 
 .cook-item {
-    list-style: none;
-    margin-left: 0;
-    padding: 0;
-    width: 100%;
+  list-style: none;
+  margin-left: 0;
+  padding: 0;
+  width: 100%;
 }
-
 
 .cook-list-form-placeholder {
-    margin-top: 100px;
-    font-weight: 600;
-    font-size: 20px;
-    width: 800px;
-    width: 70rem;
-    margin: auto ;
+  margin-top: 100px;
+  font-weight: 600;
+  font-size: 20px;
+  width: 800px;
+  width: 70rem;
+  margin: auto;
 }
 
-
-
-  
-
-.cook-name, .cook-surname, .cook-pesel, .cook-action{
-    width: 22.5%;
-    height: 50px;
-    padding: 0;
-    text-align: center;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
+.cook-name,
+.cook-surname,
+.cook-pesel,
+.cook-action {
+  width: 22.5%;
+  height: 50px;
+  padding: 0;
+  text-align: center;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
 }
 
 .cook-image {
-    width: 10%;
-    height: 50px;
-    text-align: center;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
+  width: 10%;
+  height: 50px;
+  text-align: center;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
 }
 
 .image {
-    height: 100%;
-    text-align: center;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
+  height: 100%;
+  text-align: center;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
 }
 
 .item-name-ingredient {
-    text-align: start;
+  text-align: start;
 }
 
-
 .cook-table-placeholder {
-    display: flex;
-    flex-direction: row;
-    color: white;
-    justify-content: center;
-    align-items: center;
-    height: 50px;
-    border-top-left-radius: 10px;
-    border-top-right-radius: 10px;
-    background-color: rgb(117, 148, 215);
-   text-align: center;   
+  display: flex;
+  flex-direction: row;
+  color: white;
+  justify-content: center;
+  align-items: center;
+  height: 50px;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  background-color: rgb(117, 148, 215);
+  text-align: center;
 }
 
 .cook-table {
-    display: flex;
-    flex-direction: row;
-    color: white;
-    justify-content: center;
-    align-items: center;
-    height: 50px;
-    border-top-left-radius: 10px;
-    border-top-right-radius: 10px;
-    border-bottom: 1px solid rgb(7, 7, 7);
-   text-align: center;   
+  display: flex;
+  flex-direction: row;
+  color: white;
+  justify-content: center;
+  align-items: center;
+  height: 50px;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  border-bottom: 1px solid rgb(7, 7, 7);
+  text-align: center;
 }
 
 .cook-details-button {
-    background-color: rgb(9, 49, 118);
-    border: none;
-    padding:8px;
-    font-size: 18px;
-    font-weight: 600;
-    border-radius: 5px;
-    color: white;
-    outline: none;
-    cursor: pointer;
-    transition: background-color 0.3s, color 0.3s;
-    border: 1px solid #676363;
+  background-color: rgb(9, 49, 118);
+  border: none;
+  padding: 8px;
+  font-size: 18px;
+  font-weight: 600;
+  border-radius: 5px;
+  color: white;
+  outline: none;
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s;
+  border: 1px solid #676363;
 }
 
 .cook-item-row {
-    display: flex;
-    flex-direction: row;
-    color: black;
-    justify-content: space-between;
-    font-weight: 600;
-    height: 45px;
-    border-bottom: 3px solid white;
-    background: rgb(222, 225, 236);
-    padding: 10px;
-   
-   text-align: center;
-   transition: background-color 0.3s, color 0.3s; 
-   
-   
+  display: flex;
+  flex-direction: row;
+  color: black;
+  justify-content: space-between;
+  font-weight: 600;
+  height: 45px;
+  border-bottom: 3px solid white;
+  background: rgb(222, 225, 236);
+  padding: 10px;
+
+  text-align: center;
+  transition: background-color 0.3s, color 0.3s;
 }
 
-
 .cook-details-button:hover {
-    
-    background-color: white;
-    color: black;
-    cursor: pointer;
+  background-color: white;
+  color: black;
+  cursor: pointer;
 }
 
 .item-name {
-    width: 50px;
+  width: 50px;
 }
 
 .container-statistics {
-    display: flex;
-    flex-direction: row;
-    background-color: rgb(222, 225, 236);
-    margin-top: -25px;
-    justify-content: center;
-  }
-  
-  .content {
-    width: 90%;
-    height: 100%;
-   
-  }
-  
-  .grid-container2 {
-      width: 90%;
-      color: white;
-      display: grid;
-      margin-top: 0;
-        grid-template-columns: repeat(2, 1fr); 
-        grid-template-rows: repeat(2, 1fr);
-    }
-  
-  .ranking {
-      
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-  }
-  
-  
-  .pie-chart {
-    
-    background-color: rgb(0, 5, 13);
-    width: 600px;
-      height: 300px;
-    border: 1px solid #676363;
-    border-radius: 15px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    box-shadow: 0 5px 16px rgb(239, 236, 236, 0.05);
-  }
-  
-  .pie-chart ul {
-      
-      margin: 0;
-      padding: 0;
-      text-align: center;
-      
-  }
-  
-  .pie-chart li {
-      
-      display: flex;
-      flex-direction: row;
-      justify-content: space-between;
-      padding: 5px;
-      border-bottom: 1px solid white;
-  }
-  
-  .pie-chart li:last-child {
-      
-      border-bottom: none;
-  }
-  
-  .pie-chart li:hover {
-      background-color: rgb(1, 13, 33);
-      cursor: pointer;
-  }
-  
-  .pie-chart li > span {
-      
-      width: 30%;
-  }
-  
-  .pie-chart li > span:first-child {
-      text-align: left; 
-  }
-  
-  .pie-chart li > span:last-child {
-      text-align: right;
-      
-  }
+  display: flex;
+  flex-direction: row;
+  background-color: rgb(222, 225, 236);
+  margin-top: -25px;
+  justify-content: center;
+}
 
-  .dishes-counts {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-  }
+.content {
+  width: 90%;
+  height: 100%;
+}
 
-  .dishes-counts-item {
-    background-color: rgb(117, 148, 215);
-    color: white;
-    border-radius: 10px;
-    height: 200px;
-    width: 200px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-  }
+.grid-container2 {
+  width: 90%;
+  color: white;
+  display: grid;
+  margin-top: 0;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+}
 
-  .count {
-    text-align: center;
-    font-size: 60px;
-    height: 140px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-  }
+.ranking {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
 
-  .date {
-    border-top: 1px solid white;
-    text-align: center;
-    font-size: 24px;
-    height: 50px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-  }
+.pie-chart {
+  background-color: rgb(0, 5, 13);
+  width: 600px;
+  height: 300px;
+  border: 1px solid #676363;
+  border-radius: 15px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  box-shadow: 0 5px 16px rgb(239, 236, 236, 0.05);
+}
+
+.pie-chart ul {
+  margin: 0;
+  padding: 0;
+  text-align: center;
+}
+
+.pie-chart li {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 5px;
+  border-bottom: 1px solid white;
+}
+
+.pie-chart li:last-child {
+  border-bottom: none;
+}
+
+.pie-chart li:hover {
+  background-color: rgb(1, 13, 33);
+  cursor: pointer;
+}
+
+.pie-chart li > span {
+  width: 30%;
+}
+
+.pie-chart li > span:first-child {
+  text-align: left;
+}
+
+.pie-chart li > span:last-child {
+  text-align: right;
+}
+
+.dishes-counts {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+.dishes-counts-item {
+  background-color: rgb(117, 148, 215);
+  color: white;
+  border-radius: 10px;
+  height: 200px;
+  width: 200px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+.count {
+  text-align: center;
+  font-size: 60px;
+  height: 140px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.date {
+  border-top: 1px solid white;
+  text-align: center;
+  font-size: 24px;
+  height: 50px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
 
 .cooks-charts {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
 }
 
 .cook-chart-statistics {
-    background-color: rgb(255, 255, 255);
-    
-    color: black;
-    width: 620px;
-    height: 400px;
-    border-radius: 15px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    box-shadow: 0 5px 16px rgb(239, 236, 236, 0.05);
-  }
+  background-color: rgb(255, 255, 255);
 
-  .text2 {
-    margin: 70px;
-    font-size: 30px;
-  }
+  color: black;
+  width: 620px;
+  height: 400px;
+  border-radius: 15px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  box-shadow: 0 5px 16px rgb(239, 236, 236, 0.05);
+}
 
- 
+.text2 {
+  margin: 70px;
+  font-size: 30px;
+}

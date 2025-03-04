@@ -8,14 +8,14 @@ const Navbar = () => {
       <ul className="navbar-list">
         <h1>Panele statystyk</h1>
         <hr />
-        <li className="navbar-item">
+        {/* <li className="navbar-item">
         <NavLink 
             to="/statistics/summary" 
             className={({ isActive }) => isActive && window.location.pathname === '/statistics/summary' ? 'active' : ''}
           >
             Podsumowanie
           </NavLink>
-        </li>
+        </li> */}
         <li className="navbar-item">
         <NavLink 
             to="/statistics" 

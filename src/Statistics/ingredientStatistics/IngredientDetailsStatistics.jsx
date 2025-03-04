@@ -17,8 +17,8 @@ const IngredientStats = () => {
   const [ingredientStats, setIngredientStats] = useState(null);
   const [pieChartData, setPieChartData] = useState([]);
   const [ingredientUsage, setIngredientUsage] = useState(null);
-  const [periodUsage, setPeriodUsage] = useState("tydzien");
-  const [periodWaste, setPeriodWaste] = useState("tydzien");
+  const [periodUsage, setPeriodUsage] = useState("rok");
+  const [periodWaste, setPeriodWaste] = useState("rok");
   const [ingredientWaste, setIngredientWaste] = useState(null);
   const auth = useContext(AuthContext);
   const [ingredients, setIngredients] = useState([]);
@@ -152,11 +152,9 @@ const IngredientStats = () => {
     }
   };
 
-  {
-    !ingredientStats && !ingredientUsage && (
-      <h1 className="text3">Brak gotowych dań do odebrania</h1>
-    );
-  }
+  const isExpired = (expirationDate) => {
+    return new Date(expirationDate) < new Date();
+  };
 
   return (
     <>
@@ -391,7 +389,7 @@ const IngredientStats = () => {
             </div>
           )}
           {!isLoading && ingredientStats && ingredients.length > 0 && (
-            <div className="ingredient-info">              
+            <div className="ingredient-info">
               <div className="ingredient-info-content-left">
                 <div className="ingredient-info-content-header">
                   <h2 className="text">
@@ -412,10 +410,6 @@ const IngredientStats = () => {
                     {ingredientStats.daysUntilExpiration}
                   </p>
                   <p>
-                    <strong>Prawdopodobieństwo niedoboru: </strong>
-                    {ingredientStats.shortageProbability}%
-                  </p>
-                  <p>
                     <strong>Łączna waga składnika: </strong>
                     {ingredientStats.totalWeightOfIngredient}
                   </p>
@@ -427,25 +421,34 @@ const IngredientStats = () => {
                 </div>
                 <div className="place-list-form-placeholder-ingredient">
                   <div className="ingredients-list-desc">
-                    <span className="item-name-ingredient">Nazwa</span>
+                    <span className="item-category">Nazwa</span>
                     <span className="item-category">Kategoria</span>
                     <span className="item-weight">Ilość</span>
                     <span className="item-action">Data ważności</span>
                   </div>
                 </div>
                 <ul className="place-list-form-ingredient">
-                  {ingredients.map((ingredient) => (
-                    <li key={ingredient.id}>
-                      <div className="cart-item-ingredient">
-                        <span className="item-category">{ingredient.name}</span>
-                        <span className="item-category">
-                          {ingredient.category}
-                        </span>
-                        <span className="item-weight">{ingredient.weight}</span>
-                        <span className="item-category">
-                          {ingredient.expirationDate}
-                        </span>
-                      </div>
+                  {ingredients.map((ingredient, index) => (
+                    <li
+                      key={ingredient.id}
+                      className={`ingredient-item-ingredient ${
+                        index === ingredients.length - 1
+                          ? "last-ingredient"
+                          : ""
+                      } ${
+                        isExpired(ingredient.expirationDate)
+                          ? "expired-ingredient"
+                          : ""
+                      }`}
+                    >
+                      <span className="item-category">{ingredient.name}</span>
+                      <span className="item-category">
+                        {ingredient.category}
+                      </span>
+                      <span className="item-weight">{ingredient.weight}</span>
+                      <span className="item-category">
+                        {ingredient.expirationDate}
+                      </span>
                     </li>
                   ))}
                 </ul>
