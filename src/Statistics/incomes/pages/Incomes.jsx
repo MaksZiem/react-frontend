@@ -99,13 +99,13 @@ const Incomes = () => {
     }
   };
 
-  if (isLoading) {
-    return (
-      <div>
-        <LoadingSpinner asOverlay />
-      </div>
-    );
-  }
+  // if (isLoading) {
+  //   return (
+  //     <div>
+  //       <LoadingSpinner />
+  //     </div>
+  //   );
+  // }
 
   if (error) {
     return <div>Błąd: {error}</div>;
@@ -141,6 +141,13 @@ const Incomes = () => {
     <div className="container-statistics">
       <Navbar />
       <div className="content">
+        { isLoading && (
+
+          <div className="spinner">
+            <LoadingSpinner/>
+          </div>
+          )
+        }
         {totalProfit && (
           <>
             <h1 className="text5">
@@ -178,20 +185,18 @@ const Incomes = () => {
         {totalProfit && (
           <div className="year-input">
             <div className="year-input-content">
-
-            <label htmlFor="years">Liczba lat:</label>
-            <div className="year-input-input">
-
-            <input
-              id="years"
-              type="number"
-              min="1"
-              value={inputYears}
-              onChange={handleYearsChange}
-              onKeyDown={handleKeyDown} 
-              />
+              <label htmlFor="years">Liczba lat:</label>
+              <div className="year-input-input">
+                <input
+                  id="years"
+                  type="number"
+                  min="1"
+                  value={inputYears}
+                  onChange={handleYearsChange}
+                  onKeyDown={handleKeyDown}
+                />
               </div>
-              </div>
+            </div>
           </div>
         )}
 

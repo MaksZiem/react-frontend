@@ -43,6 +43,14 @@ body {
   align-items: center;
 }
 
+.spinner {
+  padding-top: 50px;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .main {
   background-color: red;
 }

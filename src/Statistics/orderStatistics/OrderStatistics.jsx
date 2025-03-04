@@ -25,7 +25,6 @@ const Statistics = () => {
   const initialColor = "rgb(117, 148, 215)";
   const [incomeColor, setIncomeColor] = useState("rgb(117, 148, 215)");
 
-
   const steps = 10;
   const result = darkenColor(initialColor, steps);
   const navigate = useNavigate();
