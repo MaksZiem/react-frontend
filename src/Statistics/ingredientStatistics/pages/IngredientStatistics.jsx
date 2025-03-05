@@ -27,7 +27,7 @@ const IngredientStatistics = () => {
     const fetchCategories = async () => {
       try {
         const response = await sendRequest(
-          `http://localhost:8000/api/config/ingredient-categories`,
+          `${URL}/api/config/ingredient-categories`,
           "GET",
           null,
           {
@@ -48,7 +48,7 @@ const IngredientStatistics = () => {
     const fetchDishes = async () => {
       try {
         const responseniedobor = await sendRequest(
-          `http://localhost:8000/api/statistics/ingredients/deficiency`,
+          `${URL}/api/statistics/ingredients/deficiency`,
           "GET",
           null,
           { Authorization: "Bearer " + auth.token }
@@ -57,7 +57,7 @@ const IngredientStatistics = () => {
         console.log(responseniedobor)
 
         const responseData = await sendRequest(
-          `http://localhost:8000/api/ingredients`,
+          `${URL}/api/ingredients`,
           "GET",
           null,
           {
@@ -77,7 +77,7 @@ const IngredientStatistics = () => {
     const fetchIngredients = async () => {
       try {
         const responseData = await sendRequest(
-          `http://localhost:8000/api/ingredients?name=${inputName}&category=${selectedCategory}`,
+          `${URL}/api/ingredients?name=${inputName}&category=${selectedCategory}`,
           "GET",
           null,
           {
@@ -113,7 +113,7 @@ const IngredientStatistics = () => {
 
     try {
       const responseData = await sendRequest(
-        `http://localhost:8000/api/ingredients?name=${inputName}&category=${selectedCategory}`,
+        `${URL}/api/ingredients?name=${inputName}&category=${selectedCategory}`,
         "GET"
       );
       setLoadedIngredientsTemplates(responseData.ingredientTemplates); // Update with filtered data

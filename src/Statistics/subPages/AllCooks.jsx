@@ -23,7 +23,7 @@ const AllCooksStats = () => {
     const fetchCooks = async () => {
       try {
         const responseData = await sendRequest(
-          `http://localhost:8000/api/statistics/cooks`,
+          `${URL}/api/statistics/cooks`,
           "GET",
           null,
           { Authorization: "Bearer " + auth.token }
@@ -39,7 +39,7 @@ const AllCooksStats = () => {
     const fetchCookStats = async () => {
       try {
         const responseData = await sendRequest(
-          `http://localhost:8000/api/statistics/all-cooks-stats`,
+          `${URL}/api/statistics/all-cooks-stats`,
           "GET",
           null,
           { Authorization: "Bearer " + auth.token }
@@ -108,7 +108,11 @@ const AllCooksStats = () => {
         <div className="content">
           <Employes tab={"cook"} />
           <ErrorModal error={error} onClear={clearError} />
-          {isLoading && <LoadingSpinner asOverlay />}
+          {isLoading && (
+            <div className="spinner">
+              <LoadingSpinner />
+            </div>
+          )}
           {!isLoading && cookStats && (
             <div className="cook-stats-details">
               <h2 className="text2">Ogólne statystyki przygotowanych dań</h2>
@@ -232,7 +236,7 @@ const AllCooksStats = () => {
                   <div className="cook-image">
                     <img
                       className="image"
-                      src={`http://localhost:8000/${cook.image}`}
+                      src={`${URL}/${cook.image}`}
                       alt={cook.name}
                     />
                   </div>

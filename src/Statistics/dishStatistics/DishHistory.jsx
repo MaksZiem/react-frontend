@@ -23,9 +23,9 @@ const DishHistory = () => {
   const { sendRequest, error } = useHttpClient();
   const auth = useContext(AuthContext);
   const initialColor = "rgb(117, 148, 215)";
-  // useEffect – wywołuje zapytanie, gdy zmienią się dishId lub przesłane daty
+  
   useEffect(() => {
-    // if (!dishId || !submittedStartDate || !submittedEndDate) return;
+    
 
     const fetchDishHistory = async () => {
       console.log("dsa");

@@ -27,7 +27,7 @@ const Incomes = () => {
     const fetchCategories = async () => {
       try {
         const response = await sendRequest(
-          `http://localhost:8000/api/config/dish-categories`,
+          `${URL}/api/config/dish-categories`,
           "GET",
           null,
           {
@@ -47,7 +47,7 @@ const Incomes = () => {
   const fetchData = async () => {
     try {
       const responseData = await sendRequest(
-        `http://localhost:8000/api/statistics/dishes/dish-revenue-prediction/?years=${years}`,
+        `${URL}/api/statistics/dishes/dish-revenue-prediction/?years=${years}`,
         "POST",
         null,
         {
@@ -57,7 +57,7 @@ const Incomes = () => {
       );
 
       const responseData2 = await sendRequest(
-        `http://localhost:8000/api/statistics/dishes/dishes-count`,
+        `${URL}/api/statistics/dishes/dishes-count`,
         "POST",
         null,
         {
@@ -99,19 +99,11 @@ const Incomes = () => {
     }
   };
 
-  // if (isLoading) {
-  //   return (
-  //     <div>
-  //       <LoadingSpinner />
-  //     </div>
-  //   );
-  // }
 
   if (error) {
     return <div>Błąd: {error}</div>;
   }
 
-  // Function to get the month names starting from the current month
   const getMonthNames = (numMonths) => {
     const monthNames = [
       "Styczeń",
@@ -233,35 +225,7 @@ const Incomes = () => {
             </ul>
           </>
         )}
-        {/* <div className="search-container">
-        <form className="search-forms">
-          <div className="select-category">
-            <label htmlFor="name">Nazwa:</label>
-            <input
-              className="select"
-              type="text"
-              id="name"
-              value={inputName}
-              onChange={nameChangeHandler}
-            />
-          </div>
-          <div className="select-category">
-            <label htmlFor="category">Kategoria:</label>
-            <select
-              className="select"
-              id="category"
-              value={selectedCategory}
-              onChange={categoryChangeHandler}
-            >
-              {categories.map((cat) => (
-                <option key={cat._id} value={cat.name}>
-                  {cat.name}
-                </option>
-              ))}
-            </select>
-          </div>
-        </form>
-      </div> */}
+     
         {dishes && <h1 className="text5">Statystyki poszczególnych dań</h1>}
         {dishes &&
           !isLoading &&
