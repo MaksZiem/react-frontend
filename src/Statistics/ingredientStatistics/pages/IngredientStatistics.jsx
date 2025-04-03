@@ -54,7 +54,7 @@ const IngredientStatistics = () => {
           { Authorization: "Bearer " + auth.token }
         );
         setTopIngredients(responseniedobor);
-        console.log(responseniedobor)
+        console.log(responseniedobor);
 
         const responseData = await sendRequest(
           `${URL}/api/ingredients`,
@@ -86,11 +86,9 @@ const IngredientStatistics = () => {
           }
         );
         setIngredientsByCategory(responseData.ingredientsByCategory);
-        // setLoadedCartItems(responseData.cartIngredients);
       } catch (error) {}
     };
     fetchIngredients();
-    // console.log(loadedCartItems)
   }, [sendRequest, selectedCategory, inputName, auth.token]);
 
   const categoryChangeHandler = (event) => {
@@ -109,14 +107,14 @@ const IngredientStatistics = () => {
   };
 
   const filterIngredientsHandler = async (event) => {
-    event.preventDefault(); // Prevents page refresh
+    event.preventDefault();
 
     try {
       const responseData = await sendRequest(
         `${URL}/api/ingredients?name=${inputName}&category=${selectedCategory}`,
         "GET"
       );
-      setLoadedIngredientsTemplates(responseData.ingredientTemplates); // Update with filtered data
+      setLoadedIngredientsTemplates(responseData.ingredientTemplates);
     } catch (err) {}
   };
 
@@ -126,14 +124,17 @@ const IngredientStatistics = () => {
         <Navbar />
         <div className="statistics">
           <h2 className="text4">Najwieksze pradopodobieństwo niedoboru</h2>
-          {!isLoading && topIngredients.length > 0 && (
+          {!isLoading && topIngredients.length > 0 ? (
             <IngredientWasteList ingredientTemplates={topIngredients} />
+          ) : (
+            <div className="spinner">
+              <LoadingSpinner />
+            </div>
           )}
 
           <h1 className="text3">Składniki</h1>
           <div className="search-container">
             <form className="search-forms" onSubmit={filterIngredientsHandler}>
-             
               <div className="select-category">
                 <label htmlFor="name">Podaj nazwe:</label>
                 <input

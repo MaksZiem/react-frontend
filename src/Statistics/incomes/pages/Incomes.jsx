@@ -99,7 +99,6 @@ const Incomes = () => {
     }
   };
 
-
   if (error) {
     return <div>Błąd: {error}</div>;
   }
@@ -133,13 +132,11 @@ const Incomes = () => {
     <div className="container-statistics">
       <Navbar />
       <div className="content">
-        { isLoading && (
-
+        {isLoading && (
           <div className="spinner">
-            <LoadingSpinner/>
+            <LoadingSpinner />
           </div>
-          )
-        }
+        )}
         {totalProfit && (
           <>
             <h1 className="text5">
@@ -225,7 +222,7 @@ const Incomes = () => {
             </ul>
           </>
         )}
-     
+
         {dishes && <h1 className="text5">Statystyki poszczególnych dań</h1>}
         {dishes &&
           !isLoading &&

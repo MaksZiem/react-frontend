@@ -150,7 +150,7 @@ const EmpCookStats = () => {
                 </h1>
               </>
             ) : (
-              <p>dsdas.</p>
+              <p>error</p>
             )}
           </div>
 

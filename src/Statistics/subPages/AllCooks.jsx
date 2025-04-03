@@ -229,7 +229,7 @@ const AllCooksStats = () => {
                   onClick={() => handleCookClick(cook._id)}
                   className={
                     index === cooks.length - 1
-                      ? "last-ingredient"
+                      ? "last-cook"
                       : "cook-list-item"
                   }
                 >

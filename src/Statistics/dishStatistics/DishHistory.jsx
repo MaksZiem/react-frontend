@@ -8,10 +8,8 @@ import Navbar from "../components/Navbar";
 import { LineChart } from "@mui/x-charts/LineChart";
 
 const DishHistory = () => {
-  // Stan formularza – daty wprowadzone przez użytkownika
   const [formStartDate, setFormStartDate] = useState("");
   const [formEndDate, setFormEndDate] = useState("");
-  // Stany przesłanych dat, których użyjemy do pobierania danych
   const [submittedStartDate, setSubmittedStartDate] = useState("");
   const [submittedEndDate, setSubmittedEndDate] = useState("");
   const [dishData, setDishData] = useState(null);
@@ -23,10 +21,8 @@ const DishHistory = () => {
   const { sendRequest, error } = useHttpClient();
   const auth = useContext(AuthContext);
   const initialColor = "rgb(117, 148, 215)";
-  
-  useEffect(() => {
-    
 
+  useEffect(() => {
     const fetchDishHistory = async () => {
       console.log("dsa");
       setLoading(true);
@@ -56,22 +52,23 @@ const DishHistory = () => {
 
   useEffect(() => {
     if (dishData && dishData.occurrencesByMonth) {
-      // Używamy pełnej etykiety, np. "2023-02"
-      const quantityArray = dishData.occurrencesByMonth.map((item) => item.quantity);
-      const uniqueLabels = dishData.occurrencesByMonth.map((item) => item.period);
-      
+      const quantityArray = dishData.occurrencesByMonth.map(
+        (item) => item.quantity
+      );
+      const uniqueLabels = dishData.occurrencesByMonth.map(
+        (item) => item.period
+      );
+
       setQuantities(quantityArray);
       setLabels(uniqueLabels);
       console.log("Labels:", uniqueLabels);
       console.log("Quantities:", quantityArray);
     }
   }, [dishData]);
-  
 
-  // Funkcja obsługująca wysłanie formularza
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Jeśli daty nie są podane, ustaw domyślnie: od roku wstecz do dzisiaj
+
     const today = new Date();
     const defaultEnd = today.toISOString().split("T")[0];
     const defaultStart = new Date();
@@ -144,40 +141,37 @@ const DishHistory = () => {
                   <h2>Przychód za danie na przestrzeni czasu</h2>
                   <div className="pie-chart-statistics-placeholder">
                     {labels && quantities && (
-
-                      
                       <LineChart
-                      xAxis={[
-                        {
-                          scaleType: "band",
-                          data: labels,
-                          
-                          legend: {
-                            text: {
-                              fill: "white",
+                        xAxis={[
+                          {
+                            scaleType: "band",
+                            data: labels,
+
+                            legend: {
+                              text: {
+                                fill: "white",
+                              },
+                            },
+                            ticks: {
+                              line: {
+                                stroke: "white",
+                                strokeWidth: 1,
+                              },
+                              text: {
+                                fill: "white",
+                              },
                             },
                           },
-                          ticks: {
-                            line: {
-                              stroke: "white",
-                              strokeWidth: 1,
-                            },
-                            text: {
-                              fill: "white",
-                            },
+                        ]}
+                        series={[
+                          {
+                            data: quantities,
+                            color: initialColor,
+                            area: true,
                           },
-                        },
-                      ]}
-                      series={[
-                        {
-                          data: quantities,
-                          color: initialColor,
-                          area: true,
-                        }, // Kolor i dane dla kolumn
-                      ]}
-                      colors={{ scheme: "nivo" }}
-                      // width={600}
-                      height={300}
+                        ]}
+                        colors={{ scheme: "nivo" }}
+                        height={300}
                       />
                     )}
                   </div>
