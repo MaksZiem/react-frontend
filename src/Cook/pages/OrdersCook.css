@@ -1,3 +1,9 @@
-.dish-to-cook {
-  background-color: red;
+
+.orders-list3 {
+  /* background-color: red; */
+  display: flex;
+  flex-direction: column;
+  width: 60%;
+  margin: 0;
+  padding: 0;
 }

@@ -12,6 +12,7 @@ const DishCartList = (props) => {
   const auth = useContext(AuthContext);
   const { isLoading, error, sendRequest, clearError } = useHttpClient();
   const navigate = useNavigate();
+
   const placeSubmitHandler = async (event) => {
     event.preventDefault();
     try {
@@ -20,6 +21,7 @@ const DishCartList = (props) => {
         "POST",
         JSON.stringify({
           tableNumber: props.tableId,
+          note: props.orderNote ? props.orderNote.trim() : "",
         }),
         {
           Authorization: "Bearer " + auth.token,
@@ -38,6 +40,7 @@ const DishCartList = (props) => {
       </div>
     );
   }
+
   return (
     <>
       <ErrorModal error={error} onClear={clearError} />
@@ -69,9 +72,10 @@ const DishCartList = (props) => {
 
       <div className="text-margin">
         <button onClick={placeSubmitHandler} className="btn-white-submit">
-          Dodaj
+          Dodaj zamówienie
         </button>
       </div>
+      
       <h1 className="text2">Wybierz dania</h1>
     </>
   );

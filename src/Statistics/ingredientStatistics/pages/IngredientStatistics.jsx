@@ -71,7 +71,7 @@ const IngredientStatistics = () => {
       } catch (error) {}
     };
     fetchDishes();
-  }, [sendRequest]);
+  }, []);
 
   useEffect(() => {
     const fetchIngredients = async () => {
@@ -99,13 +99,6 @@ const IngredientStatistics = () => {
     setInputName(event.target.value);
   };
 
-  const handleInredientDetails = (dishId) => {
-    console.log("dishId: " + dishId);
-    navigate(`/statistics/dishes/dish`, {
-      state: { dishId: dishId },
-    });
-  };
-
   const filterIngredientsHandler = async (event) => {
     event.preventDefault();
 
@@ -124,7 +117,7 @@ const IngredientStatistics = () => {
         <Navbar />
         <div className="statistics">
           <h2 className="text4">Najwieksze pradopodobieństwo niedoboru</h2>
-          {!isLoading && topIngredients.length > 0 ? (
+          {!isLoading ? (
             <IngredientWasteList ingredientTemplates={topIngredients} />
           ) : (
             <div className="spinner">

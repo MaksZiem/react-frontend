@@ -61,7 +61,9 @@ const Statistics = () => {
         }
       );
 
-      if(fetchTotalWeekProfit.totalProfit) {
+      if(fetchTotalWeekProfit.totalProfit >= 0) {
+        setIncomeColor("rgb(117, 148, 215)")
+      } else {
         setIncomeColor("rgb(235, 64, 52)")
       }
 

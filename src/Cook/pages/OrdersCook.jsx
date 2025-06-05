@@ -4,6 +4,7 @@ import { AuthContext } from "../../shared/context/auth-context";
 import LoadingSpinner from "../../shared/components/UIElements/LoadingSpinner";
 import { useLocation } from "react-router-dom";
 import { URL } from "../../shared/consts";
+import './OrdersCook.css'
 
 const CookStatistics = () => {
   const { isLoading, error, sendRequest, clearError } = useHttpClient();
@@ -44,7 +45,8 @@ const CookStatistics = () => {
   }, []);
 
   return (
-    <>
+    <div className="statistics">
+      <div className="orders-container">
       <div className="dates-pickers">
         <div className="select-date">
           <label>Data początkowa:</label>
@@ -72,19 +74,19 @@ const CookStatistics = () => {
         </div>
       </div>
 
-      <div className="text2">
+      {/* <div className="text2"> */}
         {isLoading && <LoadingSpinner asOverlay />}
         {!isLoading && orders && (
-          <ul className="orders-list">
+          <ul className="orders-list3">
             {orders.map((order) => (
-              <li key={order.orderId} className="order-item">
+              <li key={order.orderId} className="order-cook-item">
                 <div className="order-id">
                   <h2>Zamówienie ID: {order.orderId}</h2>
                 </div>
                 <p>Data zamówienia: {order.orderDate}</p>
                 <div>
                   <h3>Dania w zamówieniu:</h3>
-                  <ul>
+                  <ul style={{padding: 0}}>
                     {order.dishes.map((dish, index) => (
                       <li key={index} className="dish-item">
                         <p>Nazwa dania: {dish.dishName}</p>
@@ -104,8 +106,9 @@ const CookStatistics = () => {
             ))}
           </ul>
         )}
+      {/* </div> */}
       </div>
-    </>
+      </div>
   );
 };
 

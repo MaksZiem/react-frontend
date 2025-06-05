@@ -66,7 +66,7 @@ const AllWaiters = () => {
                  onClick={() => handleWaiterClick(waiter.waiterId, waiter.waiterName, waiter.surname)}
                 className={
                   index === waiters.length - 1
-                    ? "last-ingredient"
+                    ? "last-cook"
                     : "cook-list-item"
                 }
               >

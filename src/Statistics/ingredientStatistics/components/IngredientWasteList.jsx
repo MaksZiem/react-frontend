@@ -1,22 +1,13 @@
-import React from 'react'
-import Button from '../../../shared/components/FormElements/Button'
-import IngredientItem from './IngredientItem'
-import Card from '../../../shared/components/UIElements/Card';
-import IngredientWasteItem from './IngredientWasteItem';
-// import './IngredientWasteList.css';
+import React from "react";
+import IngredientWasteItem from "./IngredientWasteItem";
 
 const IngredientWasteList = (props) => {
-  
-
   if (props.ingredientTemplates.length === 0) {
     return (
-        <div className='place-list center'>
-            <Card>
-                <h2>No places found. Maybe create one?</h2>
-                <Button to='places/new'>Add place</Button>
-            </Card>
-        </div>
-    )
+      <div className="place-list center">
+        <h2>Nie znaleziono składników</h2>
+      </div>
+    );
   }
 
   return (
@@ -28,22 +19,21 @@ const IngredientWasteList = (props) => {
           <span className="item-category">Całkowita ilość w magazynie</span>
           <span className="item-category">Dni do wyczerpania zapasów</span>
         </div>
-        </div>
-    <ul className="place-list-form-ingredient">      
+      </div>
+      <ul className="place-list-form-ingredient">
         {props.ingredientTemplates.map((ingredient, index) => (
-            <IngredientWasteItem
-                key={ingredient.id}
-                daysUntilOutOfStock={ingredient.daysUntilOutOfStock}
-                averageDailyUsage={ingredient.averageDailyUsage}
-                shortageProbability={ingredient.totalWeight}
-                ingredientName={ingredient.ingredientName}
-                isLast={index === props.ingredientTemplates.length - 1} 
-            />
+          <IngredientWasteItem
+            key={ingredient.id}
+            daysUntilOutOfStock={ingredient.daysUntilOutOfStock}
+            averageDailyUsage={ingredient.averageDailyUsage}
+            shortageProbability={ingredient.totalWeight}
+            ingredientName={ingredient.ingredientName}
+            isLast={index === props.ingredientTemplates.length - 1}
+          />
         ))}
-    </ul>
-    
+      </ul>
     </>
-  )
-}
+  );
+};
 
-export default IngredientWasteList
+export default IngredientWasteList;

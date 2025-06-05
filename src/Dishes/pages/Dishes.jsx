@@ -21,7 +21,9 @@ const Dishes = (props) => {
   const [inputName, setInputName] = useState("");
   const [showConfirmModal, setShowConfirmModal] = useState(false);
   const [categories, setCategories] = useState([]);
+  const [orderNote, setOrderNote] = useState("");
   const auth = useContext(AuthContext);
+  
   const fetchTableCart = async () => {
     try {
       const responseData = await sendRequest(
@@ -80,6 +82,7 @@ const Dishes = (props) => {
 
   const onAddOrder = () => {
     setShowConfirmModal(true);
+    setOrderNote(""); // Clear note after successful order
   };
 
   const categoryChangeHandler = (event) => {
@@ -88,6 +91,10 @@ const Dishes = (props) => {
 
   const nameChangeHandler = (event) => {
     setInputName(event.target.value);
+  };
+
+  const noteChangeHandler = (event) => {
+    setOrderNote(event.target.value);
   };
 
   return (
@@ -115,7 +122,7 @@ const Dishes = (props) => {
           onAddDish={updateCartHandler}
           onAddOrder={onAddOrder}
           onCancelModal={cancelDeleteHandler}
-
+          orderNote={orderNote}
         />
       )}
       <div className="search-container">
@@ -144,6 +151,18 @@ const Dishes = (props) => {
                 </option>
               ))}
             </select>
+          </div>
+          <div className="select-category" >
+            <label htmlFor="order-note">Notatka do zamówienia:</label>
+            <input
+              style={{backgroundColor: 'white', border: 'none', color: 'black'}}
+              className="select"
+              id="order-note"
+              value={orderNote}
+              onChange={noteChangeHandler}
+              rows="3"
+              maxLength="500"
+            />
           </div>
         </form>
       </div>

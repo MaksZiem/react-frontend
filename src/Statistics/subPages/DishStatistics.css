@@ -10,6 +10,7 @@
     flex-direction: column;
     justify-content: center;
     text-align: center;
+    margin: 15px;
 }
 
 .order-cook-item span {

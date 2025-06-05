@@ -98,37 +98,48 @@ const Cook = () => {
               <div className="dishes-in-order">Dania w zamówieniu:</div>
               <ul className="order-list">
                 {order.dishes.map((dishItem, index) => (
-                  <li key={index}>
-                    <span className="order-name">{dishItem.dishName}</span>
-                    <span className="order-quantity ">
-                      x {dishItem.quantity}
-                    </span>
-                    <span
-                      className={`order-dish-status  ${
-                        dishItem.status === "gotowy" ? "ready" : ""
-                      }`}
-                    >
-                      {dishItem.status}
-                    </span>
-
-                    {dishItem.status === "gotowy" ||
-                    dishItem.status === "wydane" ? (
-                      <button className="dish-ready">Oznacz jako gotowe</button>
-                    ) : (
-                      <button
-                        className="make-dish-ready"
-                        onClick={() =>
-                          handleMarkDishAsReady(
-                            order.orderId,
-                            dishItem.dishName,
-                            dishItem.id
-                          )
-                        }
+                  <>
+                    <li key={index}>
+                      <span className="order-name">{dishItem.dishName}</span>
+                      <span className="order-quantity ">
+                        x {dishItem.quantity}
+                      </span>
+                      <span
+                        className={`order-dish-status  ${
+                          dishItem.status === "gotowy" ? "ready" : ""
+                        }`}
                       >
-                        Oznacz jako gotowe
-                      </button>
+                        {dishItem.status}
+                      </span>
+
+                      {dishItem.status === "gotowy" ||
+                      dishItem.status === "wydane" ? (
+                        <button className="dish-ready">
+                          Oznacz jako gotowe
+                        </button>
+                      ) : (
+                        <button
+                          className="make-dish-ready"
+                          onClick={() =>
+                            handleMarkDishAsReady(
+                              order.orderId,
+                              dishItem.dishName,
+                              dishItem.id
+                            )
+                          }
+                        >
+                          Oznacz jako gotowe
+                        </button>
+                      )}
+                    </li>
+                    
+                      {order.note && (
+                      <>
+                        <h3>notatki:</h3>
+                        <span>{order.note}</span>
+                      </>
                     )}
-                  </li>
+                  </>
                 ))}
               </ul>
             </li>

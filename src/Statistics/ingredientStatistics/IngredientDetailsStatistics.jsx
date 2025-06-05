@@ -28,60 +28,65 @@ const IngredientStats = () => {
   const result = darkenColor(initialColor, steps);
   const [fetchError, setFetchError] = useState(null);
 
+  const fetchIngredientUsage = async () => {
+    try {
+      const responseData = await sendRequest(
+        `${URL}/api/statistics/ingredients/usage/${ingredientName}`,
+        "POST",
+        JSON.stringify({ period: periodUsage }),
+        {
+          Authorization: "Bearer " + auth.token,
+          "Content-Type": "application/json",
+        }
+      );
+      setIngredientUsage(responseData);
+      console.log(responseData);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const fetchIngredientWaste = async () => {
+    try {
+      const responseDataWaste = await sendRequest(
+        `${URL}/api/statistics/ingredients/waste/${ingredientName}`,
+        "POST",
+        JSON.stringify({ period: periodWaste }),
+        {
+          Authorization: "Bearer " + auth.token,
+          "Content-Type": "application/json",
+        }
+      );
+      setIngredientWaste(responseDataWaste);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const fetchIngredients = async () => {
+    try {
+      const responseData = await sendRequest(
+        `${URL}/api/magazine/${ingredientName}`
+      );
+      setIngredients(responseData.ingredients);
+    } catch (err) {}
+  };
+
   useEffect(() => {
-    const fetchIngredientUsage = async () => {
-      try {
-        const responseData = await sendRequest(
-          `${URL}/api/statistics/ingredients/usage/${ingredientName}`,
-          "POST",
-          JSON.stringify({ period: periodUsage }),
-          {
-            Authorization: "Bearer " + auth.token,
-            "Content-Type": "application/json",
-          }
-        );
-        setIngredientUsage(responseData);
-        console.log(responseData);
-      } catch (error) {
-        console.error(error);
-      }
-    };
-
-    fetchIngredientUsage();
-  }, [periodUsage]);
-
-  useEffect(() => {
-    const fetchIngredientWaste = async () => {
-      try {
-        const responseDataWaste = await sendRequest(
-          `${URL}/api/statistics/ingredients/waste/${ingredientName}`,
-          "POST",
-          JSON.stringify({ period: periodWaste }),
-          {
-            Authorization: "Bearer " + auth.token,
-            "Content-Type": "application/json",
-          }
-        );
-        setIngredientWaste(responseDataWaste);
-      } catch (error) {
-        console.error(error);
-      }
-    };
-
-    fetchIngredientWaste();
-  }, [periodWaste]);
-
-  useEffect(() => {
-    const fetchIngredients = async () => {
-      try {
-        const responseData = await sendRequest(
-          `${URL}/api/magazine/${ingredientName}`
-        );
-        setIngredients(responseData.ingredients);
-      } catch (err) {}
-    };
     fetchIngredients();
   }, [sendRequest, ingredientName]);
+
+  useEffect(() => {
+    if (ingredientName) {
+      fetchIngredientUsage();
+    }
+  }, [periodUsage, ingredientName, auth.token, sendRequest]);
+
+  useEffect(() => {
+    if (ingredientName) {
+      fetchIngredientWaste();
+    }
+  }, [periodWaste, ingredientName, auth.token, sendRequest]);
 
   useEffect(() => {
     const fetchIngredientStats = async () => {
@@ -140,16 +145,13 @@ const IngredientStats = () => {
     ? ingredientWaste.usageByPeriod.map((item) => parseFloat(item.usage))
     : [];
 
-  const handlePeriodUsage = (newPeriod) => {
-    if (newPeriod !== periodUsage) {
-      setPeriodUsage(newPeriod);
-    }
+  const handlePeriodUsageChange = (newPeriod) => {
+    setPeriodUsage(newPeriod);
+    console.log(periodWaste, newPeriod)
   };
 
-  const handlePeriodWaste = (newPeriod) => {
-    if (newPeriod !== periodWaste) {
-      setPeriodWaste(newPeriod);
-    }
+  const handlePeriodWasteChange = (newPeriod) => {
+    setPeriodWaste(newPeriod);
   };
 
   const isExpired = (expirationDate) => {
@@ -162,11 +164,11 @@ const IngredientStats = () => {
         <Navbar />
         <div className="statistics">
           {fetchError && <h1 className="text3"> {fetchError}</h1>}
-          {!isLoading && ingredientStats && ingredientUsage && (
+          {ingredientStats && ingredientUsage && (
             <div className="grid-container-statistics">
               <div className="ranking">
                 <>
-                  <h2>Uycie skladnika na przestrzeni czasu</h2>
+                  <h2>Uzycie skladnika na przestrzeni czasu</h2>
                   <div className="pie-chart-statistics-placeholder">
                     <LineChart
                       xAxis={[
@@ -207,7 +209,7 @@ const IngredientStats = () => {
                       className={`picker-btn ${
                         periodUsage === "rok" ? "active-period-button" : ""
                       }`}
-                      onClick={() => handlePeriodUsage("rok")}
+                      onClick={() => handlePeriodUsageChange("rok")}
                     >
                       rok
                     </button>
@@ -215,7 +217,7 @@ const IngredientStats = () => {
                       className={`picker-btn ${
                         periodUsage === "miesiac" ? "active-period-button" : ""
                       }`}
-                      onClick={() => handlePeriodUsage("miesiac")}
+                      onClick={() => handlePeriodUsageChange("miesiac")}
                     >
                       miesiąc
                     </button>
@@ -223,7 +225,7 @@ const IngredientStats = () => {
                       className={`picker-btn ${
                         periodUsage === "tydzien" ? "active-period-button" : ""
                       }`}
-                      onClick={() => handlePeriodUsage("tydzien")}
+                      onClick={() => handlePeriodUsageChange("tydzien")}
                     >
                       tydzień
                     </button>
@@ -308,7 +310,7 @@ const IngredientStats = () => {
                       className={`picker-btn ${
                         periodWaste === "rok" ? "active-period-button" : ""
                       }`}
-                      onClick={() => handlePeriodWaste("rok")}
+                      onClick={() => handlePeriodWasteChange("rok")}
                     >
                       rok
                     </button>
@@ -316,7 +318,7 @@ const IngredientStats = () => {
                       className={`picker-btn ${
                         periodWaste === "miesiac" ? "active-period-button" : ""
                       }`}
-                      onClick={() => handlePeriodWaste("miesiac")}
+                      onClick={() => handlePeriodWasteChange("miesiac")}
                     >
                       miesiąc
                     </button>
@@ -324,7 +326,7 @@ const IngredientStats = () => {
                       className={`picker-btn ${
                         periodWaste === "tydzien" ? "active-period-button" : ""
                       }`}
-                      onClick={() => handlePeriodWaste("tydzien")}
+                      onClick={() => handlePeriodWasteChange("tydzien")}
                     >
                       tydzień
                     </button>

@@ -246,7 +246,7 @@ const AllCooksStats = () => {
                   <div className="cook-action">
                     <button
                       type="button"
-                      className="ingredient-details-button2"
+                      className="ingredient-details-button4"
                       onClick={() => handleCookClick(cook._id)}
                     >
                       Szczegóły
