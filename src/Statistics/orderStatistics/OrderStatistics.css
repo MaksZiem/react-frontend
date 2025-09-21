@@ -35,6 +35,12 @@
   min-height: 450px;
 }
 
+.text9 {
+  display: flex;
+  justify-content: center;
+  margin-left: 13rem;
+}
+
 .pie-chart-statistics-placeholder {
   background-color: rgb(255, 255, 255);
   /* background-color: red; */

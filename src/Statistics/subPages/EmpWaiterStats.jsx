@@ -26,6 +26,8 @@ const EmpWaiterStats = () => {
           { Authorization: "Bearer " + auth.token }
         );
 
+        console.log(responseData)
+
         setOrders(responseData.orders);
       } catch (err) {}
     };
@@ -76,7 +78,11 @@ const EmpWaiterStats = () => {
                           {new Date(order.orderDate).toLocaleString("pl-PL")}
                         </p>
                         <p>
-                          <strong>Cena całkowita:</strong> {order.totalPrice}{" "}
+                          <strong>Cena całkowita:</strong> {order.price}{" "}
+                          PLN
+                        </p>
+                        <p>
+                          <strong>Wartość napiwku:</strong> {order.tipAmount}{" "}
                           PLN
                         </p>
                       </div>

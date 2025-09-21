@@ -68,6 +68,7 @@ const Statistics = () => {
       }
 
       setTotalWeekProfit(fetchTotalWeekProfit.totalProfit);
+      console.log(fetchTotalWeekProfit.totalProfit)
     } catch (err) {
       console.log(err);
     }
@@ -393,7 +394,7 @@ const Statistics = () => {
           </div>
         </div>
       </div>
-      <div className="text2">
+      <div className="text9">
         <button
           onClick={navigateToOrdersHistory}
           className="cook-orders-button"

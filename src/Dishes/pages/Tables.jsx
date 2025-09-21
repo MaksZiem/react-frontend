@@ -100,11 +100,11 @@ const TablesList = () => {
   const getStatusClass = (status) => {
     switch (status) {
       case 'free':
-        return 'table-free';
+        return 'wolny';
       case 'waiting':
-        return 'table-waiting';
+        return 'oczekujący';
       case 'delivered':
-        return 'table-delivered';
+        return 'dostarczony';
       default:
         return '';
     }
@@ -158,7 +158,7 @@ const TablesList = () => {
               <button className="add-order-table-button" onClick={() => viewTableDetailsHandler(table.number)}>
                 {table.status === 'free' ? "Dodaj zamówienie" : "Szczegóły"}
               </button>
-              <span className="status">Status: {table.status}</span>
+              <span className="status">Status: {getStatusClass(table.status)}</span>
             </li>
           ))}
         </ul>

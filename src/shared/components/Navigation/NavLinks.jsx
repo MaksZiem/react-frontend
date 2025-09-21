@@ -60,7 +60,7 @@ const NavLinks = () => {
             )} */}
             {!auth.isLoggedIn && (
             <li>
-              <NavLink to="/">Authenticate</NavLink>  
+              <NavLink to="/">Autoryzacja</NavLink>  
             </li>
             )}
             {auth.isLoggedIn && (

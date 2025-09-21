@@ -378,6 +378,9 @@ const Dish = () => {
               </div>
             </div>
             <div className="ranking">
+            <h2 style={{ textAlign: "center" }}>
+                    Procentowy udział składników w daniu
+                  </h2>
               <div className="pie-chart-statistics">
                 {pieChartData && pieChartData.length > 0 ? (
                   <PieChart
@@ -417,7 +420,7 @@ const Dish = () => {
             <div className="ranking">
               {dishTotal.length !== 0 && (
                 <>
-                  <h2 style={{ textAlign: "center" }}>
+                  <h2 style={{ textAlign: "center", width: '600px'}}>
                     Wykres ilosci wystąpień dania w zamowieniach na przestrzeni
                     czasu
                   </h2>

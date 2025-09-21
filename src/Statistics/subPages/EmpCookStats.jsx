@@ -52,7 +52,7 @@ const EmpCookStats = () => {
         }
       );
       setDishCount(cookStats);
-      console.log(cookStats);
+      console.log('cook stats: ', cookStats)
     } catch (error) {
       console.log(error);
     }
@@ -73,7 +73,7 @@ const EmpCookStats = () => {
           "Content-Type": "application/json",
         }
       );
-      // console.log(cookStats);
+      console.log('preparationTime: ', cookStats);
       setPreparationTime(cookStats);
     } catch (error) {
       console.log(error);
@@ -89,13 +89,11 @@ const EmpCookStats = () => {
       const userData = await sendRequest(
         `${URL}/api/users/${cookId}`,
         "POST",
-        JSON.stringify({ period: periodPreparationTime }),
         {
           Authorization: "Bearer " + auth.token,
           "Content-Type": "application/json",
         }
-      );
-      console.log(userData);
+      )
       setUserData(userData.user);
     } catch (error) {
       console.error(error);

@@ -81,11 +81,11 @@ const AllWaiters = () => {
                     {waiter.waiterName}
                   </span>
                   <span className="cook-name">{waiter.surname}</span>
-                  <span className="item-category">
+                  <span className="cook-surname">
                     {waiter.averageTip.toFixed(2)} PLN
                   </span>
-                  <span className="item-category">{waiter.orderCount}</span>
-                  <span className="item-category">
+                  <span className="cook-pesel">{waiter.orderCount}</span>
+                  <span className="cook-action">
                     {waiter.totalTips.toFixed(2)} PLN
                   </span>
               </li>
