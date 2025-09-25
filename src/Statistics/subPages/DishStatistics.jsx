@@ -18,6 +18,7 @@ const DishStatistics = () => {
   const [userData, setUserData] = useState();
 
   const fetchDishStats2 = async () => {
+    console.log(cookId)
     try {
       const responseData = await sendRequest(
         `${URL}/api/cook/dishes/${cookId}`,

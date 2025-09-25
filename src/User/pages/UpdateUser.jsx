@@ -180,7 +180,7 @@ const UpdateUser = () => {
             />
             <ImageUpload center id="image" onInput={inputHandler} initialPreviewUrl={
                       formState.inputs.image.value
-                        ? `${URL}/${formState.inputs.image.value}`
+                        ? `${URL}/uploads/images/${formState.inputs.image.value}`
                         : ""
                     }/>
             <Input

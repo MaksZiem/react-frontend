@@ -53,7 +53,7 @@ const DishItem = (props) => {
           </React.Fragment>
         }
       >
-        <p>Pomyślnie dodano składnik</p>
+        <p>Pomyślnie dodano danie</p>
       </Modal>
     <li lassName='one-item'>
       <ErrorModal error={error} onClear={clearError} />

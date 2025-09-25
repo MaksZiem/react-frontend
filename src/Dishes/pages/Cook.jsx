@@ -36,8 +36,40 @@ const Cook = () => {
     fetchWaitingOrders();
 
     const socket = io("http://localhost:8001");
+    
     socket.on("newOrder", (newOrder) => {
       setWaitingOrders((prevOrders) => [...prevOrders, newOrder]);
+    });
+
+    // Dodana obsługa eventu dishDelivered
+    socket.on("dishDelivered", ({ orderId, dishName }) => {
+      setWaitingOrders((prevOrders) => {
+        return prevOrders.map((order) => {
+          if (order.orderId === orderId) {
+            const updatedDishes = order.dishes.map((dish) =>
+              dish.dishName === dishName
+                ? { ...dish, status: "wydane" }
+                : dish
+            );
+            
+            // Sprawdź czy wszystkie dania są wydane
+            const allDishesDelivered = updatedDishes.every(
+              (dish) => dish.status === "wydane"
+            );
+            
+            // Jeśli wszystkie dania są wydane, usuń zamówienie z listy
+            if (allDishesDelivered) {
+              return null; // Zamówienie zostanie przefiltrowane
+            }
+            
+            return {
+              ...order,
+              dishes: updatedDishes,
+            };
+          }
+          return order;
+        }).filter(order => order !== null); // Usuń zamówienia oznaczone jako null
+      });
     });
 
     return () => {
@@ -98,8 +130,8 @@ const Cook = () => {
               <div className="dishes-in-order">Dania w zamówieniu:</div>
               <ul className="order-list">
                 {order.dishes.map((dishItem, index) => (
-                  <>
-                    <li key={index}>
+                  <React.Fragment key={index}>
+                    <li>
                       <span className="order-name">{dishItem.dishName}</span>
                       <span className="order-quantity ">
                         x {dishItem.quantity}
@@ -123,8 +155,7 @@ const Cook = () => {
                           onClick={() =>
                             handleMarkDishAsReady(
                               order.orderId,
-                              dishItem.dishName,
-                              dishItem.id
+                              dishItem.dishName
                             )
                           }
                         >
@@ -132,15 +163,14 @@ const Cook = () => {
                         </button>
                       )}
                     </li>
-                    
-                      {order.note && (
-                      <>
-                        <h3>notatki:</h3>
-                        <span>{order.note}</span>
-                      </>
-                    )}
-                  </>
+                  </React.Fragment>
                 ))}
+                {order.note && (
+                  <li className="order-note">
+                    <h3>Notatki:</h3>
+                    <span>{order.note}</span>
+                  </li>
+                )}
               </ul>
             </li>
           ))}

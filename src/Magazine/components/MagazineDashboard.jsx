@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Button from "../../shared/components/FormElements/Button";
 import MagazineDashboardItem from "./MagazineDashboardItem";
 import Card from "../../shared/components/UIElements/Card";

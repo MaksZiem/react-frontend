@@ -236,7 +236,7 @@ const AllCooksStats = () => {
                   <div className="cook-image">
                     <img
                       className="image"
-                      src={`${URL}/${cook.image}`}
+                      src={`${URL}/uploads/images/${cook.image}`}
                       alt={cook.name}
                     />
                   </div>

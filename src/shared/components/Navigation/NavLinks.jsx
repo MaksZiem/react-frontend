@@ -65,7 +65,7 @@ const NavLinks = () => {
             )}
             {auth.isLoggedIn && (
             <li>
-                <button onClick={auth.logout}>logout</button>
+                <NavLink to="/" onClick={auth.logout}>wyloguj</NavLink>
             </li>
             )}
         </ul>

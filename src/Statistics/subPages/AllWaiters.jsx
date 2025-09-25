@@ -73,7 +73,7 @@ const AllWaiters = () => {
                   <div className="cook-image">
                     <img
                       className="image"
-                      src={`${URL}/${waiter.image}`}
+                      src={`${URL}/uploads/images/${waiter.image}`}
                       alt={waiter.name}
                     />
                   </div>

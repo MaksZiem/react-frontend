@@ -142,13 +142,14 @@ const TablesList = () => {
                   {table.status === 'delivered' && !tipSubmittedTables.includes(table.order._id) && (
                     <>
                       <input
+                      style={{marginBottom: "10px"}}
                         className="select3"
                         type="number"
                         placeholder="Napiwek"
                         value={tips[table.order._id] || ''}
                         onChange={(e) => handleTipChange(table.order._id, e.target.value)}
                       />
-                      <button className="add-order-table-button" onClick={() => submitTipHandler(table.order._id, table.number)}>
+                      <button className="add-order-table-button" style={{marginBottom: "10px"}} onClick={() => submitTipHandler(table.order._id, table.number)}>
                         Zakończ
                       </button>
                     </>

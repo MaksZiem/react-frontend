@@ -73,7 +73,7 @@ const EmpCookStats = () => {
           "Content-Type": "application/json",
         }
       );
-      console.log('preparationTime: ', cookStats);
+      console.log('preparationTime: ',cookStats);
       setPreparationTime(cookStats);
     } catch (error) {
       console.log(error);

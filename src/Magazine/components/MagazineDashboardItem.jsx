@@ -9,6 +9,7 @@ import { AuthContext } from "../../shared/context/auth-context";
 import LoadingSpinner from "../../shared/components/UIElements/LoadingSpinner";
 import { URL } from "../../shared/consts";
 
+
 const MagazineDashboardItem = (props) => {
   const navigate = useNavigate();
   const { isLoading, error, sendRequest, clearError } = useHttpClient();
@@ -89,7 +90,7 @@ const MagazineDashboardItem = (props) => {
             <h3>{props.category}</h3>
             <div className="ingredient-image">
               <img
-                src={`${URL}/${props.image}`}
+                src={`${URL}/uploads/images/${props.image}`}
                 className="ingredient-image"
                 alt={props.name}
               />

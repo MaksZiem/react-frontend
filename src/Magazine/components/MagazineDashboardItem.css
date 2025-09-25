@@ -149,6 +149,11 @@ ol::marker {
   width: 100%;
   height: 280px;
   margin-bottom: 20px;
-  filter: grayscale(100%) sepia(50%) hue-rotate(190deg) saturate(150%)
+  filter: grayscale(100%) sepia(40%) hue-rotate(190deg) saturate(100%)
     opacity(85%);
+}
+
+.dish-title {
+  background-color: red;
+  height: 150px;
 }

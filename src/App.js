@@ -41,7 +41,21 @@ import DishCategoryConfig from "./Config/pages/DishCategoryConfig";
 import UsersConfig from "./Config/pages/UsersConfig";
 import DishHistory from "./Statistics/dishStatistics/DishHistory";
 import Summary from "./Statistics/summary/Summary";
+
 let logoutTimer;
+
+// Komponent do przekierowania w zależności od roli
+const RoleBasedRedirect = ({ userRole }) => {
+  if (userRole === 'admin') {
+    return <Navigate to="/statistics" replace />;
+  } else if (userRole === 'cook') {
+    return <Navigate to="/statistics/cooks/details" replace />;
+  } else if (userRole === 'waiter') {
+    return <Navigate to="/statistics/waiter" replace />;
+  } else {
+    return <Navigate to="/statistics" replace />;
+  }
+};
 
 const App = () => {
   const [token, setToken] = useState(false);
@@ -107,8 +121,9 @@ const App = () => {
   if (token) {
     routes = (
       <Routes>
-        {/* <Route exact path="/" element={<Magazine />} /> */}
-        <Route exact path="/" element={<Navigate to="/statistics" />} />
+        {/* Przekierowanie na stronę główną w zależności od roli */}
+        <Route exact path="/" element={<RoleBasedRedirect userRole={userRole} />} />
+        
         <Route exact path="/ingredients-dashboard" element={<Ingredients />} />
         <Route path="/weight-checkout" element={<IngredientWeight />} />
         <Route exact path="/magazine" element={<Magazine />} />
@@ -117,6 +132,7 @@ const App = () => {
           path="/magazine/create-ingredient-template"
           element={<CreateIngredientTemplate />}
         />
+        <Route path="/logout" element={<Auth />} />
         <Route path="/tables" element={<Tables />} />
         <Route path="/tables/:tableId" element={<Dishes />} />
         <Route path="/cook" element={<Cook />} />
